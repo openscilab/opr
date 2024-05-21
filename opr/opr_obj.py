@@ -16,3 +16,15 @@
         if gc_content < 0.4 or gc_content > 0.6:
             raise OPRBaseError("Primer GC content should be between 40% and 60%.")
         return primer_sequence
+    
+    @property
+    def sequence(self):
+        return self._sequence
+    
+    @sequence.setter
+    def sequence(self, any):
+        raise OPRBaseError("sequence attribute is read-only.")
+
+    @sequence.deleter
+    def sequence(self, any):
+        raise OPRBaseError("This attribute is not removable.")
