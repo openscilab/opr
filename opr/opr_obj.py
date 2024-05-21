@@ -28,3 +28,23 @@
     @sequence.deleter
     def sequence(self, any):
         raise OPRBaseError("This attribute is not removable.")
+
+    @property
+    def molecular_weight(self):
+        if self._molecular_weight:
+            return self._molecular_weight
+        a_count = self._sequence.count('A')
+        t_count = self._sequence.count('T')
+        c_count = self._sequence.count('C')
+        g_count = self._sequence.count('G')
+        # Anhydrous Molecular Weight = (An x 313.21) + (Tn x 304.2) + (Cn x 289.18) + (Gn x 329.21) - 61.96
+        self._molecular_weight = (a_count * 313.21) + (t_count * 304.2) + (c_count * 289.18) + (g_count * 329.21) - 61.96
+        return self._molecular_weight    
+
+    @molecular_weight.setter
+    def molecular_weight(self, any):
+        raise OPRBaseError("molecular_weight attribute is read-only.")
+
+    @molecular_weight.deleter
+    def molecular_weight(self, any):
+        self._molecular_weight = None
