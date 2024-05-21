@@ -1,3 +1,27 @@
+# -*- coding: utf-8 -*-
+"""OPR modules."""
+from .opr_error import OPRBaseError
+from .opr_param import VALID_BASES
+
+
+class OPR:
+    """
+    TODO
+
+    >>> TODO
+    """
+
+    def __init__(self, primer_sequence):
+        """
+        Initialize the Optimized Primer(OPR) instance.
+
+        :param primer_sequence: primer nucleotides sequence
+        :type primer_sequence: str
+        :return: an instance of the OPR class
+        """
+        self._sequence = OPR.validate_primer(primer_sequence)
+        self._molecular_weight = None
+
     @staticmethod
     def validate_primer(primer_sequence):
         if not isinstance(primer_sequence, str):
