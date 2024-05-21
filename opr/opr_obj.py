@@ -46,11 +46,11 @@ class OPR:
         return self._sequence
     
     @sequence.setter
-    def sequence(self, any):
+    def sequence(self, _):
         raise OPRBaseError("sequence attribute is read-only.")
 
     @sequence.deleter
-    def sequence(self, any):
+    def sequence(self, _):
         raise OPRBaseError("This attribute is not removable.")
 
     @property
@@ -66,9 +66,9 @@ class OPR:
         return self._molecular_weight    
 
     @molecular_weight.setter
-    def molecular_weight(self, any):
+    def molecular_weight(self, _):
         raise OPRBaseError("molecular_weight attribute is read-only.")
 
     @molecular_weight.deleter
-    def molecular_weight(self, any):
+    def molecular_weight(self, _):
         self._molecular_weight = None
