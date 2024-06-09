@@ -2,7 +2,10 @@
 """OPR modules."""
 from .opr_error import OPRBaseError
 from .opr_param import VALID_BASES
-
+from .opr_param import PRIMER_SEQUENCE_TYPE_ERROR, PRIMER_SEQUENCE_LENGTH_ERROR, PRIMER_SEQUENCE_VALID_BASES_ERROR, PRIMER_SEQUENCE_VALID_GC_CONTENT_RANGE_ERROR
+from .opr_param import PRIMER_LOWER_LENGTH, PRIMER_HIGHEST_LENGTH, PRIMER_LOWEST_GC_RANGE, PRIMER_HIGHEST_GC_RANGE
+from .opr_param import PRIMER_READ_ONLY_ATTRIBUTE_ERROR, PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR
+from .opr_param import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT, ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
 
 class OPR:
     """
@@ -25,33 +28,33 @@ class OPR:
     @staticmethod
     def validate_primer(primer_sequence):
         if not isinstance(primer_sequence, str):
-            raise OPRBaseError("Primer sequence should be a string variable.")
+            raise OPRBaseError(PRIMER_SEQUENCE_TYPE_ERROR)
         primer_sequence = primer_sequence.upper()
 
-        if len(primer_sequence) < 18 or len(primer_sequence) > 22:
-            raise OPRBaseError("Primer length should be between 18 and 22 nucleotides.")
+        if len(primer_sequence) < PRIMER_LOWER_LENGTH or len(primer_sequence) > PRIMER_HIGHEST_LENGTH:
+            raise OPRBaseError(PRIMER_SEQUENCE_LENGTH_ERROR)
 
         if not all(base in VALID_BASES for base in primer_sequence):
-            raise OPRBaseError("Primer sequence should only contain the nucleotide bases A, T, C, and G.")
+            raise OPRBaseError(PRIMER_SEQUENCE_VALID_BASES_ERROR)
 
         gc_count = primer_sequence.count('G') + primer_sequence.count('C')
         gc_content = gc_count / len(primer_sequence)
 
-        if gc_content < 0.4 or gc_content > 0.6:
-            raise OPRBaseError("Primer GC content should be between 40% and 60%.")
+        if gc_content < PRIMER_LOWEST_GC_RANGE or gc_content > PRIMER_HIGHEST_GC_RANGE:
+            raise OPRBaseError(PRIMER_SEQUENCE_VALID_GC_CONTENT_RANGE_ERROR)
         return primer_sequence
-    
+
     @property
     def sequence(self):
         return self._sequence
-    
+
     @sequence.setter
     def sequence(self, _):
-        raise OPRBaseError("sequence attribute is read-only.")
+        raise OPRBaseError(PRIMER_READ_ONLY_ATTRIBUTE_ERROR)
 
     @sequence.deleter
     def sequence(self, _):
-        raise OPRBaseError("This attribute is not removable.")
+        raise OPRBaseError(PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR)
 
     @property
     def molecular_weight(self):
@@ -62,12 +65,12 @@ class OPR:
         c_count = self._sequence.count('C')
         g_count = self._sequence.count('G')
         # Anhydrous Molecular Weight = (An x 313.21) + (Tn x 304.2) + (Cn x 289.18) + (Gn x 329.21) - 61.96
-        self._molecular_weight = (a_count * 313.21) + (t_count * 304.2) + (c_count * 289.18) + (g_count * 329.21) - 61.96
+        self._molecular_weight = (a_count * A_WEIGHT) + (t_count * T_WEIGHT) + (c_count * C_WEIGHT) + (g_count * G_WEIGHT) - ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
         return self._molecular_weight    
 
     @molecular_weight.setter
     def molecular_weight(self, _):
-        raise OPRBaseError("molecular_weight attribute is read-only.")
+        raise OPRBaseError(PRIMER_READ_ONLY_ATTRIBUTE_ERROR)
 
     @molecular_weight.deleter
     def molecular_weight(self, _):
