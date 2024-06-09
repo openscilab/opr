@@ -9,9 +9,10 @@ from .opr_param import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT, ANHYDROUS_MOLECUL
 
 class OPR:
     """
-    TODO
+    The OPR class facilitates working with the primer sequence.
 
-    >>> TODO
+    >>> oprimer = OPR("ATCGATCGATCGATCGAT")
+    >>> oprimer.molecular_weight
     """
 
     def __init__(self, primer_sequence):
@@ -27,6 +28,13 @@ class OPR:
 
     @staticmethod
     def validate_primer(primer_sequence):
+        """
+        Validate the given primer sequence.
+
+        :param primer_sequence: primer nucleotides sequence
+        :type primer_sequence: any
+        :return: an uppercased primer sequence
+        """
         if not isinstance(primer_sequence, str):
             raise OPRBaseError(PRIMER_SEQUENCE_TYPE_ERROR)
         primer_sequence = primer_sequence.upper()
@@ -46,6 +54,11 @@ class OPR:
 
     @property
     def sequence(self):
+        """
+        Return the primer sequence.
+
+        :return: primer sequence
+        """
         return self._sequence
 
     @sequence.setter
@@ -58,6 +71,11 @@ class OPR:
 
     @property
     def molecular_weight(self):
+        """
+        Calculate(if needed) the molecular weight.
+
+        :return: molecular weight
+        """
         if self._molecular_weight:
             return self._molecular_weight
         a_count = self._sequence.count('A')
