@@ -31,4 +31,6 @@ about:
         Repo: https://github.com/openscilab/opr
 extra:
     recipe-maintainers:
+        - sepandhaghighi
+        - AHReccese
         - sadrasabouri
