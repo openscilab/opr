@@ -19,7 +19,7 @@ CHANGELOG_ITEMS = [
     "[{0}]:"]
 PARAMS_ITEMS = ['OPR_VERSION = "{0}"']
 META_ITEMS = ['% set version = "{0}" %']
-SECURITY_ITEMS = ["| {0}           | :white_check_mark: |", "| < {0}         | :x:                |"]
+SECURITY_ITEMS = ["| {0}           | :white_check_mark: |"]
 
 FILES = {
     os.path.join("otherfiles", "meta.yaml"): META_ITEMS,
