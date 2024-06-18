@@ -35,7 +35,7 @@ setup(
     long_description=read_description(),
     long_description_content_type='text/markdown',
     author='OPR Development Team',
-    author_email='info@pycm.io',
+    author_email='opr@openscilab.com',
     url='https://github.com/openscilab/opr',
     download_url='https://github.com/openscilab/opr/tarball/v0.1',
     keywords="python3 python machine_learning ML",
