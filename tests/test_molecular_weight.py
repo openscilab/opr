@@ -1,4 +1,4 @@
-from opr.opr_obj import Primer
+from opr import Primer
 
 TEST_CASE_NAME = "molecular weight calculation testcase"
 
