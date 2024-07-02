@@ -7,23 +7,23 @@ from .opr_param import PRIMER_LOWER_LENGTH, PRIMER_HIGHEST_LENGTH, PRIMER_LOWEST
 from .opr_param import PRIMER_READ_ONLY_ATTRIBUTE_ERROR, PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR
 from .opr_param import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT, ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
 
-class OPR:
+class Primer:
     """
-    The OPR class facilitates working with the primer sequence.
+    The Primer class facilitates working with the primer sequence.
 
-    >>> oprimer = OPR("ATCGATCGATCGATCGAT")
+    >>> oprimer = Primer("ATCGATCGATCGATCGAT")
     >>> oprimer.molecular_weight
     """
 
     def __init__(self, primer_sequence):
         """
-        Initialize the Optimized Primer(OPR) instance.
+        Initialize the Primer instance.
 
         :param primer_sequence: primer nucleotides sequence
         :type primer_sequence: str
-        :return: an instance of the OPR class
+        :return: an instance of the Primer class
         """
-        self._sequence = OPR.validate_primer(primer_sequence)
+        self._sequence = Primer.validate_primer(primer_sequence)
         self._molecular_weight = None
 
     @staticmethod
