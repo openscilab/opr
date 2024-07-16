@@ -36,7 +36,12 @@ class Primer:
         :type inplace: bool
         :return: new Primer object or None
         """
-        pass
+        new_seq = self._sequence[::-1]
+        if inplace:
+            self._sequence = new_seq
+        else:
+            return Primer(primer_sequence=new_seq)
+
 
     def complement(self, inplace=False):
         """
