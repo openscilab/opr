@@ -8,6 +8,7 @@ from .opr_param import PRIMER_READ_ONLY_ATTRIBUTE_ERROR, PRIMER_NOT_REMOVABLE_AT
 from .opr_param import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT, ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
 from .opr_param import DNA_COMPLEMENT_MAP
 
+
 class Primer:
     """
     The Primer class facilitates working with the primer sequence.
@@ -27,7 +28,6 @@ class Primer:
         self._sequence = Primer.validate_primer(primer_sequence)
         self._molecular_weight = None
 
-
     def reverse(self, inplace=False):
         """
         Reverse sequence.
@@ -41,7 +41,6 @@ class Primer:
             self._sequence = new_seq
         else:
             return Primer(primer_sequence=new_seq)
-
 
     def complement(self, inplace=False):
         """
@@ -116,8 +115,9 @@ class Primer:
         c_count = self._sequence.count('C')
         g_count = self._sequence.count('G')
         # Anhydrous Molecular Weight = (An x 313.21) + (Tn x 304.2) + (Cn x 289.18) + (Gn x 329.21) - 61.96
-        self._molecular_weight = (a_count * A_WEIGHT) + (t_count * T_WEIGHT) + (c_count * C_WEIGHT) + (g_count * G_WEIGHT) - ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
-        return self._molecular_weight    
+        self._molecular_weight = (a_count * A_WEIGHT) + (t_count * T_WEIGHT) + (c_count * \
+                                  C_WEIGHT) + (g_count * G_WEIGHT) - ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
+        return self._molecular_weight
 
     @molecular_weight.setter
     def molecular_weight(self, _):

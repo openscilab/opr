@@ -29,7 +29,7 @@ def read_description():
 setup(
     name='opr',
     packages=[
-        'opr',],
+        'opr', ],
     version='0.1',
     description='TODO',
     long_description=read_description(),
