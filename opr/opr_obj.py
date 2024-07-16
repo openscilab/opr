@@ -6,6 +6,7 @@ from .opr_param import PRIMER_SEQUENCE_TYPE_ERROR, PRIMER_SEQUENCE_LENGTH_ERROR,
 from .opr_param import PRIMER_LOWER_LENGTH, PRIMER_HIGHEST_LENGTH, PRIMER_LOWEST_GC_RANGE, PRIMER_HIGHEST_GC_RANGE
 from .opr_param import PRIMER_READ_ONLY_ATTRIBUTE_ERROR, PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR
 from .opr_param import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT, ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
+from .opr_param import DNA_COMPLEMENT_MAP
 
 class Primer:
     """
@@ -25,6 +26,33 @@ class Primer:
         """
         self._sequence = Primer.validate_primer(primer_sequence)
         self._molecular_weight = None
+
+
+    def reverse(self, inplace=False):
+        """
+        Reverse sequence.
+
+        :param inplace: inplace flag
+        :type inplace: bool
+        :return: new Primer object or None
+        """
+        pass
+
+    def complement(self, inplace=False):
+        """
+        Complement sequence.
+
+        :param inplace: inplace flag
+        :type inplace: bool
+        :return: new Primer object or None
+        """
+        new_seq = ""
+        for item in self._sequence:
+            new_seq += DNA_COMPLEMENT_MAP[item]
+        if inplace:
+            self._sequence = new_seq
+        else:
+            return Primer(primer_sequence=new_seq)
 
     @staticmethod
     def validate_primer(primer_sequence):
