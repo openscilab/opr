@@ -17,18 +17,18 @@ def test_reverse_3():
 
 
 def test_complement_1():
-    oprimer = Primer("ATCGGCTA")
+    oprimer = Primer("ATCGGCTAAATCGGCTAA")
     oprimer_complemented = oprimer.complement(inplace=False)
-    assert oprimer_complemented.sequence == "TAGCCGAT"
+    assert oprimer_complemented.sequence == "TAGCCGATTTAGCCGATT"
 
 def test_complement_2():
-    oprimer = Primer("ATCGGCTA")
+    oprimer = Primer("ATCGGCTAAATCGGCTAA")
     oprimer_complemented = oprimer.complement()
-    assert oprimer_complemented.sequence == "TAGCCGAT"
+    assert oprimer_complemented.sequence == "TAGCCGATTTAGCCGATT"
 
 def test_complement_3():
-    oprimer = Primer("ATCGGCTA")
+    oprimer = Primer("ATCGGCTAAATCGGCTAA")
     oprimer.complement(inplace=True)
-    assert oprimer.sequence == "TAGCCGAT"
+    assert oprimer.sequence == "TAGCCGATTTAGCCGATT"
 
 
