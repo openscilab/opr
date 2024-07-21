@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `Primer` class
 - Molecular weight calculation
 - Sequence validation
+- Unit tests
+- `complement` method
+- `reverse` method
 
 [Unreleased]: https://github.com/openscilab/opr/compare/v0.1...dev
 [0.1]: https://github.com/openscilab/opr/compare/0baa8dd...v0.1

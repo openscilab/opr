@@ -2,6 +2,7 @@
 """Parameters and constants."""
 OPR_VERSION = "0.1"
 VALID_BASES = set('ATCG')
+DNA_COMPLEMENT_MAP = {"A": "T", "C": "G", "G": "C", "T": "A"}
 
 PRIMER_LOWER_LENGTH = 18
 PRIMER_HIGHEST_LENGTH = 30
@@ -20,4 +21,3 @@ PRIMER_SEQUENCE_VALID_BASES_ERROR = "Primer sequence should only contain the nuc
 PRIMER_SEQUENCE_VALID_GC_CONTENT_RANGE_ERROR = "Primer GC content should be between 30% and 80%."
 PRIMER_READ_ONLY_ATTRIBUTE_ERROR = "This attribute is read-only."
 PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR = "This attribute is not removable."
-
