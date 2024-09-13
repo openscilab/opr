@@ -1,6 +1,6 @@
 from opr import Primer
 
-TEST_CASE_NAME = "molecular weight calculation testcase"
+TEST_CASE_NAME = "Calculations tests"
 
 def test_mwc():
     oprimer = Primer("ATCGATCGATCGATCGAT")
