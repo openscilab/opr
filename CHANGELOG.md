@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - `Primer` class
 - Molecular weight calculation
+- GC content calculation
 - Sequence validation
 - Unit tests
 - `complement` method
