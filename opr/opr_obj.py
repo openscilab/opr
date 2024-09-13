@@ -3,7 +3,7 @@
 from warnings import warn
 from .opr_error import OPRBaseError
 from .opr_param import VALID_BASES
-from .opr_param import PRIMER_SEQUENCE_TYPE_ERROR, PRIMER_SEQUENCE_LENGTH_ERROR, PRIMER_SEQUENCE_VALID_BASES_ERROR, PRIMER_SEQUENCE_VALID_GC_CONTENT_RANGE_WARNING
+from .opr_param import PRIMER_SEQUENCE_TYPE_ERROR, PRIMER_SEQUENCE_LENGTH_WARNING, PRIMER_SEQUENCE_VALID_BASES_ERROR, PRIMER_SEQUENCE_VALID_GC_CONTENT_RANGE_WARNING
 from .opr_param import PRIMER_LOWER_LENGTH, PRIMER_HIGHEST_LENGTH, PRIMER_LOWEST_GC_RANGE, PRIMER_HIGHEST_GC_RANGE
 from .opr_param import PRIMER_READ_ONLY_ATTRIBUTE_ERROR, PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR
 from .opr_param import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT, ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
@@ -74,7 +74,7 @@ class Primer:
         primer_sequence = primer_sequence.upper()
 
         if len(primer_sequence) < PRIMER_LOWER_LENGTH or len(primer_sequence) > PRIMER_HIGHEST_LENGTH:
-            raise OPRBaseError(PRIMER_SEQUENCE_LENGTH_ERROR)
+            warn(PRIMER_SEQUENCE_LENGTH_WARNING, RuntimeWarning)
 
         if not all(base in VALID_BASES for base in primer_sequence):
             raise OPRBaseError(PRIMER_SEQUENCE_VALID_BASES_ERROR)
