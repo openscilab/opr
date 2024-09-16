@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 """OPR modules."""
+from warnings import warn
 from .opr_error import OPRBaseError
 from .opr_param import VALID_BASES
-from .opr_param import PRIMER_SEQUENCE_TYPE_ERROR, PRIMER_SEQUENCE_LENGTH_ERROR, PRIMER_SEQUENCE_VALID_BASES_ERROR, PRIMER_SEQUENCE_VALID_GC_CONTENT_RANGE_ERROR
+from .opr_param import PRIMER_SEQUENCE_TYPE_ERROR, PRIMER_SEQUENCE_LENGTH_WARNING, PRIMER_SEQUENCE_VALID_BASES_ERROR, PRIMER_SEQUENCE_VALID_GC_CONTENT_RANGE_WARNING
 from .opr_param import PRIMER_LOWER_LENGTH, PRIMER_HIGHEST_LENGTH, PRIMER_LOWEST_GC_RANGE, PRIMER_HIGHEST_GC_RANGE
 from .opr_param import PRIMER_READ_ONLY_ATTRIBUTE_ERROR, PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR
 from .opr_param import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT, ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
@@ -27,6 +28,7 @@ class Primer:
         """
         self._sequence = Primer.validate_primer(primer_sequence)
         self._molecular_weight = None
+        self._gc_content = None
 
     def reverse(self, inplace=False):
         """
@@ -72,16 +74,10 @@ class Primer:
         primer_sequence = primer_sequence.upper()
 
         if len(primer_sequence) < PRIMER_LOWER_LENGTH or len(primer_sequence) > PRIMER_HIGHEST_LENGTH:
-            raise OPRBaseError(PRIMER_SEQUENCE_LENGTH_ERROR)
+            warn(PRIMER_SEQUENCE_LENGTH_WARNING, RuntimeWarning)
 
         if not all(base in VALID_BASES for base in primer_sequence):
             raise OPRBaseError(PRIMER_SEQUENCE_VALID_BASES_ERROR)
-
-        gc_count = primer_sequence.count('G') + primer_sequence.count('C')
-        gc_content = gc_count / len(primer_sequence)
-
-        if gc_content < PRIMER_LOWEST_GC_RANGE or gc_content > PRIMER_HIGHEST_GC_RANGE:
-            raise OPRBaseError(PRIMER_SEQUENCE_VALID_GC_CONTENT_RANGE_ERROR)
         return primer_sequence
 
     @property
@@ -126,3 +122,25 @@ class Primer:
     @molecular_weight.deleter
     def molecular_weight(self, _):
         self._molecular_weight = None
+
+    @property
+    def gc_content(self):
+        """
+        Calculate gc content.
+
+        :return: gc content
+        """
+        if self._gc_content is None:
+            gc_count = self._sequence.count('G') + self._sequence.count('C')
+            self._gc_content = gc_count / len(self._sequence)
+        if self._gc_content < PRIMER_LOWEST_GC_RANGE or self._gc_content > PRIMER_HIGHEST_GC_RANGE:
+            warn(PRIMER_SEQUENCE_VALID_GC_CONTENT_RANGE_WARNING, RuntimeWarning)
+        return self._gc_content
+
+    @gc_content.setter
+    def gc_content(self, _):
+        raise OPRBaseError(PRIMER_READ_ONLY_ATTRIBUTE_ERROR)
+
+    @gc_content.deleter
+    def gc_content(self, _):
+        raise OPRBaseError(PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR)
