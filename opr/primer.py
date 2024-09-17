@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""OPR modules."""
+"""OPR primer."""
 from warnings import warn
 from .errors import OPRBaseError
 from .params import VALID_BASES
