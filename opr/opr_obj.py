@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """OPR modules."""
 from warnings import warn
-from .opr_error import OPRBaseError
+from .errors import OPRBaseError
 from .opr_param import VALID_BASES
 from .opr_param import PRIMER_SEQUENCE_TYPE_ERROR, PRIMER_SEQUENCE_LENGTH_WARNING, PRIMER_SEQUENCE_VALID_BASES_ERROR, PRIMER_SEQUENCE_VALID_GC_CONTENT_RANGE_WARNING
 from .opr_param import PRIMER_LOWER_LENGTH, PRIMER_HIGHEST_LENGTH, PRIMER_LOWEST_GC_RANGE, PRIMER_HIGHEST_GC_RANGE
