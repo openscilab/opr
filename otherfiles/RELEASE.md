@@ -1,6 +1,6 @@
 # OPR Release Instructions
 
-#### Last Update: 2023-12-20
+**Last Update: 2024-09-17**
 
 1. Create the `release` branch under `dev`
 2. Update all version tags
