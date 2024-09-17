@@ -27,7 +27,7 @@ FILES = {
     "README.md": README_ITEMS,
     "CHANGELOG.md": CHANGELOG_ITEMS,
     "SECURITY.md": SECURITY_ITEMS,
-    os.path.join("opr", "opr_param.py"): PARAMS_ITEMS,
+    os.path.join("opr", "params.py"): PARAMS_ITEMS,
 }
 
 TEST_NUMBER = len(FILES)
