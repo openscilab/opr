@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """OPR modules."""
-from .opr_param import OPR_VERSION
-from .opr_obj import Primer
+from .params import OPR_VERSION
+from .primer import Primer
+from .errors import OPRBaseError
 
 __version__ = OPR_VERSION
