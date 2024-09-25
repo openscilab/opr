@@ -41,7 +41,7 @@ class Primer:
 
     def __add__(self, other_primer):
         """
-        Concat the inner nucleic acid sequences of current Primer with other Primer and return a new Primer.
+        Concatenate the sequences of the current Primer with another one.
 
         :param other_primer: another Primer to concat its sequence to the current Primer
         :type other_primer: Primer

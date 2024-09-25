@@ -22,5 +22,5 @@ PRIMER_SEQUENCE_VALID_GC_CONTENT_RANGE_WARNING = "The recommended range for GC c
 PRIMER_READ_ONLY_ATTRIBUTE_ERROR = "This attribute is read-only."
 PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR = "This attribute is not removable."
 
-PRIMER_ADDITION_ERROR = "You can only add two Primer objects togather (which will lead to a new Primer with the concatenated sequence)."
-PRIMER_MULTIPICATION_ERROR = "Primer sequence can only get multipied by integer."
+PRIMER_ADDITION_ERROR = "You can only add two Primer objects."
+PRIMER_MULTIPICATION_ERROR = "The primer sequence can only be multiplied by an integer."
