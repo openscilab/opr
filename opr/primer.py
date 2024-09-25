@@ -30,6 +30,14 @@ class Primer:
         self._molecular_weight = None
         self._gc_content = None
 
+    def __len__(self):
+        """
+        Return the length of the Primer sequence.
+
+        :return: length of the Primer sequence
+        """
+        return len(self._sequence)
+
     def reverse(self, inplace=False):
         """
         Reverse sequence.
