@@ -8,6 +8,7 @@ from .params import PRIMER_LOWER_LENGTH, PRIMER_HIGHEST_LENGTH, PRIMER_LOWEST_GC
 from .params import PRIMER_READ_ONLY_ATTRIBUTE_ERROR, PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR
 from .params import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT, ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
 from .params import DNA_COMPLEMENT_MAP
+from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPICATION_ERROR
 
 
 class Primer:
@@ -37,6 +38,30 @@ class Primer:
         :return: length of the Primer sequence
         """
         return len(self._sequence)
+
+    def __add__(self, other_primer):
+        """
+        Concat the inner nucleic acid sequences of current Primer with other Primer and return a new Primer.
+
+        :param other_primer: another Primer to concat its sequence to the current Primer
+        :type other_primer: Primer
+        :return: new Primer with concatenated sequence
+        """
+        if isinstance(other_primer, Primer):
+            return Primer(self._sequence + other_primer._sequence)
+        raise OPRBaseError(PRIMER_ADDITION_ERROR)
+
+    def __mul__(self, number):
+        """
+        Multiply the Primer sequence `number` times.
+
+        :param number: times to concat the Primer sequence to itself
+        :type number: int
+        :return: new Primer with multiplied sequence
+        """
+        if isinstance(number, int):
+            return Primer(self._sequence * number)
+        raise OPRBaseError(PRIMER_MULTIPICATION_ERROR)
 
     def reverse(self, inplace=False):
         """
