@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 ## [0.1] - 2024-06-05
 ### Added
+- `addition` and `multipication` operators overload
+- `len` magic overload
 - `Primer` class
 - Molecular weight calculation
 - GC content calculation

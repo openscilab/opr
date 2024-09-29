@@ -33,4 +33,17 @@ def test_complement_3(): #Reference: https://www.qiagen.com/us/applications/enzy
     oprimer.complement(inplace=True)
     assert oprimer.sequence == "TAGCCGATTTAGCCGATT"
 
+def test_length():
+    oprimer = Primer("ATCGGCTAAATCGGCTAA")
+    assert len(oprimer) == 18
 
+def test_addition():
+    oprimer_1 = Primer("ATCG")
+    oprimer_2 = Primer("GATC")
+    oprimer_concat = oprimer_1 + oprimer_2
+    assert oprimer_concat.sequence == "ATCGGATC"
+
+def test_multiply():
+    oprimer_1 = Primer("ATCG")
+    oprimer_concat = oprimer_1 * 4
+    assert oprimer_concat.sequence == "ATCGATCGATCGATCG"
