@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """OPR primer."""
+from enum import Enum
 from warnings import warn
 from .errors import OPRBaseError
 from .params import VALID_BASES
@@ -9,6 +10,13 @@ from .params import PRIMER_READ_ONLY_ATTRIBUTE_ERROR, PRIMER_NOT_REMOVABLE_ATTRI
 from .params import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT, ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
 from .params import DNA_COMPLEMENT_MAP
 from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPICATION_ERROR
+
+class MeltingTemperatureMode(Enum):
+    """Mode used to calculate the Melting Temperature of the Primer accordingly."""
+
+    BASIC = 1
+    SALT_ADJUSTED = 2
+    NEAREST_NEIGHBOR = 3
 
 
 class Primer:
