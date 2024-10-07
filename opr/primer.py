@@ -10,6 +10,7 @@ from .params import PRIMER_READ_ONLY_ATTRIBUTE_ERROR, PRIMER_NOT_REMOVABLE_ATTRI
 from .params import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT, ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
 from .params import DNA_COMPLEMENT_MAP
 from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPICATION_ERROR
+from .params import PRIMER_SUPPORTED_MELTING_TEMPERATURE_CALCULATIONS
 
 class MeltingTemperatureMode(Enum):
     """Mode used to calculate the Melting Temperature of the Primer accordingly."""
@@ -38,6 +39,11 @@ class Primer:
         self._sequence = Primer.validate_primer(primer_sequence)
         self._molecular_weight = None
         self._gc_content = None
+        self._melting_temperature = {
+            MeltingTemperatureMode.BASIC: None,
+            MeltingTemperatureMode.SALT_ADJUSTED: None,
+            MeltingTemperatureMode.NEAREST_NEIGHBOR: None,
+        }
 
     def __len__(self):
         """
@@ -185,3 +191,38 @@ class Primer:
     @gc_content.deleter
     def gc_content(self, _):
         raise OPRBaseError(PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR)
+
+    @property
+    def melting_temperature(self):
+        """
+        Calculate(if needed) the melting temperature.
+
+        :return: approximated melting temperatures
+        """
+        a_count = self._sequence.count('A')
+        t_count = self._sequence.count('T')
+        c_count = self._sequence.count('C')
+        g_count = self._sequence.count('G')
+        warn(PRIMER_SUPPORTED_MELTING_TEMPERATURE_CALCULATIONS)
+        if self._melting_temperature[MeltingTemperatureMode.BASIC] is None:
+            if len(self) <= 13:
+                # Tm= (wA+xT) * 2 + (yG+zC) * 4
+                # where w,x,y,z are the number of the bases A,T,G,C in the sequence, respectively (from Marmur,J., and Doty,P. (1962) J Mol Biol 5:109-118 [PubMed]).
+                self._melting_temperature[MeltingTemperatureMode.BASIC] = (a_count+t_count) * 2 + (g_count+c_count) * 4
+            else:
+                # Tm= 64.9 +41 * (yG+zC-16.4)/(wA+xT+yG+zC)
+                # See Wallace,R.B., Shaffer,J., Murphy,R.F., Bonner,J., Hirose,T., and Itakura,K. (1979) Nucleic Acids Res 6:3543-3557 (Abstract) and Sambrook,J., and Russell,D.W. (2001) Molecular Cloning: A Laboratory Manual. Cold Spring Harbor Laboratory Press; Cold Spring Harbor, NY. (CHSL Press)
+                self._melting_temperature[MeltingTemperatureMode.BASIC] = 64.9 + 41 * ((g_count+c_count-16.4)/(a_count+t_count+g_count+c_count))
+        return self._melting_temperature
+
+    @melting_temperature.setter
+    def melting_temperature(self, _):
+        raise OPRBaseError(PRIMER_READ_ONLY_ATTRIBUTE_ERROR)
+
+    @melting_temperature.deleter
+    def melting_temperature(self, _):
+        self.melting_temperature = {
+            MeltingTemperatureMode.BASIC: None,
+            MeltingTemperatureMode.SALT_ADJUSTED: None,
+            MeltingTemperatureMode.NEAREST_NEIGHBOR: None,
+        }
