@@ -24,3 +24,5 @@ PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR = "This attribute is not removable."
 
 PRIMER_ADDITION_ERROR = "You can only add two Primer objects."
 PRIMER_MULTIPICATION_ERROR = "The primer sequence can only be multiplied by an integer."
+
+PRIMER_SUPPORTED_MELTING_TEMPERATURE_CALCULATIONS = "This version currently supports only the Basic calculation for Melting Temperature."
