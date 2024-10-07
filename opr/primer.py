@@ -12,6 +12,7 @@ from .params import DNA_COMPLEMENT_MAP
 from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPICATION_ERROR
 from .params import PRIMER_SUPPORTED_MELTING_TEMPERATURE_CALCULATIONS
 
+
 class MeltingTemperatureMode(Enum):
     """Mode used to calculate the Melting Temperature of the Primer accordingly."""
 
@@ -158,8 +159,8 @@ class Primer:
         c_count = self._sequence.count('C')
         g_count = self._sequence.count('G')
         # Anhydrous Molecular Weight = (An x 313.21) + (Tn x 304.2) + (Cn x 289.18) + (Gn x 329.21) - 61.96
-        self._molecular_weight = (a_count * A_WEIGHT) + (t_count * T_WEIGHT) + (c_count * \
-                                  C_WEIGHT) + (g_count * G_WEIGHT) - ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
+        self._molecular_weight = (a_count * A_WEIGHT) + (t_count * T_WEIGHT) + (c_count *
+                                                                                C_WEIGHT) + (g_count * G_WEIGHT) - ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
         return self._molecular_weight
 
     @molecular_weight.setter
@@ -207,12 +208,20 @@ class Primer:
         if self._melting_temperature[MeltingTemperatureMode.BASIC] is None:
             if len(self) <= 13:
                 # Tm= (wA+xT) * 2 + (yG+zC) * 4
-                # where w,x,y,z are the number of the bases A,T,G,C in the sequence, respectively (from Marmur,J., and Doty,P. (1962) J Mol Biol 5:109-118 [PubMed]).
-                self._melting_temperature[MeltingTemperatureMode.BASIC] = (a_count+t_count) * 2 + (g_count+c_count) * 4
+                # where w,x,y,z are the number of the bases A,T,G,C in the sequence,
+                # respectively (from Marmur,J., and Doty,P. (1962) J Mol Biol 5:109-118
+                # [PubMed]).
+                self._melting_temperature[MeltingTemperatureMode.BASIC] = (
+                    a_count + t_count) * 2 + (g_count + c_count) * 4
             else:
                 # Tm= 64.9 +41 * (yG+zC-16.4)/(wA+xT+yG+zC)
-                # See Wallace,R.B., Shaffer,J., Murphy,R.F., Bonner,J., Hirose,T., and Itakura,K. (1979) Nucleic Acids Res 6:3543-3557 (Abstract) and Sambrook,J., and Russell,D.W. (2001) Molecular Cloning: A Laboratory Manual. Cold Spring Harbor Laboratory Press; Cold Spring Harbor, NY. (CHSL Press)
-                self._melting_temperature[MeltingTemperatureMode.BASIC] = 64.9 + 41 * ((g_count+c_count-16.4)/(a_count+t_count+g_count+c_count))
+                # See Wallace,R.B., Shaffer,J., Murphy,R.F., Bonner,J., Hirose,T., and
+                # Itakura,K. (1979) Nucleic Acids Res 6:3543-3557 (Abstract) and
+                # Sambrook,J., and Russell,D.W. (2001) Molecular Cloning: A Laboratory
+                # Manual. Cold Spring Harbor Laboratory Press; Cold Spring Harbor, NY.
+                # (CHSL Press)
+                self._melting_temperature[MeltingTemperatureMode.BASIC] = 64.9 + 41 * \
+                    ((g_count + c_count - 16.4) / (a_count + t_count + g_count + c_count))
         return self._melting_temperature
 
     @melting_temperature.setter
