@@ -21,9 +21,10 @@ def test_gc_content_3(): #Reference: https://jamiemcgowan.ie/bioinf/gc_content.h
 
 def test_melt_temp_1(): #Reference: http://biotools.nubic.northwestern.edu/OligoCalc.html
     oprimer = Primer("ATCGATCGATCGATCGATCG")
-    assert round(oprimer.melting_temperature[MeltingTemperature.BASIC],1) == 51.8
+    basic_melt_temp = oprimer.melting_temperature(MeltingTemperature.BASIC)
+    assert round(basic_melt_temp,1) == 51.8
 
 def test_melt_temp_2(): #Reference: http://biotools.nubic.northwestern.edu/OligoCalc.html
     oprimer = Primer("ATCG")
-    print(oprimer.melting_temperature)
-    assert round(oprimer.melting_temperature[MeltingTemperature.BASIC],1) == 12
+    basic_melt_temp = oprimer.melting_temperature(method=MeltingTemperature.BASIC)
+    assert round(basic_melt_temp,1) == 12

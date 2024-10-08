@@ -193,19 +193,21 @@ class Primer:
     def gc_content(self, _):
         raise OPRBaseError(PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR)
 
-    @property
-    def melting_temperature(self):
+    def melting_temperature(self, method=MeltingTemperature.BASIC):
         """
         Calculate(if needed) the melting temperature.
 
-        :return: approximated melting temperatures
+        :param method: requested calculation mode for melting temperature
+        :type method: MeltingTemperature
+        :return: approximated melting temperature
         """
+        if self._melting_temperature[method] != None:
+            return self._melting_temperature[method]
         a_count = self._sequence.count('A')
         t_count = self._sequence.count('T')
         c_count = self._sequence.count('C')
         g_count = self._sequence.count('G')
-        warn(PRIMER_SUPPORTED_MELTING_TEMPERATURE_CALCULATIONS)
-        if self._melting_temperature[MeltingTemperature.BASIC] is None:
+        if method == MeltingTemperature.BASIC:
             if len(self) <= 13:
                 # Tm= (wA+xT) * 2 + (yG+zC) * 4
                 # where w,x,y,z are the number of the bases A,T,G,C in the sequence,
@@ -222,16 +224,6 @@ class Primer:
                 # (CHSL Press)
                 self._melting_temperature[MeltingTemperature.BASIC] = 64.9 + 41 * \
                     ((g_count + c_count - 16.4) / (a_count + t_count + g_count + c_count))
-        return self._melting_temperature
-
-    @melting_temperature.setter
-    def melting_temperature(self, _):
-        raise OPRBaseError(PRIMER_READ_ONLY_ATTRIBUTE_ERROR)
-
-    @melting_temperature.deleter
-    def melting_temperature(self, _):
-        self.melting_temperature = {
-            MeltingTemperature.BASIC: None,
-            MeltingTemperature.SALT_ADJUSTED: None,
-            MeltingTemperature.NEAREST_NEIGHBOR: None,
-        }
+        else:
+            raise(NotImplementedError(PRIMER_SUPPORTED_MELTING_TEMPERATURE_CALCULATIONS))
+        return self._melting_temperature[method]
