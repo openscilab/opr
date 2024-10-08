@@ -1,5 +1,5 @@
 from opr import Primer
-from opr.primer import MeltingTemperatureMode
+from opr.primer import MeltingTemperature
 
 TEST_CASE_NAME = "Calculations tests"
 
@@ -21,9 +21,9 @@ def test_gc_content_3(): #Reference: https://jamiemcgowan.ie/bioinf/gc_content.h
 
 def test_melt_temp_1(): #Reference: http://biotools.nubic.northwestern.edu/OligoCalc.html
     oprimer = Primer("ATCGATCGATCGATCGATCG")
-    assert round(oprimer.melting_temperature[MeltingTemperatureMode.BASIC],1) == 51.8
+    assert round(oprimer.melting_temperature[MeltingTemperature.BASIC],1) == 51.8
 
 def test_melt_temp_2(): #Reference: http://biotools.nubic.northwestern.edu/OligoCalc.html
     oprimer = Primer("ATCG")
     print(oprimer.melting_temperature)
-    assert round(oprimer.melting_temperature[MeltingTemperatureMode.BASIC],1) == 12
+    assert round(oprimer.melting_temperature[MeltingTemperature.BASIC],1) == 12

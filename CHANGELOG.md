@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.1] - 2024-06-05
 ### Added
 - MeltingTemperatureMode enum
-- Basic Melting Temperature calculation
+- Basic melting temperature calculation
 - `addition` and `multipication` operators overload
 - `len` magic overload
 - `Primer` class

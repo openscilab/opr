@@ -13,7 +13,7 @@ from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPICATION_ERROR
 from .params import PRIMER_SUPPORTED_MELTING_TEMPERATURE_CALCULATIONS
 
 
-class MeltingTemperatureMode(Enum):
+class MeltingTemperature(Enum):
     """Mode used to calculate the Melting Temperature of the Primer accordingly."""
 
     BASIC = 1
@@ -41,9 +41,9 @@ class Primer:
         self._molecular_weight = None
         self._gc_content = None
         self._melting_temperature = {
-            MeltingTemperatureMode.BASIC: None,
-            MeltingTemperatureMode.SALT_ADJUSTED: None,
-            MeltingTemperatureMode.NEAREST_NEIGHBOR: None,
+            MeltingTemperature.BASIC: None,
+            MeltingTemperature.SALT_ADJUSTED: None,
+            MeltingTemperature.NEAREST_NEIGHBOR: None,
         }
 
     def __len__(self):
@@ -205,13 +205,13 @@ class Primer:
         c_count = self._sequence.count('C')
         g_count = self._sequence.count('G')
         warn(PRIMER_SUPPORTED_MELTING_TEMPERATURE_CALCULATIONS)
-        if self._melting_temperature[MeltingTemperatureMode.BASIC] is None:
+        if self._melting_temperature[MeltingTemperature.BASIC] is None:
             if len(self) <= 13:
                 # Tm= (wA+xT) * 2 + (yG+zC) * 4
                 # where w,x,y,z are the number of the bases A,T,G,C in the sequence,
                 # respectively (from Marmur,J., and Doty,P. (1962) J Mol Biol 5:109-118
                 # [PubMed]).
-                self._melting_temperature[MeltingTemperatureMode.BASIC] = (
+                self._melting_temperature[MeltingTemperature.BASIC] = (
                     a_count + t_count) * 2 + (g_count + c_count) * 4
             else:
                 # Tm= 64.9 +41 * (yG+zC-16.4)/(wA+xT+yG+zC)
@@ -220,7 +220,7 @@ class Primer:
                 # Sambrook,J., and Russell,D.W. (2001) Molecular Cloning: A Laboratory
                 # Manual. Cold Spring Harbor Laboratory Press; Cold Spring Harbor, NY.
                 # (CHSL Press)
-                self._melting_temperature[MeltingTemperatureMode.BASIC] = 64.9 + 41 * \
+                self._melting_temperature[MeltingTemperature.BASIC] = 64.9 + 41 * \
                     ((g_count + c_count - 16.4) / (a_count + t_count + g_count + c_count))
         return self._melting_temperature
 
@@ -231,7 +231,7 @@ class Primer:
     @melting_temperature.deleter
     def melting_temperature(self, _):
         self.melting_temperature = {
-            MeltingTemperatureMode.BASIC: None,
-            MeltingTemperatureMode.SALT_ADJUSTED: None,
-            MeltingTemperatureMode.NEAREST_NEIGHBOR: None,
+            MeltingTemperature.BASIC: None,
+            MeltingTemperature.SALT_ADJUSTED: None,
+            MeltingTemperature.NEAREST_NEIGHBOR: None,
         }
