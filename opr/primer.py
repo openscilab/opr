@@ -29,15 +29,15 @@ class Primer:
     >>> oprimer.molecular_weight
     """
 
-    def __init__(self, primer_sequence):
+    def __init__(self, sequence):
         """
         Initialize the Primer instance.
 
-        :param primer_sequence: primer nucleotides sequence
-        :type primer_sequence: str
+        :param sequence: primer nucleotides sequence
+        :type sequence: str
         :return: an instance of the Primer class
         """
-        self._sequence = Primer.validate_primer(primer_sequence)
+        self._sequence = Primer.validate_primer(sequence)
         self._molecular_weight = None
         self._gc_content = None
         self._melting_temperature = {
@@ -90,7 +90,7 @@ class Primer:
         if inplace:
             self._sequence = new_seq
         else:
-            return Primer(primer_sequence=new_seq)
+            return Primer(sequence=new_seq)
 
     def complement(self, inplace=False):
         """
@@ -106,27 +106,27 @@ class Primer:
         if inplace:
             self._sequence = new_seq
         else:
-            return Primer(primer_sequence=new_seq)
+            return Primer(sequence=new_seq)
 
     @staticmethod
-    def validate_primer(primer_sequence):
+    def validate_primer(sequence):
         """
         Validate the given primer sequence.
 
-        :param primer_sequence: primer nucleotides sequence
-        :type primer_sequence: any
+        :param sequence: primer nucleotides sequence
+        :type sequence: any
         :return: an uppercased primer sequence
         """
-        if not isinstance(primer_sequence, str):
+        if not isinstance(sequence, str):
             raise OPRBaseError(PRIMER_SEQUENCE_TYPE_ERROR)
-        primer_sequence = primer_sequence.upper()
+        sequence = sequence.upper()
 
-        if len(primer_sequence) < PRIMER_LOWER_LENGTH or len(primer_sequence) > PRIMER_HIGHEST_LENGTH:
+        if len(sequence) < PRIMER_LOWER_LENGTH or len(sequence) > PRIMER_HIGHEST_LENGTH:
             warn(PRIMER_SEQUENCE_LENGTH_WARNING, RuntimeWarning)
 
-        if not all(base in VALID_BASES for base in primer_sequence):
+        if not all(base in VALID_BASES for base in sequence):
             raise OPRBaseError(PRIMER_SEQUENCE_VALID_BASES_ERROR)
-        return primer_sequence
+        return sequence
 
     @property
     def sequence(self):
