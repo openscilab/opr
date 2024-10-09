@@ -9,7 +9,7 @@ from .params import PRIMER_LOWER_LENGTH, PRIMER_HIGHEST_LENGTH, PRIMER_LOWEST_GC
 from .params import PRIMER_READ_ONLY_ATTRIBUTE_ERROR, PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR
 from .params import DNA_COMPLEMENT_MAP
 from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPICATION_ERROR
-from .params import PRIMER_SUPPORTED_MELTING_TEMPERATURE_CALCULATIONS
+from .params import PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR
 from .functions import molecular_weight_calc, basic_melting_temperature_calc
 
 
@@ -200,5 +200,5 @@ class Primer:
         if method == MeltingTemperature.BASIC:
             self._melting_temperature[MeltingTemperature.BASIC] = basic_melting_temperature_calc(self._sequence)
         else:
-            raise(NotImplementedError(PRIMER_SUPPORTED_MELTING_TEMPERATURE_CALCULATIONS))
+            raise NotImplementedError(PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR)
         return self._melting_temperature[method]
