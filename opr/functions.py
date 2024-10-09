@@ -27,10 +27,10 @@ def basic_melting_temperature_calc(sequence):
     :type sequence: str
     :return: melting temperature as float
     """
-    a_count = self._sequence.count('A')
-    t_count = self._sequence.count('T')
-    c_count = self._sequence.count('C')
-    g_count = self._sequence.count('G')
+    a_count = sequence.count('A')
+    t_count = sequence.count('T')
+    c_count = sequence.count('C')
+    g_count = sequence.count('G')
     if len(sequence) <= 13:
         melting_temperature = (a_count + t_count) * 2 + (g_count + c_count) * 4
     else:
