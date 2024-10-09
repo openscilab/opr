@@ -11,6 +11,7 @@ from .params import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT, ANHYDROUS_MOLECULAR_
 from .params import DNA_COMPLEMENT_MAP
 from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPICATION_ERROR
 from .params import PRIMER_SUPPORTED_MELTING_TEMPERATURE_CALCULATIONS
+from .functions import molecular_weight_calc
 
 
 class MeltingTemperature(Enum):
@@ -154,13 +155,7 @@ class Primer:
         """
         if self._molecular_weight:
             return self._molecular_weight
-        a_count = self._sequence.count('A')
-        t_count = self._sequence.count('T')
-        c_count = self._sequence.count('C')
-        g_count = self._sequence.count('G')
-        # Anhydrous Molecular Weight = (An x 313.21) + (Tn x 304.2) + (Cn x 289.18) + (Gn x 329.21) - 61.96
-        self._molecular_weight = (a_count * A_WEIGHT) + (t_count * T_WEIGHT) + (c_count *
-                                                                                C_WEIGHT) + (g_count * G_WEIGHT) - ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
+        self._molecular_weight = molecular_weight_calc(self._sequence)
         return self._molecular_weight
 
     @molecular_weight.setter
