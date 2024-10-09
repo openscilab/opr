@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Parameters and constants."""
+"""OPR parameters and constants."""
 OPR_VERSION = "0.1"
 VALID_BASES = set('ATCG')
 DNA_COMPLEMENT_MAP = {"A": "T", "C": "G", "G": "C", "T": "A"}
@@ -23,6 +23,6 @@ PRIMER_READ_ONLY_ATTRIBUTE_ERROR = "This attribute is read-only."
 PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR = "This attribute is not removable."
 
 PRIMER_ADDITION_ERROR = "You can only add two Primer objects."
-PRIMER_MULTIPICATION_ERROR = "The primer sequence can only be multiplied by an integer."
+PRIMER_MULTIPLICATION_ERROR = "The primer sequence can only be multiplied by an integer."
 
-PRIMER_SUPPORTED_MELTING_TEMPERATURE_CALCULATIONS = "This version currently supports only the Basic calculation for Melting Temperature."
+PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR = "This method for calculating melting temperature has not been implemented."

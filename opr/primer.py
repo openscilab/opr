@@ -7,10 +7,10 @@ from .params import VALID_BASES
 from .params import PRIMER_SEQUENCE_TYPE_ERROR, PRIMER_SEQUENCE_LENGTH_WARNING, PRIMER_SEQUENCE_VALID_BASES_ERROR, PRIMER_SEQUENCE_VALID_GC_CONTENT_RANGE_WARNING
 from .params import PRIMER_LOWER_LENGTH, PRIMER_HIGHEST_LENGTH, PRIMER_LOWEST_GC_RANGE, PRIMER_HIGHEST_GC_RANGE
 from .params import PRIMER_READ_ONLY_ATTRIBUTE_ERROR, PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR
-from .params import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT, ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
 from .params import DNA_COMPLEMENT_MAP
-from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPICATION_ERROR
-from .params import PRIMER_SUPPORTED_MELTING_TEMPERATURE_CALCULATIONS
+from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPLICATION_ERROR
+from .params import PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR
+from .functions import molecular_weight_calc, basic_melting_temperature_calc
 
 
 class MeltingTemperature(Enum):
@@ -76,7 +76,7 @@ class Primer:
         """
         if isinstance(number, int):
             return Primer(self._sequence * number)
-        raise OPRBaseError(PRIMER_MULTIPICATION_ERROR)
+        raise OPRBaseError(PRIMER_MULTIPLICATION_ERROR)
 
     def reverse(self, inplace=False):
         """
@@ -154,13 +154,7 @@ class Primer:
         """
         if self._molecular_weight:
             return self._molecular_weight
-        a_count = self._sequence.count('A')
-        t_count = self._sequence.count('T')
-        c_count = self._sequence.count('C')
-        g_count = self._sequence.count('G')
-        # Anhydrous Molecular Weight = (An x 313.21) + (Tn x 304.2) + (Cn x 289.18) + (Gn x 329.21) - 61.96
-        self._molecular_weight = (a_count * A_WEIGHT) + (t_count * T_WEIGHT) + (c_count *
-                                                                                C_WEIGHT) + (g_count * G_WEIGHT) - ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
+        self._molecular_weight = molecular_weight_calc(self._sequence)
         return self._molecular_weight
 
     @molecular_weight.setter
@@ -201,29 +195,10 @@ class Primer:
         :type method: MeltingTemperature
         :return: approximated melting temperature
         """
-        if self._melting_temperature[method] != None:
+        if self._melting_temperature[method] is not None:
             return self._melting_temperature[method]
-        a_count = self._sequence.count('A')
-        t_count = self._sequence.count('T')
-        c_count = self._sequence.count('C')
-        g_count = self._sequence.count('G')
         if method == MeltingTemperature.BASIC:
-            if len(self) <= 13:
-                # Tm= (wA+xT) * 2 + (yG+zC) * 4
-                # where w,x,y,z are the number of the bases A,T,G,C in the sequence,
-                # respectively (from Marmur,J., and Doty,P. (1962) J Mol Biol 5:109-118
-                # [PubMed]).
-                self._melting_temperature[MeltingTemperature.BASIC] = (
-                    a_count + t_count) * 2 + (g_count + c_count) * 4
-            else:
-                # Tm= 64.9 +41 * (yG+zC-16.4)/(wA+xT+yG+zC)
-                # See Wallace,R.B., Shaffer,J., Murphy,R.F., Bonner,J., Hirose,T., and
-                # Itakura,K. (1979) Nucleic Acids Res 6:3543-3557 (Abstract) and
-                # Sambrook,J., and Russell,D.W. (2001) Molecular Cloning: A Laboratory
-                # Manual. Cold Spring Harbor Laboratory Press; Cold Spring Harbor, NY.
-                # (CHSL Press)
-                self._melting_temperature[MeltingTemperature.BASIC] = 64.9 + 41 * \
-                    ((g_count + c_count - 16.4) / (a_count + t_count + g_count + c_count))
+            self._melting_temperature[MeltingTemperature.BASIC] = basic_melting_temperature_calc(self._sequence)
         else:
-            raise(NotImplementedError(PRIMER_SUPPORTED_MELTING_TEMPERATURE_CALCULATIONS))
+            raise NotImplementedError(PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR)
         return self._melting_temperature[method]
