@@ -195,7 +195,7 @@ class Primer:
         :type method: MeltingTemperature
         :return: approximated melting temperature
         """
-        if self._melting_temperature[method] != None:
+        if self._melting_temperature[method] is not None:
             return self._melting_temperature[method]
         if method == MeltingTemperature.BASIC:
             self._melting_temperature[MeltingTemperature.BASIC] = basic_melting_temperature_calc(self._sequence)
