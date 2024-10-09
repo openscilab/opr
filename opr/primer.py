@@ -76,7 +76,7 @@ class Primer:
         """
         if isinstance(number, int):
             return Primer(self._sequence * number)
-        raise OPRBaseError(PRIMER_MULTIPICATION_ERROR)
+        raise OPRBaseError(PRIMER_MULTIPLICATION_ERROR)
 
     def reverse(self, inplace=False):
         """
