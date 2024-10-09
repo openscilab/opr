@@ -86,11 +86,11 @@ class Primer:
         :type inplace: bool
         :return: new Primer object or None
         """
-        new_seq = self._sequence[::-1]
+        new_sequence = self._sequence[::-1]
         if inplace:
-            self._sequence = new_seq
+            self._sequence = new_sequence
         else:
-            return Primer(sequence=new_seq)
+            return Primer(sequence=new_sequence)
 
     def complement(self, inplace=False):
         """
@@ -100,13 +100,13 @@ class Primer:
         :type inplace: bool
         :return: new Primer object or None
         """
-        new_seq = ""
+        new_sequence = ""
         for item in self._sequence:
-            new_seq += DNA_COMPLEMENT_MAP[item]
+            new_sequence += DNA_COMPLEMENT_MAP[item]
         if inplace:
-            self._sequence = new_seq
+            self._sequence = new_sequence
         else:
-            return Primer(sequence=new_seq)
+            return Primer(sequence=new_sequence)
 
     @staticmethod
     def validate_primer(sequence):
