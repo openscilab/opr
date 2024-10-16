@@ -85,7 +85,7 @@ body:
       label: OPR version
       description: Which version of OPR are you using?
       options:
-        - OPR 0.0
+        - OPR 0.1
       default: 0
     validations:
       required: true
