@@ -19,8 +19,8 @@ OPR is an open source Python package that provides ... TODO
     <tr>
         <td align="center">PyPI Counter</td>
         <td align="center">
-            <a href="TODO">
-                <img src="TODO">
+            <a href="https://pepy.tech/projects/opr">
+                <img src="https://static.pepy.tech/badge/opr">
             </a>
         </td>
     </tr>
@@ -28,7 +28,7 @@ OPR is an open source Python package that provides ... TODO
         <td align="center">Github Stars</td>
         <td align="center">
             <a href="https://github.com/openscilab/opr">
-                <img src="TODO">
+                <img src="https://img.shields.io/github/stars/openscilab/opr.svg?style=social&label=Stars">
             </a>
         </td>
     </tr>
@@ -42,10 +42,10 @@ OPR is an open source Python package that provides ... TODO
     <tr>
         <td align="center">CI</td>
         <td align="center">
-            <img src="https://github.com/openscilab/opr/workflows/CI/badge.svg?branch=main">
+            <img src="https://github.com/openscilab/opr/actions/workflows/test.yml/badge.svg?branch=main">
         </td>
         <td align="center">
-            <img src="https://github.com/openscilab/opr/workflows/CI/badge.svg?branch=dev">
+            <img src="https://github.com/openscilab/opr/actions/workflows/test.yml/badge.svg?branch=dev">
             </td>
     </tr>
 </table>
@@ -71,8 +71,8 @@ Just fill an issue and describe it. We'll check it ASAP! or send an email to [op
  
 You can also join our discord server
 
-<a href="TODO">
-  <img src="TODO" alt="Discord Channel">
+<a href="https://discord.gg/8mBspwXqcA">
+  <img src="https://img.shields.io/discord/1064533716615049236.svg?style=for-the-badge" alt="Discord Channel">
 </a>
 
 
