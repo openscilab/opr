@@ -38,7 +38,7 @@ setup(
     author_email='opr@openscilab.com',
     url='https://github.com/openscilab/opr',
     download_url='https://github.com/openscilab/opr/tarball/v0.1',
-    keywords="python3 python machine_learning ML",
+    keywords="primer biology bioinformatics genome dna",
     project_urls={
             'Source': 'https://github.com/openscilab/opr',
     },
