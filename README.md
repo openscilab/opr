@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://github.com/openscilab/opr/raw/doc/otherfiles/logo.png" width="280">
+    <img src="https://github.com/openscilab/opr/raw/doc/otherfiles/logo.png" width="250">
 	<h1>OPR: Optimized Primer</h1>
     <br/>
     <a href="https://codecov.io/gh/openscilab/opr"><img src="https://codecov.io/gh/openscilab/opr/branch/main/graph/badge.svg" alt="Codecov"></a>
