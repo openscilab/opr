@@ -18,20 +18,6 @@
 
 ----------
 
-## Table of contents
-
-* [Overview](https://github.com/openscilab/opr#overview)
-* [Installation](https://github.com/openscilab/opr#installation)
-* [Usage](https://github.com/openscilab/opr#usage)
-* [Issues & Bug Reports](https://github.com/openscilab/opr#issues--bug-reports)
-* [Todo](https://github.com/openscilab/opr/blob/main/TODO.md)
-* [Contribution](https://github.com/openscilab/opr/blob/main/.github/CONTRIBUTING.md)
-* [Authors](https://github.com/openscilab/opr/blob/main/AUTHORS.md)
-* [License](https://github.com/openscilab/opr/blob/main/LICENSE)
-* [Show Your Support](https://github.com/openscilab/opr#show-your-support)
-* [Changelog](https://github.com/openscilab/opr/blob/main/CHANGELOG.md)
-* [Code of Conduct](https://github.com/openscilab/opr/blob/main/.github/CODE_OF_CONDUCT.md)
-
 
 ## Overview
 <p align="justify">
