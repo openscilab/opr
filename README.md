@@ -13,7 +13,7 @@
 
 ## Overview
 <p align="justify">
-**OPR** is an open-source Python package designed to simplify and streamline primer design and analysis for biologists and bioinformaticians. **OPR** enables users to design, validate, and optimize primers with ease, catering to a wide range of applications such as PCR, qPCR, and sequencing. With a focus on user-friendliness and efficiency, **OPR** aims to bridge the gap between biological research and computational tools, making primer-related workflows faster and more reliable.
+<b>OPR</b> is an open-source Python package designed to simplify and streamline primer design and analysis for biologists and bioinformaticians. <b>OPR</b> enables users to design, validate, and optimize primers with ease, catering to a wide range of applications such as PCR, qPCR, and sequencing. With a focus on user-friendliness and efficiency, <b>OPR</b> aims to bridge the gap between biological research and computational tools, making primer-related workflows faster and more reliable.
 </p>
 <table>
     <tr>
