@@ -38,7 +38,7 @@ setup(
     author_email='opr@openscilab.com',
     url='https://github.com/openscilab/opr',
     download_url='https://github.com/openscilab/opr/tarball/v0.1',
-    keywords="primer biology bioinformatics genome dna",
+    keywords="primer biology bioinformatics genome dna pcr",
     project_urls={
             'Source': 'https://github.com/openscilab/opr',
     },
