@@ -1,6 +1,6 @@
 <div align="center">
     <img src="https://github.com/openscilab/opr/raw/doc/otherfiles/logo.png" width="280">
-    <br/>
+	<h1>OPR: Optimized Primer</h1>
     <br/>
     <a href="https://codecov.io/gh/openscilab/opr"><img src="https://codecov.io/gh/openscilab/opr/branch/main/graph/badge.svg" alt="Codecov"></a>
     <a href="https://badge.fury.io/py/opr"><img src="https://badge.fury.io/py/opr.svg" alt="PyPI version" height="18"></a>
@@ -13,7 +13,7 @@
 
 ## Overview
 <p align="justify">
-OPR is an open source Python package that provides ... TODO
+OPR is an open-source Python package designed to simplify and streamline primer design and analysis for biologists and bioinformaticians. OPR enables users to design, validate, and optimize primers with ease, catering to a wide range of applications such as PCR, qPCR, and sequencing. With a focus on user-friendliness and efficiency, OPR aims to bridge the gap between biological research and computational tools, making primer-related workflows faster and more reliable.
 </p>
 <table>
     <tr>
@@ -54,7 +54,6 @@ OPR is an open source Python package that provides ... TODO
 ## Installation
 
 ### PyPI
-
 - Check [Python Packaging User Guide](https://packaging.python.org/installing/)
 - Run `pip install opr==0.1`
 ### Source code
