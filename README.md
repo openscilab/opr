@@ -62,6 +62,46 @@ OPR is an open-source Python package designed to simplify and streamline primer 
 
 ## Usage
 
+### Load
+```pycon
+>>> from opr import Primer
+>>> primer1 = Primer(sequence="CTGGAGGACGGAAGAGGAAGTAA")
+>>> primer1.sequence
+'CTGGAGGACGGAAGAGGAAGTAA'
+```
+
+### Properties
+
+#### Molecular weight
+```pycon
+>>> primer1.molecular_weight
+7235.79
+```
+#### GC content
+```pycon
+>>> primer1.gc_content
+0.5217391304347826
+```
+#### Melting temperature
+```pycon
+>>> primer1.melting_temperature()
+57.056521739130446
+```
+### Operations
+
+#### Reverse
+```pycon
+>>> primer1_reversed = primer1.reverse()
+>>> primer1_reversed.sequence
+'AATGAAGGAGAAGGCAGGAGGTC'
+```
+#### Complement
+```pycon
+>>> primer1_complemented = primer1.complement()
+>>> primer1_complemented.sequence
+'GACCTCCTGCCTTCTCCTTCATT'
+```
+
 ## Issues & bug reports
 
 Just fill an issue and describe it. We'll check it ASAP! or send an email to [opr@openscilab.com](mailto:opr@openscilab.com "opr@openscilab.com"). 
@@ -75,7 +115,7 @@ You can also join our discord server
 </a>
 
 
-## Show Your Support
+## Show your support
 
 
 ### Star this repo
