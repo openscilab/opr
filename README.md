@@ -114,6 +114,16 @@ You can also join our discord server
   <img src="https://img.shields.io/discord/1064533716615049236.svg?style=for-the-badge" alt="Discord Channel">
 </a>
 
+## References
+					
+<blockquote>1- <a href="http://biotools.nubic.northwestern.edu/OligoCalc.html">Oligo Calc: Oligonucleotide Properties Calculator</a></blockquote>
+
+<blockquote>2- Marmur, Julius, and Paul Doty. "Determination of the base composition of deoxyribonucleic acid from its thermal denaturation temperature." <i>Journal of molecular biology</i> 5.1 (1962): 109-118.</blockquote>
+
+<blockquote>3- Wallace, R. Bruce, et al. "Hybridization of synthetic oligodeoxyribonucleotides to Φ X 174 DNA: the effect of single base pair mismatch." <i>Nucleic acids research</i> 6.11 (1979): 3543-3558.</blockquote>
+
+<blockquote>4- Panjkovich, Alejandro, and Francisco Melo. "Comparison of different melting temperature calculation methods for short DNA sequences." <i>Bioinformatics 21.6</i> (2005): 711-722.</blockquote>
+
 
 ## Show your support
 
