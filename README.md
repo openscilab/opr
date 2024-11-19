@@ -1,6 +1,6 @@
 <div align="center">
     <img src="https://github.com/openscilab/opr/raw/main/otherfiles/logo.png" width="250">
-	<h1>OPR: Optimized Primer</h1>
+    <h1>OPR: Optimized Primer</h1>
     <br/>
     <a href="https://codecov.io/gh/openscilab/opr"><img src="https://codecov.io/gh/openscilab/opr/branch/main/graph/badge.svg" alt="Codecov"></a>
     <a href="https://badge.fury.io/py/opr"><img src="https://badge.fury.io/py/opr.svg" alt="PyPI version" height="18"></a>
