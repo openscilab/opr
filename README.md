@@ -1,48 +1,26 @@
 <div align="center">
-    <img src="https://github.com/openscilab/opr/raw/main/otherfiles/logo.png" width="280" height="400">
+    <img src="https://github.com/openscilab/opr/raw/main/otherfiles/logo.png" width="250">
+    <h1>OPR: Optimized Primer</h1>
     <br/>
-    <br/>
-    <a href="https://codecov.io/gh/openscilab/opr">
-        <img src="https://codecov.io/gh/openscilab/opr/branch/main/graph/badge.svg" alt="Codecov"/>
-    </a>
-    <a href="TODO">
-        <img src="TODO" alt="PyPI version" height="18">
-    </a>
-    <a href="https://www.python.org/">
-        <img src="https://img.shields.io/badge/built%20with-Python3-green.svg" alt="built with Python3">
-    </a>
-    <a href="TODO">
-        <img src="TODO" alt="Discord Channel">
-    </a>
+    <a href="https://codecov.io/gh/openscilab/opr"><img src="https://codecov.io/gh/openscilab/opr/branch/main/graph/badge.svg" alt="Codecov"></a>
+    <a href="https://badge.fury.io/py/opr"><img src="https://badge.fury.io/py/opr.svg" alt="PyPI version" height="18"></a>
+    <a href="https://www.python.org/"><img src="https://img.shields.io/badge/built%20with-Python3-green.svg" alt="built with Python3"></a>
+    <a href="https://discord.gg/8mBspwXqcA"><img src="https://img.shields.io/discord/1064533716615049236.svg" alt="Discord Channel" style="height: 24px;"></a>
 </div>
 
 ----------
 
-## Table of contents
-
-* [Overview](https://github.com/openscilab/opr#overview)
-* [Installation](https://github.com/openscilab/opr#installation)
-* [Usage](https://github.com/openscilab/opr#usage)
-* [Issues & Bug Reports](https://github.com/openscilab/opr#issues--bug-reports)
-* [Todo](https://github.com/openscilab/opr/blob/main/TODO.md)
-* [Contribution](https://github.com/openscilab/opr/blob/main/.github/CONTRIBUTING.md)
-* [Authors](https://github.com/openscilab/opr/blob/main/AUTHORS.md)
-* [License](https://github.com/openscilab/opr/blob/main/LICENSE)
-* [Show Your Support](https://github.com/openscilab/opr#show-your-support)
-* [Changelog](https://github.com/openscilab/opr/blob/main/CHANGELOG.md)
-* [Code of Conduct](https://github.com/openscilab/opr/blob/main/.github/CODE_OF_CONDUCT.md)
-
 
 ## Overview
 <p align="justify">
-OPR is an open source Python package that provides ... TODO
+<b>OPR</b> is an open-source Python package designed to simplify and streamline primer design and analysis for biologists and bioinformaticians. <b>OPR</b> enables users to design, validate, and optimize primers with ease, catering to a wide range of applications such as PCR, qPCR, and sequencing. With a focus on user-friendliness and efficiency, <b>OPR</b> aims to bridge the gap between biological research and computational tools, making primer-related workflows faster and more reliable.
 </p>
 <table>
     <tr>
         <td align="center">PyPI Counter</td>
         <td align="center">
-            <a href="TODO">
-                <img src="TODO">
+            <a href="https://pepy.tech/projects/opr">
+                <img src="https://static.pepy.tech/badge/opr">
             </a>
         </td>
     </tr>
@@ -50,7 +28,7 @@ OPR is an open source Python package that provides ... TODO
         <td align="center">Github Stars</td>
         <td align="center">
             <a href="https://github.com/openscilab/opr">
-                <img src="TODO">
+                <img src="https://img.shields.io/github/stars/openscilab/opr.svg?style=social&label=Stars">
             </a>
         </td>
     </tr>
@@ -64,10 +42,10 @@ OPR is an open source Python package that provides ... TODO
     <tr>
         <td align="center">CI</td>
         <td align="center">
-            <img src="https://github.com/openscilab/opr/workflows/CI/badge.svg?branch=main">
+            <img src="https://github.com/openscilab/opr/actions/workflows/test.yml/badge.svg?branch=main">
         </td>
         <td align="center">
-            <img src="https://github.com/openscilab/opr/workflows/CI/badge.svg?branch=dev">
+            <img src="https://github.com/openscilab/opr/actions/workflows/test.yml/badge.svg?branch=dev">
             </td>
     </tr>
 </table>
@@ -76,7 +54,6 @@ OPR is an open source Python package that provides ... TODO
 ## Installation
 
 ### PyPI
-
 - Check [Python Packaging User Guide](https://packaging.python.org/installing/)
 - Run `pip install opr==0.1`
 ### Source code
@@ -84,6 +61,46 @@ OPR is an open source Python package that provides ... TODO
 - Run `pip install .`
 
 ## Usage
+
+### Load
+```pycon
+>>> from opr import Primer
+>>> primer1 = Primer(sequence="CTGGAGGACGGAAGAGGAAGTAA")
+>>> primer1.sequence
+'CTGGAGGACGGAAGAGGAAGTAA'
+```
+
+### Properties
+
+#### Molecular weight
+```pycon
+>>> primer1.molecular_weight
+7235.79
+```
+#### GC content
+```pycon
+>>> primer1.gc_content
+0.5217391304347826
+```
+#### Melting temperature
+```pycon
+>>> primer1.melting_temperature()
+57.056521739130446
+```
+### Operations
+
+#### Reverse
+```pycon
+>>> primer1_reversed = primer1.reverse()
+>>> primer1_reversed.sequence
+'AATGAAGGAGAAGGCAGGAGGTC'
+```
+#### Complement
+```pycon
+>>> primer1_complemented = primer1.complement()
+>>> primer1_complemented.sequence
+'GACCTCCTGCCTTCTCCTTCATT'
+```
 
 ## Issues & bug reports
 
@@ -93,12 +110,22 @@ Just fill an issue and describe it. We'll check it ASAP! or send an email to [op
  
 You can also join our discord server
 
-<a href="TODO">
-  <img src="TODO" alt="Discord Channel">
+<a href="https://discord.gg/8mBspwXqcA">
+  <img src="https://img.shields.io/discord/1064533716615049236.svg?style=for-the-badge" alt="Discord Channel">
 </a>
 
+## References
+					
+<blockquote>1- <a href="http://biotools.nubic.northwestern.edu/OligoCalc.html">Oligo Calc: Oligonucleotide Properties Calculator</a></blockquote>
 
-## Show Your Support
+<blockquote>2- Marmur, Julius, and Paul Doty. "Determination of the base composition of deoxyribonucleic acid from its thermal denaturation temperature." <i>Journal of molecular biology</i> 5.1 (1962): 109-118.</blockquote>
+
+<blockquote>3- Wallace, R. Bruce, et al. "Hybridization of synthetic oligodeoxyribonucleotides to Φ X 174 DNA: the effect of single base pair mismatch." <i>Nucleic acids research</i> 6.11 (1979): 3543-3558.</blockquote>
+
+<blockquote>4- Panjkovich, Alejandro, and Francisco Melo. "Comparison of different melting temperature calculation methods for short DNA sequences." <i>Bioinformatics 21.6</i> (2005): 711-722.</blockquote>
+
+
+## Show your support
 
 
 ### Star this repo
