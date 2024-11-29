@@ -54,6 +54,16 @@ class Primer:
         """
         return len(self._sequence)
 
+    def __eq__(self, other_primer):
+        """
+        Check primers equality.
+
+        :param other_primer: another Primer
+        :type other_primer: Primer
+        :return: result as bool
+        """
+        return self._sequence == other_primer._sequence
+
     def __add__(self, other_primer):
         """
         Concatenate the sequences of the current Primer with another one.
