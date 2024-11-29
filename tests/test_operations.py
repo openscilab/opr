@@ -47,3 +47,13 @@ def test_multiply():
     oprimer_1 = Primer("ATCG")
     oprimer_concat = oprimer_1 * 4
     assert oprimer_concat.sequence == "ATCGATCGATCGATCG"
+
+def test_equality1():
+    oprimer_1 = Primer("ATCG")
+    oprimer_2 = Primer("ATCG")
+    assert oprimer_1 == oprimer_2
+
+def test_equality2():
+    oprimer_1 = Primer("ATCG")
+    oprimer_2 = Primer("ATCGC")
+    assert oprimer_1 != oprimer_2
