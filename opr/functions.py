@@ -37,3 +37,15 @@ def basic_melting_temperature_calc(sequence):
     else:
         melting_temperature = 64.9 + 41 * ((g_count + c_count - 16.4) / (a_count + t_count + g_count + c_count))
     return melting_temperature
+
+
+def gc_content_calc(sequence):
+    """
+    Calculate gc content.
+
+    :param sequence: primer nucleotides sequence
+    :type sequence: str
+    :return: gc content as float
+    """
+    gc_count = sequence.count('G') + sequence.count('C')
+    return gc_count / len(sequence)

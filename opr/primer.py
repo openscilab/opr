@@ -14,6 +14,7 @@ from .params import PRIMER_LOWEST_GC_RANGE, PRIMER_HIGHEST_GC_RANGE
 from .params import DNA_COMPLEMENT_MAP
 
 from .functions import molecular_weight_calc, basic_melting_temperature_calc
+from .functions import gc_content_calc
 
 
 class MeltingTemperature(Enum):
@@ -186,8 +187,7 @@ class Primer:
         :return: gc content
         """
         if self._gc_content is None:
-            gc_count = self._sequence.count('G') + self._sequence.count('C')
-            self._gc_content = gc_count / len(self._sequence)
+            self._gc_content = gc_content_calc(self._sequence)
         if self._gc_content < PRIMER_LOWEST_GC_RANGE or self._gc_content > PRIMER_HIGHEST_GC_RANGE:
             warn(PRIMER_SEQUENCE_VALID_GC_CONTENT_RANGE_WARNING, RuntimeWarning)
         return self._gc_content
