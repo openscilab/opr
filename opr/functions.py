@@ -2,6 +2,8 @@
 """OPR functions."""
 from .params import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT
 from .params import ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
+from .params import CHEMICAL_FORMULA_FORMAT, CHEMICAL_FORMULA_FORMAT_SHORT
+from .params import CHEMICAL_FORMULA_BASES, CHEMICAL_FORMULA_WATER
 
 
 def molecular_weight_calc(sequence):
@@ -49,3 +51,30 @@ def gc_content_calc(sequence):
     """
     gc_count = sequence.count('G') + sequence.count('C')
     return gc_count / len(sequence)
+
+
+def chemical_formula_calc(sequence):
+    """
+    Calculate the chemical formula.
+
+    :param sequence: primer nucleotides sequence
+    :type sequence: str
+    :return: chemical formula as dict
+    """
+    count_mapping = {
+        'A': sequence.count('A'),
+        'T': sequence.count('T'),
+        'C': sequence.count('C'),
+        'G': sequence.count('G'),
+    }
+
+    carbon_count = sum([count_mapping[x] * y['C'] for x, y in CHEMICAL_FORMULA_BASES.items()])
+    hydrogen_count = sum([count_mapping[x] * y['H'] for x, y in CHEMICAL_FORMULA_BASES.items()])
+    hydrogen_count -= (len(sequence) - 1) * CHEMICAL_FORMULA_WATER['H']
+    nitrogen_count = sum([count_mapping[x] * y['N'] for x, y in CHEMICAL_FORMULA_BASES.items()])
+    oxygen_count = sum([count_mapping[x] * y['O'] for x, y in CHEMICAL_FORMULA_BASES.items()])
+    oxygen_count += (len(sequence) - 1) * CHEMICAL_FORMULA_WATER['O']
+
+    if len(sequence) == 1:
+        return CHEMICAL_FORMULA_FORMAT_SHORT.format(carbon_count, hydrogen_count, nitrogen_count, oxygen_count)
+    return CHEMICAL_FORMULA_FORMAT.format(carbon_count, hydrogen_count, nitrogen_count, oxygen_count, len(sequence) - 1)
