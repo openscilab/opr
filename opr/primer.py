@@ -14,7 +14,7 @@ from .params import PRIMER_LOWEST_GC_RANGE, PRIMER_HIGHEST_GC_RANGE
 from .params import DNA_COMPLEMENT_MAP
 
 from .functions import molecular_weight_calc, basic_melting_temperature_calc
-from .functions import gc_content_calc
+from .functions import gc_content_calc, chemical_formula_calc
 
 
 class MeltingTemperature(Enum):
@@ -49,6 +49,7 @@ class Primer:
             MeltingTemperature.SALT_ADJUSTED: None,
             MeltingTemperature.NEAREST_NEIGHBOR: None,
         }
+        self._chemical_formula = None
 
     def __len__(self):
         """
@@ -199,6 +200,26 @@ class Primer:
 
     @gc_content.deleter
     def gc_content(self, _):
+        raise OPRBaseError(PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR)
+    
+    @property
+    def chemical_formula(self):
+        """
+        Calculate the chemical formula.
+
+        :return: chemical formula
+        """
+        if self._chemical_formula is not None:
+            return self._chemical_formula
+        self._chemical_formula = chemical_formula_calc(self._sequence)
+        return self._chemical_formula
+    
+    @chemical_formula.setter
+    def chemical_formula(self, _):
+        raise OPRBaseError(PRIMER_READ_ONLY_ATTRIBUTE_ERROR)
+    
+    @chemical_formula.deleter
+    def chemical_formula(self, _):
         raise OPRBaseError(PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR)
 
     def melting_temperature(self, method=MeltingTemperature.BASIC):

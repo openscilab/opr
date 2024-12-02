@@ -3,6 +3,38 @@
 OPR_VERSION = "0.1"
 VALID_BASES = set('ATCG')
 DNA_COMPLEMENT_MAP = {"A": "T", "C": "G", "G": "C", "T": "A"}
+CHEMICAL_FORMULA_BASES = {
+    'A': {
+        'C': 10,
+        'H': 13,
+        'N': 5,
+        'O': 3,
+    },
+    'T': {
+        'C': 10,
+        'H': 14,
+        'N': 2,
+        'O': 5,
+    },
+    'C': {
+        'C': 9,
+        'H': 13,
+        'N': 3,
+        'O': 4,
+    },
+    'G': {
+        'C': 10,
+        'H': 13,
+        'N': 5,
+        'O': 4,
+    },
+}
+CHEMICAL_FORMULA_WATER = {
+    'H': 2,
+    'O': 1,
+}
+CHEMICAL_FORMULA_FORMAT = "C{0}H{1}N{2}O{3}P{4}"
+CHEMICAL_FORMULA_FORMAT_SHORT = "C{0}H{1}N{2}O{3}"
 
 PRIMER_LOWER_LENGTH = 18
 PRIMER_HIGHEST_LENGTH = 30
