@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """OPR functions."""
-from .params import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT, ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
+from .params import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT
+from .params import ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
 
 
 def molecular_weight_calc(sequence):
