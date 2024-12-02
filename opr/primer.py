@@ -186,8 +186,9 @@ class Primer:
 
         :return: gc content
         """
-        if self._gc_content is None:
-            self._gc_content = gc_content_calc(self._sequence)
+        if self._gc_content is not None:
+            return self._gc_content
+        self._gc_content = gc_content_calc(self._sequence)
         if self._gc_content < PRIMER_LOWEST_GC_RANGE or self._gc_content > PRIMER_HIGHEST_GC_RANGE:
             warn(PRIMER_SEQUENCE_VALID_GC_CONTENT_RANGE_WARNING, RuntimeWarning)
         return self._gc_content
