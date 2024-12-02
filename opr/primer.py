@@ -4,13 +4,17 @@ from enum import Enum
 from warnings import warn
 from .errors import OPRBaseError
 from .params import VALID_BASES
-from .params import PRIMER_SEQUENCE_TYPE_ERROR, PRIMER_SEQUENCE_LENGTH_WARNING, PRIMER_SEQUENCE_VALID_BASES_ERROR, PRIMER_SEQUENCE_VALID_GC_CONTENT_RANGE_WARNING
-from .params import PRIMER_LOWER_LENGTH, PRIMER_HIGHEST_LENGTH, PRIMER_LOWEST_GC_RANGE, PRIMER_HIGHEST_GC_RANGE
+from .params import PRIMER_SEQUENCE_TYPE_ERROR, PRIMER_SEQUENCE_VALID_BASES_ERROR
 from .params import PRIMER_READ_ONLY_ATTRIBUTE_ERROR, PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR
-from .params import DNA_COMPLEMENT_MAP
 from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPLICATION_ERROR
 from .params import PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR
+from .params import PRIMER_SEQUENCE_LENGTH_WARNING, PRIMER_SEQUENCE_VALID_GC_CONTENT_RANGE_WARNING
+from .params import PRIMER_LOWER_LENGTH, PRIMER_HIGHEST_LENGTH
+from .params import PRIMER_LOWEST_GC_RANGE, PRIMER_HIGHEST_GC_RANGE
+from .params import DNA_COMPLEMENT_MAP
+
 from .functions import molecular_weight_calc, basic_melting_temperature_calc
+from .functions import gc_content_calc, chemical_formula_calc
 
 
 class MeltingTemperature(Enum):
@@ -45,6 +49,7 @@ class Primer:
             MeltingTemperature.SALT_ADJUSTED: None,
             MeltingTemperature.NEAREST_NEIGHBOR: None,
         }
+        self._chemical_formula = None
 
     def __len__(self):
         """
@@ -182,9 +187,9 @@ class Primer:
 
         :return: gc content
         """
-        if self._gc_content is None:
-            gc_count = self._sequence.count('G') + self._sequence.count('C')
-            self._gc_content = gc_count / len(self._sequence)
+        if self._gc_content is not None:
+            return self._gc_content
+        self._gc_content = gc_content_calc(self._sequence)
         if self._gc_content < PRIMER_LOWEST_GC_RANGE or self._gc_content > PRIMER_HIGHEST_GC_RANGE:
             warn(PRIMER_SEQUENCE_VALID_GC_CONTENT_RANGE_WARNING, RuntimeWarning)
         return self._gc_content
@@ -195,6 +200,26 @@ class Primer:
 
     @gc_content.deleter
     def gc_content(self, _):
+        raise OPRBaseError(PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR)
+    
+    @property
+    def chemical_formula(self):
+        """
+        Calculate the chemical formula.
+
+        :return: chemical formula
+        """
+        if self._chemical_formula is not None:
+            return self._chemical_formula
+        self._chemical_formula = chemical_formula_calc(self._sequence)
+        return self._chemical_formula
+    
+    @chemical_formula.setter
+    def chemical_formula(self, _):
+        raise OPRBaseError(PRIMER_READ_ONLY_ATTRIBUTE_ERROR)
+    
+    @chemical_formula.deleter
+    def chemical_formula(self, _):
         raise OPRBaseError(PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR)
 
     def melting_temperature(self, method=MeltingTemperature.BASIC):

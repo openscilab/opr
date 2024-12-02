@@ -33,6 +33,12 @@ def test_complement_3(): #Reference: https://www.qiagen.com/us/applications/enzy
     oprimer.complement(inplace=True)
     assert oprimer.sequence == "TAGCCGATTTAGCCGATT"
 
+
+def test_chemical_formula(): #Reference: https://atdbio.com/tools/oligo-calculator
+    oprimer = Primer("ATCGGCTAAATCGGCTAA")
+    assert oprimer.chemical_formula == "C176H221N70O104P17"
+
+
 def test_length():
     oprimer = Primer("ATCGGCTAAATCGGCTAA")
     assert len(oprimer) == 18
