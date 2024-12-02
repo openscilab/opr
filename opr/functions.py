@@ -3,7 +3,7 @@
 from .params import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT
 from .params import ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
 from .params import CHEMICAL_FORMULA_FORMAT, CHEMICAL_FORMULA_FORMAT_SHORT
-from .params import CHEMICAL_FORMULA_BASES, CHEMICAL_FORMULA_WATER
+from .params import CHEMICAL_FORMULA_BASES, CHEMICAL_FORMULA_WATER, CHEMICAL_FORMULA_PHOSPHODIESTER
 
 
 def molecular_weight_calc(sequence):
@@ -67,14 +67,19 @@ def chemical_formula_calc(sequence):
         'C': sequence.count('C'),
         'G': sequence.count('G'),
     }
+    n = len(sequence)
 
     carbon_count = sum([count_mapping[x] * y['C'] for x, y in CHEMICAL_FORMULA_BASES.items()])
     hydrogen_count = sum([count_mapping[x] * y['H'] for x, y in CHEMICAL_FORMULA_BASES.items()])
-    hydrogen_count -= (len(sequence) - 1) * CHEMICAL_FORMULA_WATER['H']
     nitrogen_count = sum([count_mapping[x] * y['N'] for x, y in CHEMICAL_FORMULA_BASES.items()])
     oxygen_count = sum([count_mapping[x] * y['O'] for x, y in CHEMICAL_FORMULA_BASES.items()])
-    oxygen_count += (len(sequence) - 1) * CHEMICAL_FORMULA_WATER['O']
+    # A water is removed from the formula for each phosphodiester bond
+    hydrogen_count -= (n - 1) * CHEMICAL_FORMULA_WATER['H']
+    hydrogen_count += (n - 1) * CHEMICAL_FORMULA_PHOSPHODIESTER['H']
+    oxygen_count -= (n - 1) * CHEMICAL_FORMULA_WATER['O']
+    oxygen_count += (n - 1) * CHEMICAL_FORMULA_PHOSPHODIESTER['O']
+    phosphor_count = (n - 1) * CHEMICAL_FORMULA_PHOSPHODIESTER['P']
 
     if len(sequence) == 1:
         return CHEMICAL_FORMULA_FORMAT_SHORT.format(carbon_count, hydrogen_count, nitrogen_count, oxygen_count)
-    return CHEMICAL_FORMULA_FORMAT.format(carbon_count, hydrogen_count, nitrogen_count, oxygen_count, len(sequence) - 1)
+    return CHEMICAL_FORMULA_FORMAT.format(carbon_count, hydrogen_count, nitrogen_count, oxygen_count, phosphor_count)
