@@ -19,11 +19,11 @@ def test_gc_content_3(): #Reference: https://jamiemcgowan.ie/bioinf/gc_content.h
     oprimer = Primer("ATTTTTT")
     assert oprimer.gc_content == 0
 
-def test_gc_clamp_1(): #Reference: https://www.oligoevaluator.com/OligoCalcServlet
-    oprimer = Primer("ATCGATCGATCGATCGATCG")
-    assert oprimer.gc_clamp == 2
+def test_gc_clamp_1(): #Reference: https://www.bioinformatics.org/sms2/pcr_primer_stats.html
+    oprimer = Primer("ATCGATCGATCGATCGGTCG")
+    assert oprimer.gc_clamp == 4
 
-def test_gc_clamp_2(): #Reference: https://www.oligoevaluator.com/OligoCalcServlet
+def test_gc_clamp_2(): #Reference: https://www.bioinformatics.org/sms2/pcr_primer_stats.html
     oprimer = Primer("ATCG")
     assert oprimer.gc_clamp == 0
 
