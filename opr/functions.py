@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """OPR functions."""
 from .params import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT, ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
-from .params import PRIMER_SEQUENCE_VALID_RANGE_FOR_GC_CLAMP_WARNING
 from warnings import warn
 
 
@@ -44,11 +43,10 @@ def gc_clamp_calc(sequence):
     """
     Calculate GC clamp.
 
-    :param sequence: primer nucleotides sequence
+    :param sequence: primer sequence
     :type sequence: str
-    :return: Number of guanine (G) or cytosine (C) bases in the last 5 bases of a primer.
+    :return: number of guanine (G) or cytosine (C) bases in the last 5 bases of a primer
     """
     if len(sequence) < 5:
-        warn(PRIMER_SEQUENCE_VALID_RANGE_FOR_GC_CLAMP_WARNING, RuntimeWarning)
         return 0
     return sequence[-5:].count('G') + sequence[-5:].count('C')
