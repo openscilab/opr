@@ -10,7 +10,7 @@ from .params import PRIMER_READ_ONLY_ATTRIBUTE_ERROR, PRIMER_NOT_REMOVABLE_ATTRI
 from .params import DNA_COMPLEMENT_MAP
 from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPLICATION_ERROR
 from .params import PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR
-from .functions import molecular_weight_calc, basic_melting_temperature_calc
+from .functions import molecular_weight_calc, basic_melting_temperature_calc, gc_clamp_calc
 
 
 class MeltingTemperature(Enum):
@@ -40,6 +40,7 @@ class Primer:
         self._sequence = Primer.validate_primer(sequence)
         self._molecular_weight = None
         self._gc_content = None
+        self._gc_clamp = None
         self._melting_temperature = {
             MeltingTemperature.BASIC: None,
             MeltingTemperature.SALT_ADJUSTED: None,
@@ -195,6 +196,25 @@ class Primer:
 
     @gc_content.deleter
     def gc_content(self, _):
+        raise OPRBaseError(PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR)
+
+    @property
+    def gc_clamp(self):
+        """
+        Calculate GC clamp of the primer.
+
+        :return: GC clamp of the primer
+        """
+        if self._gc_clamp is None:
+            self._gc_clamp = gc_clamp_calc(self._sequence)
+        return self._gc_clamp
+
+    @gc_clamp.setter
+    def gc_clamp(self, _):
+        raise OPRBaseError(PRIMER_READ_ONLY_ATTRIBUTE_ERROR)
+
+    @gc_clamp.deleter
+    def gc_clamp(self, _):
         raise OPRBaseError(PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR)
 
     def melting_temperature(self, method=MeltingTemperature.BASIC):
