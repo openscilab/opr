@@ -19,6 +19,14 @@ def test_gc_content_3(): #Reference: https://jamiemcgowan.ie/bioinf/gc_content.h
     oprimer = Primer("ATTTTTT")
     assert oprimer.gc_content == 0
 
+def test_gc_clamp_1(): #Reference: https://www.oligoevaluator.com/OligoCalcServlet
+    oprimer = Primer("ATCGATCGATCGATCGATCG")
+    assert oprimer.gc_clamp == 2
+
+def test_gc_clamp_2(): #Reference: https://www.oligoevaluator.com/OligoCalcServlet
+    oprimer = Primer("ATCG")
+    assert oprimer.gc_clamp == 0
+
 def test_melt_temp_1(): #Reference: http://biotools.nubic.northwestern.edu/OligoCalc.html
     oprimer = Primer("ATCGATCGATCGATCGATCG")
     basic_melt_temp = oprimer.melting_temperature(MeltingTemperature.BASIC)
