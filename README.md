@@ -82,6 +82,11 @@
 >>> primer1.gc_content
 0.5217391304347826
 ```
+#### GC clamp
+```pycon
+>>> primer1.gc_clamp
+1
+```
 #### Melting temperature
 ```pycon
 >>> primer1.melting_temperature()
