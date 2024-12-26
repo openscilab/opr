@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """OPR functions."""
 from .params import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT, ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
-from warnings import warn
 
 
 def molecular_weight_calc(sequence):
@@ -45,7 +44,7 @@ def gc_clamp_calc(sequence):
 
     :param sequence: primer sequence
     :type sequence: str
-    :return: number of guanine (G) or cytosine (C) bases in the last 5 bases of a primer
+    :return: number of guanine (G) or cytosine (C) bases in the last 5 bases of the primer
     """
     if len(sequence) < 5:
         return 0
