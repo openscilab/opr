@@ -27,6 +27,10 @@ def test_gc_clamp_2(): #Reference: https://www.bioinformatics.org/sms2/pcr_prime
     oprimer = Primer("ATCG")
     assert oprimer.gc_clamp == 0
 
+def test_gc_clamp_3(): #Reference: https://www.bioinformatics.org/sms2/pcr_primer_stats.html
+    oprimer = Primer("ACTTA")
+    assert oprimer.gc_clamp == 1
+
 def test_melt_temp_1(): #Reference: http://biotools.nubic.northwestern.edu/OligoCalc.html
     oprimer = Primer("ATCGATCGATCGATCGATCG")
     basic_melt_temp = oprimer.melting_temperature(MeltingTemperature.BASIC)
