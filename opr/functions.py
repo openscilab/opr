@@ -36,3 +36,16 @@ def basic_melting_temperature_calc(sequence):
     else:
         melting_temperature = 64.9 + 41 * ((g_count + c_count - 16.4) / (a_count + t_count + g_count + c_count))
     return melting_temperature
+
+
+def gc_clamp_calc(sequence):
+    """
+    Calculate GC clamp.
+
+    :param sequence: primer sequence
+    :type sequence: str
+    :return: number of guanine (G) or cytosine (C) bases in the last 5 bases of the primer
+    """
+    if len(sequence) < 5:
+        return 0
+    return sequence[-5:].count('G') + sequence[-5:].count('C')
