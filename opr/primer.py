@@ -223,9 +223,9 @@ class Primer:
         """
         Calculate Single Runs of the primer.
 
-            Run length refers to how many times a single base is repeated consecutively in the primer
+        Run length refers to how many times a single base is repeated consecutively in the primer.
 
-        :return: Single Runs of the primer
+        :return: single runs of the primer
         """
         if self._single_runs is None:
             self._single_runs = {

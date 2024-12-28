@@ -87,7 +87,7 @@
 >>> primer1.gc_clamp
 1
 ```
-#### Run length
+#### Single run length
 ```pycon
 >>> primer1.single_runs
 {'A': 2, 'T': 0, 'C': 0, 'G': 2}
