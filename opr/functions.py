@@ -49,3 +49,23 @@ def gc_clamp_calc(sequence):
     if len(sequence) < 5:
         return 0
     return sequence[-5:].count('G') + sequence[-5:].count('C')
+
+def run_length(sequence, nucleic_acid):
+    """
+    Calculate the maximum consecutive occurrence of a Nucleic acid in a sequence.
+
+    :param sequence: primer sequence
+    :type sequence: str
+    :param nucleic_acid: target Nucleic acid
+    :type nucleic_acid: char
+    :return: the length of maximum consecutive occurrence
+    """
+    max_length = 0
+    current_length = 0
+    for c in sequence:
+        if c == nucleic_acid:
+            current_length += 1
+            max_length = max(max_length, current_length)
+        else:
+            current_length = 0
+    return max_length
