@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `equality` operator overload
 - `gc_clamp` property
 - `single_runs` property
+### Changed
+- `property` deleter & setter removed
 ## [0.1] - 2024-11-27
 ### Added
 - `MeltingTemperature` enum
