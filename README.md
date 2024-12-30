@@ -87,6 +87,11 @@
 >>> primer1.gc_clamp
 1
 ```
+#### Single run length
+```pycon
+>>> primer1.single_runs
+{'A': 2, 'T': 0, 'C': 0, 'G': 2}
+```
 #### Melting temperature
 ```pycon
 >>> primer1.melting_temperature()
@@ -120,7 +125,7 @@ You can also join our discord server
 </a>
 
 ## References
-					
+
 <blockquote>1- <a href="http://biotools.nubic.northwestern.edu/OligoCalc.html">Oligo Calc: Oligonucleotide Properties Calculator</a></blockquote>
 
 <blockquote>2- Marmur, Julius, and Paul Doty. "Determination of the base composition of deoxyribonucleic acid from its thermal denaturation temperature." <i>Journal of molecular biology</i> 5.1 (1962): 109-118.</blockquote>

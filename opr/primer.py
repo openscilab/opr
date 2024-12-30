@@ -10,7 +10,7 @@ from .params import PRIMER_READ_ONLY_ATTRIBUTE_ERROR, PRIMER_NOT_REMOVABLE_ATTRI
 from .params import DNA_COMPLEMENT_MAP
 from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPLICATION_ERROR
 from .params import PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR
-from .functions import molecular_weight_calc, basic_melting_temperature_calc, gc_clamp_calc
+from .functions import molecular_weight_calc, basic_melting_temperature_calc, gc_clamp_calc, single_run_length
 
 
 class MeltingTemperature(Enum):
@@ -41,6 +41,7 @@ class Primer:
         self._molecular_weight = None
         self._gc_content = None
         self._gc_clamp = None
+        self._single_runs = None
         self._melting_temperature = {
             MeltingTemperature.BASIC: None,
             MeltingTemperature.SALT_ADJUSTED: None,
@@ -215,6 +216,34 @@ class Primer:
 
     @gc_clamp.deleter
     def gc_clamp(self, _):
+        raise OPRBaseError(PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR)
+
+    @property
+    def single_runs(self):
+        """
+        Calculate Single Runs of the primer.
+
+        Run length refers to how many times a single base is repeated consecutively in the primer.
+
+        :return: single runs of the primer
+        """
+        if self._single_runs is None:
+            self._single_runs = {
+                'A': 0,
+                'T': 0,
+                'C': 0,
+                'G': 0,
+            }
+            for base in self._single_runs:
+                self._single_runs[base] = single_run_length(self._sequence, base)
+        return self._single_runs
+
+    @single_runs.setter
+    def single_runs(self, _):
+        raise OPRBaseError(PRIMER_READ_ONLY_ATTRIBUTE_ERROR)
+
+    @single_runs.deleter
+    def single_runs(self, _):
         raise OPRBaseError(PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR)
 
     def melting_temperature(self, method=MeltingTemperature.BASIC):
