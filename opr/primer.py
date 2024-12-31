@@ -6,7 +6,6 @@ from .errors import OPRBaseError
 from .params import VALID_BASES
 from .params import PRIMER_SEQUENCE_TYPE_ERROR, PRIMER_SEQUENCE_LENGTH_WARNING, PRIMER_SEQUENCE_VALID_BASES_ERROR, PRIMER_SEQUENCE_VALID_GC_CONTENT_RANGE_WARNING
 from .params import PRIMER_LOWER_LENGTH, PRIMER_HIGHEST_LENGTH, PRIMER_LOWEST_GC_RANGE, PRIMER_HIGHEST_GC_RANGE
-from .params import PRIMER_READ_ONLY_ATTRIBUTE_ERROR, PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR
 from .params import DNA_COMPLEMENT_MAP
 from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPLICATION_ERROR
 from .params import PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR
@@ -149,14 +148,6 @@ class Primer:
         """
         return self._sequence
 
-    @sequence.setter
-    def sequence(self, _):
-        raise OPRBaseError(PRIMER_READ_ONLY_ATTRIBUTE_ERROR)
-
-    @sequence.deleter
-    def sequence(self, _):
-        raise OPRBaseError(PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR)
-
     @property
     def molecular_weight(self):
         """
@@ -168,14 +159,6 @@ class Primer:
             return self._molecular_weight
         self._molecular_weight = molecular_weight_calc(self._sequence)
         return self._molecular_weight
-
-    @molecular_weight.setter
-    def molecular_weight(self, _):
-        raise OPRBaseError(PRIMER_READ_ONLY_ATTRIBUTE_ERROR)
-
-    @molecular_weight.deleter
-    def molecular_weight(self, _):
-        self._molecular_weight = None
 
     @property
     def gc_content(self):
@@ -191,14 +174,6 @@ class Primer:
             warn(PRIMER_SEQUENCE_VALID_GC_CONTENT_RANGE_WARNING, RuntimeWarning)
         return self._gc_content
 
-    @gc_content.setter
-    def gc_content(self, _):
-        raise OPRBaseError(PRIMER_READ_ONLY_ATTRIBUTE_ERROR)
-
-    @gc_content.deleter
-    def gc_content(self, _):
-        raise OPRBaseError(PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR)
-
     @property
     def gc_clamp(self):
         """
@@ -209,14 +184,6 @@ class Primer:
         if self._gc_clamp is None:
             self._gc_clamp = gc_clamp_calc(self._sequence)
         return self._gc_clamp
-
-    @gc_clamp.setter
-    def gc_clamp(self, _):
-        raise OPRBaseError(PRIMER_READ_ONLY_ATTRIBUTE_ERROR)
-
-    @gc_clamp.deleter
-    def gc_clamp(self, _):
-        raise OPRBaseError(PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR)
 
     @property
     def single_runs(self):
@@ -237,14 +204,6 @@ class Primer:
             for base in self._single_runs:
                 self._single_runs[base] = single_run_length(self._sequence, base)
         return self._single_runs
-
-    @single_runs.setter
-    def single_runs(self, _):
-        raise OPRBaseError(PRIMER_READ_ONLY_ATTRIBUTE_ERROR)
-
-    @single_runs.deleter
-    def single_runs(self, _):
-        raise OPRBaseError(PRIMER_NOT_REMOVABLE_ATTRIBUTE_ERROR)
 
     def melting_temperature(self, method=MeltingTemperature.BASIC):
         """
