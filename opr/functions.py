@@ -50,6 +50,7 @@ def gc_clamp_calc(sequence):
         return 0
     return sequence[-5:].count('G') + sequence[-5:].count('C')
 
+
 def single_run_length(sequence, base):
     """
     Calculate the maximum consecutive occurrence of a Nucleic acid (base) in a sequence.

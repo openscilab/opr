@@ -57,3 +57,10 @@ def test_equality2():
     oprimer_1 = Primer("ATCG")
     oprimer_2 = Primer("ATCGC")
     assert oprimer_1 != oprimer_2
+
+def test_str():
+    oprimer_1 = Primer("ATCG")
+    oprimer_2 = Primer("ATCGC")
+    oprimer_concat = oprimer_1 + oprimer_2
+    assert str(oprimer_1) + str(oprimer_2) == oprimer_concat.sequence
+

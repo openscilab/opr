@@ -89,6 +89,14 @@ class Primer:
             return Primer(self._sequence * number)
         raise OPRBaseError(PRIMER_MULTIPLICATION_ERROR)
 
+    def __str__(self):
+        """
+        Primer object string representation method.
+
+        :return: primer sequence as str
+        """
+        return self._sequence
+
     def reverse(self, inplace=False):
         """
         Reverse sequence.
