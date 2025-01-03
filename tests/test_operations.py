@@ -1,6 +1,6 @@
 from opr import Primer
 
-TEST_CASE_NAME = "operations testcase"
+TEST_CASE_NAME = "Operations tests"
 
 def test_reverse_1(): #Reference: https://www.qiagen.com/us/applications/enzymes/tools-and-calculators/reverse-complement-converter
     oprimer = Primer("ATCGATCGATCGATCGAT")
