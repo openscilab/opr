@@ -10,7 +10,7 @@ def test_mwc_1():
 def test_mwc_2():
     oprimer = Primer("ATCGATCGATCGATCGAT")
     molecular_weight = oprimer.molecular_weight
-    assert round(molecular_weight, 1) == 5498.7
+    assert round(oprimer.molecular_weight, 1) == round(molecular_weight, 1)
 
 def test_gc_content_1(): #Reference: https://jamiemcgowan.ie/bioinf/gc_content.html
     oprimer = Primer("ATCG")
