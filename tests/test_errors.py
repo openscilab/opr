@@ -13,7 +13,11 @@ def test_multiply():
     with pytest.raises(OPRBaseError, match=r"The primer sequence can only be multiplied by an integer."):
         oprimer * "2"
 
-def test_validate_primer():
+def test_validate_primer_1():
+    with pytest.raises(OPRBaseError, match=r"Primer sequence should be a string variable."):
+        oprimer = Primer(222)
+
+def test_validate_primer_2():
     with pytest.raises(OPRBaseError, match=r"Primer sequence should only contain the nucleotide bases A, T, C, and G."):
         oprimer = Primer("ATCGATCGATCGATCGAF")
 
