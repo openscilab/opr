@@ -1,7 +1,7 @@
 import pytest
 from opr import Primer, MeltingTemperature, OPRBaseError
 
-TEST_CASE_NAME = "errors testcase"
+TEST_CASE_NAME = "Errors tests"
 
 def test_addition():
     oprimer = Primer("ATCGATCGATCGATCGAT")
