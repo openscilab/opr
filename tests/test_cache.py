@@ -1,5 +1,4 @@
-from opr import Primer
-from opr import MeltingTemperature
+from opr import Primer, MeltingTemperature
 
 TEST_CASE_NAME = "Cache tests"
 
