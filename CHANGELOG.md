@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `single_runs` property
 ### Changed
 - Test system modified
+- `SECURITY.md` updated
+- `CONTRIBUTING.md` updated
+- `README.md` updated
 ### Removed
 - `property` deleter & setter
 ## [0.1] - 2024-11-27
