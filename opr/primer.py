@@ -3,7 +3,7 @@
 from enum import Enum
 from warnings import warn
 from .errors import OPRBaseError
-from .params import VALID_BASES
+from .params import DEFAULT_PRIMER_NAME, VALID_BASES
 from .params import PRIMER_SEQUENCE_TYPE_ERROR, PRIMER_SEQUENCE_LENGTH_WARNING, PRIMER_SEQUENCE_VALID_BASES_ERROR, PRIMER_SEQUENCE_VALID_GC_CONTENT_RANGE_WARNING
 from .params import PRIMER_LOWER_LENGTH, PRIMER_HIGHEST_LENGTH, PRIMER_LOWEST_GC_RANGE, PRIMER_HIGHEST_GC_RANGE
 from .params import DNA_COMPLEMENT_MAP
@@ -28,15 +28,18 @@ class Primer:
     >>> oprimer.molecular_weight
     """
 
-    def __init__(self, sequence):
+    def __init__(self, sequence, name=DEFAULT_PRIMER_NAME):
         """
         Initialize the Primer instance.
 
         :param sequence: primer nucleotides sequence
         :type sequence: str
+        :param name: primer name
+        :type name: str
         :return: an instance of the Primer class
         """
         self._sequence = Primer.validate_primer(sequence)
+        self._name = name
         self._molecular_weight = None
         self._gc_content = None
         self._gc_clamp = None
@@ -155,6 +158,15 @@ class Primer:
         :return: primer sequence
         """
         return self._sequence
+
+    @property
+    def name(self):
+        """
+        Return the primer name.
+
+        :return: primer name
+        """
+        return self._name
 
     @property
     def molecular_weight(self):
