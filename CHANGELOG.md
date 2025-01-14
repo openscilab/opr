@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - `name` property
+### Changed
+- Test system modified
 ## [0.2] - 2025-01-09
 ### Added
 - `__eq__` overload
