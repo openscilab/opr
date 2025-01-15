@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """OPR primer."""
+import re
 import itertools
 from enum import Enum
 from warnings import warn
@@ -236,6 +237,26 @@ class Primer:
                     counts[pair] = 0
             self._double_runs = counts
         return self._double_runs
+
+    def repeats(self, sequence, consecutive=False):
+        """
+        Count occurrences of a subsequence in a given sequence.
+
+        :param sequence: The sequence to search within.
+        :type sequence: str
+        :param consecutive: Whether to count only consecutive repeats.
+        :type consecutive: bool
+        :return: The count of occurrences.
+        """
+        if consecutive:
+            pattern = f"(?:{re.escape(sequence)})+"
+            matches = re.findall(f"({pattern})+", self.sequence)
+            result = max((len(match) // len(sequence) for match in matches), default=0)
+            if result == 1:
+                result = 0
+            return result
+        else:
+            return self.sequence.count(sequence)
 
     def melting_temperature(self, method=MeltingTemperature.BASIC):
         """
