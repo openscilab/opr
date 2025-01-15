@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """OPR primer."""
+import itertools
 from enum import Enum
 from warnings import warn
 from .errors import OPRBaseError
@@ -41,6 +42,7 @@ class Primer:
         self._gc_content = None
         self._gc_clamp = None
         self._single_runs = None
+        self._double_runs = None
         self._melting_temperature = {
             MeltingTemperature.BASIC: None,
             MeltingTemperature.SALT_ADJUSTED: None,
@@ -212,6 +214,28 @@ class Primer:
             for base in self._single_runs:
                 self._single_runs[base] = single_run_length(self._sequence, base)
         return self._single_runs
+
+    @property
+    def double_runs(self):
+        """
+        Calculate Double Runs of the primer.
+
+        It refers to how many times each 2-base pairs occurs consecutively in the primer.
+
+        :return: Dictionary of double runs (2-base pairs) and their counts in the primer
+        """
+        if self._double_runs is None:
+            bases = ['A', 'T', 'G', 'C']
+            pairs = [''.join(pair) for pair in itertools.product(bases, repeat=2) if pair[0] != pair[1]]
+            counts = {pair: 0 for pair in pairs}
+            for i in range(len(self.sequence) - 1):
+                if self.sequence[i:i+2] in counts:
+                    counts[self.sequence[i:i+2]] += 1
+            for pair in counts:
+                if counts[pair] == 1:
+                    counts[pair] = 0
+            self._double_runs = counts
+        return self._double_runs
 
     def melting_temperature(self, method=MeltingTemperature.BASIC):
         """
