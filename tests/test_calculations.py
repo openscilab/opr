@@ -76,3 +76,25 @@ def test_double_runs():
     assert len(true_answer) == len(double_runs) and all(double_runs[pair] == true_answer[pair] for pair in double_runs)
 
 
+def test_repeats_1():
+    p = Primer("ATCG")
+    assert (
+        p.repeats(sequence="A", consecutive=False) == 1 and
+        p.repeats(sequence="AT", consecutive=False) == 1 and
+        p.repeats(sequence="AC", consecutive=False) == 0 and
+        p.repeats(sequence="A", consecutive=True) == 0 and
+        p.repeats(sequence="AT", consecutive=True) == 0
+    )
+
+
+def test_repeats_2():
+    p = Primer("AAAATCGTGT")
+    assert (
+        p.repeats(sequence="AA", consecutive=True) == 2 and
+        p.repeats(sequence="GT", consecutive=True) == 2
+    )
+
+
+def test_repeats_3():
+    p = Primer("ATCGATCGATCG")
+    assert p.repeats(sequence="ATCG", consecutive=True) == 3
