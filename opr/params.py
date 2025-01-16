@@ -15,6 +15,8 @@ C_WEIGHT = 289.18
 G_WEIGHT = 329.21
 ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT = 61.96
 
+DEFAULT_PRIMER_NAME = "unknown"
+
 PRIMER_SEQUENCE_TYPE_ERROR = "Primer sequence should be a string variable."
 PRIMER_SEQUENCE_LENGTH_WARNING = "The recommended range for primer length is between 18 and 30."
 PRIMER_SEQUENCE_VALID_BASES_ERROR = "Primer sequence should only contain the nucleotide bases A, T, C, and G."
