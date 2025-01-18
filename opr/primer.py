@@ -238,15 +238,10 @@ class Primer:
         :return: Dictionary of double runs (2-base pairs) and their counts in the primer
         """
         if self._double_runs is None:
-            bases = ['A', 'T', 'G', 'C']
-            pairs = [''.join(pair) for pair in itertools.product(bases, repeat=2) if pair[0] != pair[1]]
+            pairs = [''.join(pair) for pair in itertools.product(VALID_BASES, repeat=2) if pair[0] != pair[1]]
             counts = {pair: 0 for pair in pairs}
-            for i in range(len(self.sequence) - 1):
-                if self.sequence[i:i+2] in counts:
-                    counts[self.sequence[i:i+2]] += 1
             for pair in counts:
-                if counts[pair] == 1:
-                    counts[pair] = 0
+                counts[pair] = self.repeats(pair, consecutive=True)
             self._double_runs = counts
         return self._double_runs
 
