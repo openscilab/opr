@@ -92,6 +92,20 @@
 >>> primer1.single_runs
 {'A': 2, 'T': 0, 'C': 0, 'G': 2}
 ```
+#### Double run length
+```pycon
+>>> primer1.double_runs
+{'AT': 0, 'AG': 4, 'AC': 0, 'TA': 0, 'TG': 0, 'TC': 0, 'GA': 5, 'GT': 0, 'GC': 0, 'CA': 0, 'CT': 0, 'CG': 0}
+```
+#### Repeats
+```pycon
+>>> primer1.repeats(sequence="GG", consecutive=False)
+4
+```
+```pycon
+>>> primer1.repeats(sequence="GG", consecutive=True)
+0
+```
 #### Melting temperature
 ```pycon
 >>> primer1.melting_temperature()

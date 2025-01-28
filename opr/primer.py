@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 """OPR primer."""
+import re
+import itertools
 from enum import Enum
 from warnings import warn
 from .errors import OPRBaseError
@@ -44,6 +46,7 @@ class Primer:
         self._gc_content = None
         self._gc_clamp = None
         self._single_runs = None
+        self._double_runs = None
         self._melting_temperature = {
             MeltingTemperature.BASIC: None,
             MeltingTemperature.SALT_ADJUSTED: None,
@@ -224,6 +227,43 @@ class Primer:
             for base in self._single_runs:
                 self._single_runs[base] = single_run_length(self._sequence, base)
         return self._single_runs
+
+    @property
+    def double_runs(self):
+        """
+        Calculate Double Runs of the primer.
+
+        It refers to how many times each 2-base pairs occurs consecutively in the primer.
+
+        :return: Dictionary of double runs (2-base pairs) and their counts in the primer
+        """
+        if self._double_runs is None:
+            pairs = [''.join(pair) for pair in itertools.product(VALID_BASES, repeat=2) if pair[0] != pair[1]]
+            counts = {pair: 0 for pair in pairs}
+            for pair in counts:
+                counts[pair] = self.repeats(pair, consecutive=True)
+            self._double_runs = counts
+        return self._double_runs
+
+    def repeats(self, sequence, consecutive=False):
+        """
+        Count occurrences of a subsequence in a given sequence.
+
+        :param sequence: The sequence to search within.
+        :type sequence: str
+        :param consecutive: Whether to count only consecutive repeats.
+        :type consecutive: bool
+        :return: The count of occurrences.
+        """
+        if consecutive:
+            pattern = f"(?:{re.escape(sequence)})+"
+            matches = re.findall(f"({pattern})+", self.sequence)
+            result = max((len(match) // len(sequence) for match in matches), default=0)
+            if result == 1:
+                result = 0
+            return result
+        else:
+            return self.sequence.count(sequence)
 
     def melting_temperature(self, method=MeltingTemperature.BASIC):
         """

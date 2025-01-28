@@ -1,3 +1,5 @@
+import itertools
+from opr.params import VALID_BASES
 from opr import Primer, MeltingTemperature
 
 TEST_CASE_NAME = "Cache tests"
@@ -32,3 +34,13 @@ def test_single_runs():
     runs = oprimer.single_runs
     assert oprimer.single_runs['A'] == runs['A'] and oprimer.single_runs['T'] == runs[
         'T'] and oprimer.single_runs['C'] == runs['C'] and oprimer.single_runs['G'] == runs['G']
+
+
+def test_double_runs():
+    p1 = Primer("ATATCGAACACACACACA")
+    double_runs = p1.double_runs
+    pairs = [''.join(pair) for pair in itertools.product(VALID_BASES, repeat=2) if pair[0] != pair[1]]
+    double_runs_2nd = {}
+    for pair in pairs:
+        double_runs_2nd[pair] = p1.double_runs[pair]
+    assert len(double_runs_2nd) == len(double_runs) and all(double_runs[pair] == double_runs_2nd[pair] for pair in double_runs)

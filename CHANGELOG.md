@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- `double_runs` property
+- `repeats` method
 - `name` property
 ### Changed
 - Test system modified
