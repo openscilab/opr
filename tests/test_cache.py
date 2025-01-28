@@ -43,4 +43,5 @@ def test_double_runs():
     double_runs_2nd = {}
     for pair in pairs:
         double_runs_2nd[pair] = p1.double_runs[pair]
-    assert len(double_runs_2nd) == len(double_runs) and all(double_runs[pair] == double_runs_2nd[pair] for pair in double_runs)
+    assert len(double_runs_2nd) == len(double_runs) and all(
+        double_runs[pair] == double_runs_2nd[pair] for pair in double_runs)
