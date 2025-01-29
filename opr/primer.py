@@ -109,8 +109,7 @@ class Primer:
 
         :return: None
         """
-        for base in self.sequence:
-            yield base
+        yield from self.sequence
 
     def reverse(self, inplace=False):
         """
