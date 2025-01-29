@@ -79,6 +79,6 @@ def test_str():
 def test_iter():
     oprimer_1 = Primer("ATCG")
     sequence = ""
-    for item in oprimer_1:
-        sequence += item
+    for base in oprimer_1:
+        sequence += base
     assert oprimer_1.sequence == sequence
