@@ -107,7 +107,7 @@ class Primer:
         """
         Iterate through Primer.
 
-        :return: None
+        :return: base as Generator[str]
         """
         yield from self.sequence
 
