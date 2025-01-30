@@ -103,6 +103,14 @@ class Primer:
         """
         return self._sequence
 
+    def __iter__(self):
+        """
+        Iterate through Primer.
+
+        :return: base as Generator[str]
+        """
+        yield from self.sequence
+
     def reverse(self, inplace=False):
         """
         Reverse sequence.

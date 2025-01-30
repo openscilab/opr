@@ -72,7 +72,19 @@ def test_double_runs():
     p1 = Primer("ATATCGAACACACACACA")
     double_runs = p1.double_runs
     print(double_runs)
-    true_answer = {'GT': 0, 'CA': 5, 'AT': 2, 'TA': 0, 'GC': 0, 'GA': 0, 'AG': 0, 'TG': 0, 'CG': 0, 'TC': 0, 'AC': 5, 'CT': 0}
+    true_answer = {
+        'GT': 0,
+        'CA': 5,
+        'AT': 2,
+        'TA': 0,
+        'GC': 0,
+        'GA': 0,
+        'AG': 0,
+        'TG': 0,
+        'CG': 0,
+        'TC': 0,
+        'AC': 5,
+        'CT': 0}
     assert len(true_answer) == len(double_runs) and all(double_runs[pair] == true_answer[pair] for pair in double_runs)
 
 

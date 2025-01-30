@@ -5,7 +5,7 @@ TEST_CASE_NAME = "Property tests"
 
 def test_sequence():
     oprimer = Primer("ATCGATCGATCGATCGAT")
-    assert oprimer.sequence== "ATCGATCGATCGATCGAT"
+    assert oprimer.sequence == "ATCGATCGATCGATCGAT"
 
 
 def test_name():

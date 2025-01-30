@@ -74,3 +74,11 @@ def test_str():
     oprimer_2 = Primer("ATCGC")
     oprimer_concat = oprimer_1 + oprimer_2
     assert str(oprimer_1) + str(oprimer_2) == oprimer_concat.sequence
+
+
+def test_iter():
+    oprimer_1 = Primer("ATCG")
+    sequence = ""
+    for base in oprimer_1:
+        sequence += base
+    assert oprimer_1.sequence == sequence
