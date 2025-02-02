@@ -226,14 +226,9 @@ class Primer:
         :return: single runs of the primer
         """
         if self._single_runs is None:
-            self._single_runs = {
-                'A': 0,
-                'T': 0,
-                'C': 0,
-                'G': 0,
-            }
-            for base in self._single_runs:
-                self._single_runs[base] = single_run_length(self._sequence, base)
+            self._single_runs = {}
+            for base in VALID_BASES:
+                self._single_runs[base] = self.repeats(base, consecutive=True)
         return self._single_runs
 
     @property
