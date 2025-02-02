@@ -262,8 +262,6 @@ class Primer:
             pattern = f"(?:{re.escape(sequence)})+"
             matches = re.findall(f"({pattern})+", self.sequence)
             result = max((len(match) // len(sequence) for match in matches), default=0)
-            if result == 1:
-                result = 0
             return result
         else:
             return self.sequence.count(sequence)
