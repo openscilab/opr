@@ -11,10 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `repeats` method
 - `name` property
 ### Changed
-- `single_runs` property
+- `single_runs` property updated
 - Test system modified
 ### Removed
-- single_run_length
+- `single_run_length` function
 ## [0.2] - 2025-01-09
 ### Added
 - `__eq__` overload
