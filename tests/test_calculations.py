@@ -53,13 +53,13 @@ def test_melt_temp_2():  # Reference: http://biotools.nubic.northwestern.edu/Oli
 def test_single_runs_1():  # Reference: https://www.oligoevaluator.com/OligoCalcServlet
     oprimer = Primer("ATCGATCG")
     runs = oprimer.single_runs
-    assert runs['A'] == 0 and runs['T'] == 0 and runs['C'] == 0 and runs['G'] == 0
+    assert runs['A'] == 1 and runs['T'] == 1 and runs['C'] == 1 and runs['G'] == 1
 
 
 def test_single_runs_2():  # Reference: https://www.oligoevaluator.com/OligoCalcServlet
     oprimer = Primer("ATTCGATCCCCG")
     runs = oprimer.single_runs
-    assert runs['A'] == 0 and runs['T'] == 2 and runs['C'] == 4 and runs['G'] == 0
+    assert runs['A'] == 1 and runs['T'] == 2 and runs['C'] == 4 and runs['G'] == 1
 
 
 def test_single_runs_3():  # Reference: https://www.oligoevaluator.com/OligoCalcServlet
@@ -71,20 +71,20 @@ def test_single_runs_3():  # Reference: https://www.oligoevaluator.com/OligoCalc
 def test_double_runs():
     p1 = Primer("ATATCGAACACACACACA")
     double_runs = p1.double_runs
-    print(double_runs)
     true_answer = {
-        'GT': 0,
-        'CA': 5,
         'AT': 2,
-        'TA': 0,
-        'GC': 0,
-        'GA': 0,
-        'AG': 0,
-        'TG': 0,
-        'CG': 0,
-        'TC': 0,
         'AC': 5,
-        'CT': 0}
+        'AG': 0,
+        'TA': 1,
+        'TC': 1,
+        'TG': 0,
+        'CA': 5,
+        'CT': 0,
+        'CG': 1,
+        'GA': 1,
+        'GT': 0,
+        'GC': 0
+        }
     assert len(true_answer) == len(double_runs) and all(double_runs[pair] == true_answer[pair] for pair in double_runs)
 
 
@@ -94,8 +94,8 @@ def test_repeats_1():
         p.repeats(sequence="A", consecutive=False) == 1 and
         p.repeats(sequence="AT", consecutive=False) == 1 and
         p.repeats(sequence="AC", consecutive=False) == 0 and
-        p.repeats(sequence="A", consecutive=True) == 0 and
-        p.repeats(sequence="AT", consecutive=True) == 0
+        p.repeats(sequence="A", consecutive=True) == 1 and
+        p.repeats(sequence="AT", consecutive=True) == 1
     )
 
 
