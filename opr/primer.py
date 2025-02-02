@@ -11,7 +11,7 @@ from .params import PRIMER_LOWER_LENGTH, PRIMER_HIGHEST_LENGTH, PRIMER_LOWEST_GC
 from .params import DNA_COMPLEMENT_MAP
 from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPLICATION_ERROR
 from .params import PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR
-from .functions import molecular_weight_calc, basic_melting_temperature_calc, gc_clamp_calc, single_run_length
+from .functions import molecular_weight_calc, basic_melting_temperature_calc, gc_clamp_calc
 
 
 class MeltingTemperature(Enum):
@@ -242,8 +242,8 @@ class Primer:
         """
         if self._double_runs is None:
             pairs = [''.join(pair) for pair in itertools.product(VALID_BASES, repeat=2) if pair[0] != pair[1]]
-            counts = {pair: 0 for pair in pairs}
-            for pair in counts:
+            counts = {}
+            for pair in pairs:
                 counts[pair] = self.repeats(pair, consecutive=True)
             self._double_runs = counts
         return self._double_runs
