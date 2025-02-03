@@ -11,7 +11,7 @@ from .params import PRIMER_LOWER_LENGTH, PRIMER_HIGHEST_LENGTH, PRIMER_LOWEST_GC
 from .params import DNA_COMPLEMENT_MAP
 from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPLICATION_ERROR
 from .params import PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR
-from .functions import molecular_weight_calc, basic_melting_temperature_calc, gc_clamp_calc, single_run_length
+from .functions import molecular_weight_calc, basic_melting_temperature_calc, gc_clamp_calc
 
 
 class MeltingTemperature(Enum):
@@ -226,14 +226,9 @@ class Primer:
         :return: single runs of the primer
         """
         if self._single_runs is None:
-            self._single_runs = {
-                'A': 0,
-                'T': 0,
-                'C': 0,
-                'G': 0,
-            }
-            for base in self._single_runs:
-                self._single_runs[base] = single_run_length(self._sequence, base)
+            self._single_runs = {}
+            for base in VALID_BASES:
+                self._single_runs[base] = self.repeats(base, consecutive=True)
         return self._single_runs
 
     @property
@@ -247,8 +242,8 @@ class Primer:
         """
         if self._double_runs is None:
             pairs = [''.join(pair) for pair in itertools.product(VALID_BASES, repeat=2) if pair[0] != pair[1]]
-            counts = {pair: 0 for pair in pairs}
-            for pair in counts:
+            counts = {}
+            for pair in pairs:
                 counts[pair] = self.repeats(pair, consecutive=True)
             self._double_runs = counts
         return self._double_runs
@@ -267,8 +262,6 @@ class Primer:
             pattern = f"(?:{re.escape(sequence)})+"
             matches = re.findall(f"({pattern})+", self.sequence)
             result = max((len(match) // len(sequence) for match in matches), default=0)
-            if result == 1:
-                result = 0
             return result
         else:
             return self.sequence.count(sequence)
