@@ -64,7 +64,7 @@
 
 ### Load
 ```pycon
->>> from opr import Primer
+>>> from opr import Primer, MeltingTemperature
 >>> primer1 = Primer(sequence="CTGGAGGACGGAAGAGGAAGTAA")
 >>> primer1.sequence
 'CTGGAGGACGGAAGAGGAAGTAA'
@@ -107,9 +107,17 @@
 1
 ```
 #### Melting temperature
+##### Basic
 ```pycon
 >>> primer1.melting_temperature()
 57.056521739130446
+>>> primer1.melting_temperature(MeltingTemperature.BASIC)
+57.056521739130446
+```
+##### Salt Adjusted
+```pycon
+>>> primer1.melting_temperature(MeltingTemperature.SALT_ADJUSTED)
+64.64203250676053
 ```
 ### Operations
 
