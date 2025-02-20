@@ -57,9 +57,9 @@ def test_melt_temp_3():  # Reference: http://biotools.nubic.northwestern.edu/Oli
 
 
 def test_melt_temp_4():  # Reference: http://biotools.nubic.northwestern.edu/OligoCalc.html
-    oprimer = Primer("CTGGAGGACGGAAGAGGAAGTAA", salt=65)
+    oprimer = Primer("CTGGAGGACGGAAGAGGAAGTAAA", salt=65)
     salt_adjusted_melt_temp = oprimer.melting_temperature(method=MeltingTemperature.SALT_ADJUSTED)
-    assert round(salt_adjusted_melt_temp, 0) == 66.0
+    assert round(salt_adjusted_melt_temp, 0) == 67.0
 
 
 def test_melt_temp_5():  # Reference: http://biotools.nubic.northwestern.edu/OligoCalc.html
