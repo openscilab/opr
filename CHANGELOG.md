@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- Salt Adjusted melting temperature calculation
+- Salt-adjusted melting temperature calculation
 ### Changed
 ## [0.3] - 2025-02-06
 ### Added
