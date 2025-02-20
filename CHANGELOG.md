@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ## [0.3] - 2025-02-06
 ### Added
+- `_computed` internal cache flag attribute
+- `is_computed` method
+### Changed
+- Cache structure in Primer
+- Cache Test system modified
+### Added
 - `__iter__` overload
 - `double_runs` property
 - `repeats` method
