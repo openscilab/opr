@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `is_computed` method
 ### Changed
 - Cache structure in Primer
+- Error tests
 - Cache Test system modified
 ### Added
 - `__iter__` overload
