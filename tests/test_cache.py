@@ -7,6 +7,7 @@ TEST_CASE_NAME = "Cache tests"
 
 def test_mwc():
     oprimer = Primer("ATCGATCGATCGATCGAT")
+    assert not oprimer.is_computed("molecular_weight")
     molecular_weight_first = oprimer.molecular_weight
     assert oprimer.is_computed("molecular_weight")
 
@@ -16,6 +17,7 @@ def test_mwc():
 
 def test_gc_content():
     oprimer = Primer("ATTCG")
+    assert not oprimer.is_computed("gc_content")
     gc_content_first = oprimer.gc_content
     assert oprimer.is_computed("gc_content")
 
@@ -25,6 +27,7 @@ def test_gc_content():
 
 def test_gc_clamp():
     oprimer = Primer("ATCGATCGATCGATCGGTCG")
+    assert not oprimer.is_computed("gc_clamp")
     gc_clamp_first = oprimer.gc_clamp
     assert oprimer.is_computed("gc_clamp")
 
@@ -34,6 +37,7 @@ def test_gc_clamp():
 
 def test_melt_temp():
     oprimer = Primer("ATCGATCGATCGATCGATCG")
+    assert not oprimer.is_computed("melting_temperature")[MeltingTemperature.BASIC]
     basic_melt_temp_first = oprimer.melting_temperature(MeltingTemperature.BASIC)
     assert oprimer.is_computed("melting_temperature")[MeltingTemperature.BASIC]
 
@@ -43,6 +47,7 @@ def test_melt_temp():
 
 def test_single_runs():
     oprimer = Primer("AAAAATTCGGGGATCCCCG")
+    assert not oprimer.is_computed("single_runs")
     runs_first = oprimer.single_runs
     assert oprimer.is_computed("single_runs")
 
@@ -53,6 +58,7 @@ def test_single_runs():
 
 def test_double_runs():
     p1 = Primer("ATATCGAACACACACACA")
+    assert not p1.is_computed("double_runs")
     double_runs_first = p1.double_runs
     assert p1.is_computed("double_runs")
 
