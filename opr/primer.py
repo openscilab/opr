@@ -30,7 +30,7 @@ class Primer:
     >>> oprimer.molecular_weight
     """
 
-    def __init__(self, sequence, name=DEFAULT_PRIMER_NAME):
+    def __init__(self, sequence, name=DEFAULT_PRIMER_NAME, salt=50):
         """
         Initialize the Primer instance.
 
@@ -38,6 +38,8 @@ class Primer:
         :type sequence: str
         :param name: primer name
         :type name: str
+        :param salt: Sodium ion concentration in moles (unit mM)
+        :type salt: float
         :return: an instance of the Primer class
         """
         self._sequence = Primer.validate_primer(sequence)
@@ -47,6 +49,7 @@ class Primer:
         self._gc_clamp = None
         self._single_runs = None
         self._double_runs = None
+        self._salt_level = salt
         self._melting_temperature = {
             MeltingTemperature.BASIC: None,
             MeltingTemperature.SALT_ADJUSTED: None,
@@ -279,7 +282,7 @@ class Primer:
         if method == MeltingTemperature.BASIC:
             self._melting_temperature[MeltingTemperature.BASIC] = basic_melting_temperature_calc(self._sequence)
         elif method == MeltingTemperature.SALT_ADJUSTED:
-            self._melting_temperature[MeltingTemperature.SALT_ADJUSTED] = salt_adjusted_melting_temperature_calc(self._sequence)
+            self._melting_temperature[MeltingTemperature.SALT_ADJUSTED] = salt_adjusted_melting_temperature_calc(self._sequence, self._salt_level)
         else:
             raise NotImplementedError(PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR)
         return self._melting_temperature[method]
