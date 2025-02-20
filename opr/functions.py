@@ -39,13 +39,13 @@ def basic_melting_temperature_calc(sequence):
     return melting_temperature
 
 
-def salt_adjusted_melting_temperature_calc(sequence, na_concentration=0.050):
+def salt_adjusted_melting_temperature_calc(sequence, na_concentration):
     """
-    Calculate the salt-adjusted melting temperature (Tm) of a DNA sequence.
+    Calculate the salt-adjusted melting temperature (Tm) of a primer sequence.
 
     :param sequence: Primer nucleotides sequence
     :type sequence: str
-    :param na_concentration: Sodium ion concentration in moles (default 50 mM)
+    :param na_concentration: Sodium ion concentration in moles (unit mM)
     :type na_concentration: float
     :return: Salt-adjusted melting temperature as float
     """
@@ -54,15 +54,15 @@ def salt_adjusted_melting_temperature_calc(sequence, na_concentration=0.050):
     c_count = sequence.count('C')
     g_count = sequence.count('G')
     seq_length = len(sequence)
-    salt_adjustment = 16.6 * (math.log10(na_concentration)) - 16.6 * (math.log10(0.050))
-    
+    salt_adjustment = 16.6 * (math.log10(na_concentration)-3) - 16.6 * math.log10(0.050)
+
     if seq_length <= 13:
         tm = (a_count + t_count) * 2 + (g_count + c_count) * 4 + salt_adjustment
     else:
         tm = (
             100.5 + (41 * (g_count + c_count) / seq_length) 
             - (820 / seq_length) 
-            + 16.6 * math.log10(na_concentration)
+            + 16.6 * (math.log10(na_concentration)-3)
         )
     return tm
 
