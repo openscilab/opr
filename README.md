@@ -114,7 +114,7 @@
 >>> primer1.melting_temperature(MeltingTemperature.BASIC)
 57.056521739130446
 ```
-##### Salt Adjusted
+##### Salt-adjusted
 ```pycon
 >>> primer1.melting_temperature(MeltingTemperature.SALT_ADJUSTED)
 64.64203250676053
