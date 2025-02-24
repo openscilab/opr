@@ -11,7 +11,7 @@ from .params import PRIMER_LOWER_LENGTH, PRIMER_HIGHEST_LENGTH, PRIMER_LOWEST_GC
 from .params import DNA_COMPLEMENT_MAP
 from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPLICATION_ERROR
 from .params import PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR
-from .params import PRIMER_ATTRIBUTE_NOT_COMPUTABLE_ERROR, PRIMER_INVALID_MELTING_TEMPERATURE_METHOD_ERROR
+from .params import PRIMER_ATTRIBUTE_NOT_COMPUTABLE_ERROR
 from .functions import molecular_weight_calc, basic_melting_temperature_calc, gc_clamp_calc
 
 
@@ -306,7 +306,7 @@ class Primer:
         :return: approximated melting temperature
         """
         if method not in self._computed["melting_temperature"]:
-            raise OPRBaseError(PRIMER_INVALID_MELTING_TEMPERATURE_METHOD_ERROR)
+            raise NotImplementedError(PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR)
         if self._computed["melting_temperature"][method]:
             return self._melting_temperature[method]
         if method == MeltingTemperature.BASIC:
