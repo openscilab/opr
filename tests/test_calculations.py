@@ -84,7 +84,7 @@ def test_double_runs():
         'GA': 1,
         'GT': 0,
         'GC': 0
-        }
+    }
     assert len(true_answer) == len(double_runs) and all(double_runs[pair] == true_answer[pair] for pair in double_runs)
 
 
