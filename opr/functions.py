@@ -54,9 +54,8 @@ def salt_adjusted_melting_temperature_calc(sequence, salt):
     c_count = sequence.count('C')
     g_count = sequence.count('G')
     seq_length = len(sequence)
-    salt_adjustment = 16.6 * (math.log10(salt)-3) - 16.6 * math.log10(0.050)
-
     if seq_length <= 13:
+        salt_adjustment = 16.6 * (math.log10(salt)-3) - 16.6 * math.log10(0.050)
         tm = (a_count + t_count) * 2 + (g_count + c_count) * 4 + salt_adjustment
     else:
         tm = (
