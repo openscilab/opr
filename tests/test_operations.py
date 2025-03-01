@@ -45,7 +45,7 @@ def test_to_rna_1():  # Reference: https://biomodel.uah.es/en/lab/cybertory/anal
     assert oprimer_rna.sequence == "AUCGGCUAAAUCGGCUAA"
 
 
-def test_to_rna_2():  # Reference: https://biomodel.uah.es/en/lab/cybertory/analysis
+def test_to_rna_2():  # Reference: https://biomodel.uah.es/en/lab/cybertory/analysis/trans.htm
     oprimer = Primer("ATCGATCGATCG")
     oprimer_rna = oprimer.to_rna()
     assert oprimer_rna.sequence == "AUCGAUCGAUCG"
