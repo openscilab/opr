@@ -137,7 +137,7 @@
 ### To RNA
 ```pycon
 >>> oprimer_rna = oprimer.to_rna(inplace=False)
->>> oprimer_rna.sequence
+>>> oprimer_rna
 'CUGGAGGACGGAAGAGGAAGUAA'
 ```
 

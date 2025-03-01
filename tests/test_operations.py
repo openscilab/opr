@@ -41,14 +41,14 @@ def test_complement_3():  # Reference: https://www.qiagen.com/us/applications/en
 
 def test_to_rna_1():  # Reference: https://biomodel.uah.es/en/lab/cybertory/analysis/trans.htm
     oprimer = Primer("ATCGGCTAAATCGGCTAA")
-    oprimer_rna = oprimer.to_rna(inplace=False)
-    assert oprimer_rna.sequence == "AUCGGCUAAAUCGGCUAA"
+    oprimer_rna = oprimer.to_rna()
+    assert oprimer_rna == "AUCGGCUAAAUCGGCUAA"
 
 
 def test_to_rna_2():  # Reference: https://biomodel.uah.es/en/lab/cybertory/analysis/trans.htm
     oprimer = Primer("ATCGATCGATCG")
     oprimer_rna = oprimer.to_rna()
-    assert oprimer_rna.sequence == "AUCGAUCGAUCG"
+    assert oprimer_rna == "AUCGAUCGAUCG"
 
 
 def test_length():

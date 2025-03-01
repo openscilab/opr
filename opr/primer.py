@@ -144,19 +144,14 @@ class Primer:
         else:
             return Primer(sequence=new_sequence)
 
-    def to_rna(self, inplace=False):
+    def to_rna(self):
         """
         Convert DNA sequence to RNA.
 
-        :param inplace: inplace flag
-        :type inplace: bool
-        :return: new Primer object or None
+        :return: str
         """
-        new_sequence = self._sequence.replace('T', 'U')
-        if inplace:
-            self._sequence = new_sequence
-        else:
-            return Primer(sequence=new_sequence)
+        rna_sequence = self._sequence.replace('T', 'U')
+        return rna_sequence
 
     @staticmethod
     def validate_primer(sequence):
