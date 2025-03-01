@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Salt-adjusted melting temperature calculation
+- `to_rna` method
 ### Changed
 ## [0.3] - 2025-02-06
 ### Added
