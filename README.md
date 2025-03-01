@@ -134,6 +134,13 @@
 'GACCTCCTGCCTTCTCCTTCATT'
 ```
 
+### To RNA
+```pycon
+>>> oprimer_rna = oprimer.to_rna(inplace=False)
+>>> oprimer_rna.sequence
+'CUGGAGGACGGAAGAGGAAGUAA'
+```
+
 ## Issues & bug reports
 
 Just fill an issue and describe it. We'll check it ASAP! or send an email to [opr@openscilab.com](mailto:opr@openscilab.com "opr@openscilab.com"). 
