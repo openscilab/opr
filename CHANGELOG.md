@@ -7,8 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Salt-adjusted melting temperature calculation
+- `_computed` internal cache flag attribute
+- `is_computed` method
 - `to_rna` method
 ### Changed
+- Cache structure in `Primer` class
+- Error tests
+- Cache Test system modified
 ## [0.3] - 2025-02-06
 ### Added
 - `__iter__` overload
