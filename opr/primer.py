@@ -11,7 +11,6 @@ from .params import PRIMER_LOWER_LENGTH, PRIMER_HIGHEST_LENGTH, PRIMER_LOWEST_GC
 from .params import DNA_COMPLEMENT_MAP
 from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPLICATION_ERROR
 from .params import PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR
-
 from .params import PRIMER_ATTRIBUTE_NOT_COMPUTABLE_ERROR
 from .functions import molecular_weight_calc, basic_melting_temperature_calc, salt_adjusted_melting_temperature_calc, gc_clamp_calc
 
