@@ -315,7 +315,8 @@ class Primer:
         if method == MeltingTemperature.BASIC:
             self._melting_temperature[MeltingTemperature.BASIC] = basic_melting_temperature_calc(self._sequence)
         elif method == MeltingTemperature.SALT_ADJUSTED:
-            self._melting_temperature[MeltingTemperature.SALT_ADJUSTED] = salt_adjusted_melting_temperature_calc(self._sequence, self._salt_level)
+            self._melting_temperature[MeltingTemperature.SALT_ADJUSTED] = salt_adjusted_melting_temperature_calc(
+                self._sequence, self._salt_level)
         else:
             raise NotImplementedError(PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR)
         self._computed["melting_temperature"][method] = True
