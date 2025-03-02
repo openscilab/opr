@@ -26,3 +26,5 @@ PRIMER_ADDITION_ERROR = "You can only add two Primer objects."
 PRIMER_MULTIPLICATION_ERROR = "The primer sequence can only be multiplied by an integer."
 
 PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR = "This method for calculating melting temperature has not been implemented."
+
+PRIMER_ATTRIBUTE_NOT_COMPUTABLE_ERROR = "This attribute either doesn't exist or cannot be computed/cached."

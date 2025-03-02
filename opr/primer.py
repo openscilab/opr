@@ -11,6 +11,7 @@ from .params import PRIMER_LOWER_LENGTH, PRIMER_HIGHEST_LENGTH, PRIMER_LOWEST_GC
 from .params import DNA_COMPLEMENT_MAP
 from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPLICATION_ERROR
 from .params import PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR
+from .params import PRIMER_ATTRIBUTE_NOT_COMPUTABLE_ERROR
 from .functions import molecular_weight_calc, basic_melting_temperature_calc, salt_adjusted_melting_temperature_calc, gc_clamp_calc
 
 
@@ -55,6 +56,32 @@ class Primer:
             MeltingTemperature.SALT_ADJUSTED: None,
             MeltingTemperature.NEAREST_NEIGHBOR: None,
         }
+
+        # Track computed attributes
+        self._computed = {
+            "molecular_weight": False,
+            "gc_content": False,
+            "gc_clamp": False,
+            "single_runs": False,
+            "double_runs": False,
+            "melting_temperature": {
+                MeltingTemperature.BASIC: False,
+                MeltingTemperature.SALT_ADJUSTED: False,
+                MeltingTemperature.NEAREST_NEIGHBOR: False,
+            }
+        }
+
+    def is_computed(self, attr):
+        """
+        Check whether the given attribute has been computed.
+
+        :param attr: The attribute to check.
+        :type attr: str
+        :return: True if the attribute is previously computed, False otherwise.
+        """
+        if attr not in self._computed:
+            raise OPRBaseError(PRIMER_ATTRIBUTE_NOT_COMPUTABLE_ERROR)
+        return self._computed.get(attr, False)
 
     def __len__(self):
         """
@@ -189,9 +216,9 @@ class Primer:
 
         :return: molecular weight
         """
-        if self._molecular_weight:
-            return self._molecular_weight
-        self._molecular_weight = molecular_weight_calc(self._sequence)
+        if not self._computed["molecular_weight"]:
+            self._molecular_weight = molecular_weight_calc(self._sequence)
+            self._computed["molecular_weight"] = True
         return self._molecular_weight
 
     @property
@@ -201,9 +228,10 @@ class Primer:
 
         :return: gc content
         """
-        if self._gc_content is None:
+        if not self._computed["gc_content"]:
             gc_count = self._sequence.count('G') + self._sequence.count('C')
             self._gc_content = gc_count / len(self._sequence)
+            self._computed["gc_content"] = True
         if self._gc_content < PRIMER_LOWEST_GC_RANGE or self._gc_content > PRIMER_HIGHEST_GC_RANGE:
             warn(PRIMER_SEQUENCE_VALID_GC_CONTENT_RANGE_WARNING, RuntimeWarning)
         return self._gc_content
@@ -215,8 +243,9 @@ class Primer:
 
         :return: GC clamp of the primer
         """
-        if self._gc_clamp is None:
+        if not self._computed["gc_clamp"]:
             self._gc_clamp = gc_clamp_calc(self._sequence)
+            self._computed["gc_clamp"] = True
         return self._gc_clamp
 
     @property
@@ -228,10 +257,11 @@ class Primer:
 
         :return: single runs of the primer
         """
-        if self._single_runs is None:
+        if not self._computed["single_runs"]:
             self._single_runs = {}
             for base in VALID_BASES:
                 self._single_runs[base] = self.repeats(base, consecutive=True)
+            self._computed["single_runs"] = True
         return self._single_runs
 
     @property
@@ -243,12 +273,13 @@ class Primer:
 
         :return: Dictionary of double runs (2-base pairs) and their counts in the primer
         """
-        if self._double_runs is None:
+        if not self._computed["double_runs"]:
             pairs = [''.join(pair) for pair in itertools.product(VALID_BASES, repeat=2) if pair[0] != pair[1]]
             counts = {}
             for pair in pairs:
                 counts[pair] = self.repeats(pair, consecutive=True)
             self._double_runs = counts
+            self._computed["double_runs"] = True
         return self._double_runs
 
     def repeats(self, sequence, consecutive=False):
@@ -277,12 +308,16 @@ class Primer:
         :type method: MeltingTemperature
         :return: approximated melting temperature
         """
-        if self._melting_temperature[method] is not None:
+        if method not in self._computed["melting_temperature"]:
+            raise NotImplementedError(PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR)
+        if self._computed["melting_temperature"][method]:
             return self._melting_temperature[method]
         if method == MeltingTemperature.BASIC:
             self._melting_temperature[MeltingTemperature.BASIC] = basic_melting_temperature_calc(self._sequence)
         elif method == MeltingTemperature.SALT_ADJUSTED:
-            self._melting_temperature[MeltingTemperature.SALT_ADJUSTED] = salt_adjusted_melting_temperature_calc(self._sequence, self._salt_level)
+            self._melting_temperature[MeltingTemperature.SALT_ADJUSTED] = salt_adjusted_melting_temperature_calc(
+                self._sequence, self._salt_level)
         else:
             raise NotImplementedError(PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR)
+        self._computed["melting_temperature"][method] = True
         return self._melting_temperature[method]
