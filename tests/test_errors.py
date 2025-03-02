@@ -40,5 +40,5 @@ def test_melting_temperature_2():
 
 def test_is_computed():
     oprimer = Primer("ATCGATCGATCGATCGAT")
-    with pytest.raises(OPRBaseError, match=r"^This attribute either doesn't exist or cannot be computed/cached \(e\.g\., name\)\."):
+    with pytest.raises(OPRBaseError, match=r"^This attribute either doesn't exist or cannot be computed/cached."):
         oprimer.is_computed("Invalid Attribute")
