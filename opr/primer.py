@@ -150,8 +150,7 @@ class Primer:
 
         :return: str
         """
-        rna_sequence = self._sequence.replace('T', 'U')
-        return rna_sequence
+        return self._sequence.replace('T', 'U')
 
     @staticmethod
     def validate_primer(sequence):
