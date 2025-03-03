@@ -134,7 +134,7 @@
 'GACCTCCTGCCTTCTCCTTCATT'
 ```
 
-### To RNA
+#### To RNA
 ```pycon
 >>> oprimer_rna = oprimer.to_rna()
 >>> oprimer_rna
