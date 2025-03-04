@@ -171,6 +171,14 @@ class Primer:
         else:
             return Primer(sequence=new_sequence)
 
+    def to_rna(self):
+        """
+        Convert DNA sequence to RNA.
+
+        :return: str
+        """
+        return self._sequence.replace('T', 'U')
+
     @staticmethod
     def validate_primer(sequence):
         """

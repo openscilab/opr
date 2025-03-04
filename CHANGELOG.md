@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Salt-adjusted melting temperature calculation
 - `_computed` internal cache flag attribute
 - `is_computed` method
+- `to_rna` method
 ### Changed
 - Cache structure in `Primer` class
 - Error tests
