@@ -136,11 +136,11 @@ def test_repeats_3():
     assert p.repeats(sequence="ATCG", consecutive=True) == 3
 
 
-def test_e260_1():
+def test_e260_1(): # https://atdbio.com/tools/oligo-calculator
     oprimer = Primer("ATCGATCGATCGATCGAT")
     assert round(oprimer.E260, 1) == 179.6
 
 
-def test_e260_2():
+def test_e260_2(): # https://atdbio.com/tools/oligo-calculator
     oprimer = Primer("ACGT")
     assert round(oprimer.E260, 1) == 40.3
