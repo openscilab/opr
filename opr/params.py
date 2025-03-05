@@ -15,6 +15,39 @@ C_WEIGHT = 289.18
 G_WEIGHT = 329.21
 ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT = 61.96
 
+BASE_EXTINCTION_COEFFICIENTS = { # L ⋅ mmol-1 ⋅ cm-1
+    "A": 15.4,
+    "C": 7.4,
+    "G": 11.5,
+    "T": 8.7
+}
+NN53_EXTINCTION_COEFFICIENTS = { # L ⋅ mmol-1 ⋅ cm-1
+    "A": {
+        "A": 27.4,
+        "C": 21.2,
+        "G": 25.0,
+        "T": 22.8
+    },
+    "C": {
+        "A": 21.2,
+        "C": 14.6,
+        "G": 18.0,
+        "T": 15.2
+    },
+    "G": {
+        "A": 25.2,
+        "C": 17.6,
+        "G": 21.6,
+        "T": 20.0
+    },
+    "T": {
+        "A": 23.4,
+        "C": 16.2,
+        "G": 19.0,
+        "T": 16.8
+    }
+}
+
 DEFAULT_PRIMER_NAME = "unknown"
 
 PRIMER_SEQUENCE_TYPE_ERROR = "Primer sequence should be a string variable."

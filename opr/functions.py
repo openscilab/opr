@@ -2,7 +2,7 @@
 """OPR functions."""
 import math
 from .params import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT, ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
-
+from .params import BASE_EXTINCTION_COEFFICIENTS, NN53_EXTINCTION_COEFFICIENTS
 
 def molecular_weight_calc(sequence):
     """
@@ -77,3 +77,19 @@ def gc_clamp_calc(sequence):
     if len(sequence) < 5:
         return 0
     return sequence[-5:].count('G') + sequence[-5:].count('C')
+
+
+def e260_ssnn_calc(sequence):
+    """
+    Calculate the extinction coefficient for a single-stranded nucleic acid using nearest-neighbors model for single strand DNA (ss-nn).
+
+    :param sequence: primer sequence
+    :type sequence: str
+    :return: extinction coefficient as float
+    """
+    e260 = 0
+    for i in range(len(sequence) - 1):
+        e260 += NN53_EXTINCTION_COEFFICIENTS[sequence[i]][sequence[i + 1]]
+    for base in sequence[1:-1]:
+        e260 -= BASE_EXTINCTION_COEFFICIENTS[base]
+    return e260
