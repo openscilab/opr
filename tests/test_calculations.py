@@ -134,3 +134,13 @@ def test_repeats_2():
 def test_repeats_3():
     p = Primer("ATCGATCGATCG")
     assert p.repeats(sequence="ATCG", consecutive=True) == 3
+
+
+def test_e260_1():
+    oprimer = Primer("ATCGATCGATCGATCGAT")
+    assert round(oprimer.E260, 1) == 179.6
+
+
+def test_e260_2():
+    oprimer = Primer("ACGT")
+    assert round(oprimer.E260, 1) == 40.3
