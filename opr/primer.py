@@ -320,6 +320,7 @@ class Primer:
             raise NotImplementedError(PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR)
         if self._computed["melting_temperature"][method]:
             return self._melting_temperature[method]
+
         if method == MeltingTemperature.BASIC:
             self._melting_temperature[MeltingTemperature.BASIC] = basic_melting_temperature_calc(self._sequence)
         elif method == MeltingTemperature.SALT_ADJUSTED:
