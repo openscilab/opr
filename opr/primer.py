@@ -316,7 +316,7 @@ class Primer:
         :type method: MeltingTemperature
         :return: approximated melting temperature
         """
-        if method not in self._computed["melting_temperature"]:
+        if method not in MeltingTemperature:
             raise NotImplementedError(PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR)
         if self._computed["melting_temperature"][method]:
             return self._melting_temperature[method]
