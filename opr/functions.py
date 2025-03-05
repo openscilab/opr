@@ -81,8 +81,9 @@ def gc_clamp_calc(sequence):
 
 def e260_ssnn_calc(sequence):
     """
-    Calculate the extinction coefficient for a single-stranded nucleic acid using nearest-neighbors model for single strand DNA (ss-nn).
-    Implemented based on https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/genomics/pcr/quantitation-of-oligos.
+    Calculate the extinction coefficient for a primer.
+
+    It uses nearest-neighbor model for single strand DNA (ss-nn) based on https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/genomics/pcr/quantitation-of-oligos.
 
     :param sequence: primer sequence
     :type sequence: str
