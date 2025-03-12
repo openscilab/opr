@@ -13,7 +13,7 @@ from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPLICATION_ERROR
 from .params import PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR
 from .params import PRIMER_ATTRIBUTE_NOT_COMPUTABLE_ERROR
 from .functions import molecular_weight_calc, basic_melting_temperature_calc, salt_adjusted_melting_temperature_calc, gc_clamp_calc
-
+from .functions import e260_ssnn_calc
 
 class MeltingTemperature(Enum):
     """Mode used to calculate the Melting Temperature of the Primer accordingly."""
@@ -50,6 +50,7 @@ class Primer:
         self._gc_clamp = None
         self._single_runs = None
         self._double_runs = None
+        self._E260 = None
         self._salt_level = salt
         self._melting_temperature = {
             MeltingTemperature.BASIC: None,
@@ -64,11 +65,12 @@ class Primer:
             "gc_clamp": False,
             "single_runs": False,
             "double_runs": False,
+            "E260": False,
             "melting_temperature": {
                 MeltingTemperature.BASIC: False,
                 MeltingTemperature.SALT_ADJUSTED: False,
                 MeltingTemperature.NEAREST_NEIGHBOR: False,
-            }
+            },
         }
 
     def is_computed(self, attr):
@@ -289,6 +291,18 @@ class Primer:
             self._double_runs = counts
             self._computed["double_runs"] = True
         return self._double_runs
+    
+    @property
+    def E260(self):
+        """
+        Calculate the extinction coefficient at 260 nm.
+
+        :return: extinction coefficient at 260 nm
+        """
+        if not self._computed["E260"]:
+            self._E260 = e260_ssnn_calc(self._sequence)
+            self._computed["E260"] = True
+        return self._E260
 
     def repeats(self, sequence, consecutive=False):
         """
@@ -320,6 +334,7 @@ class Primer:
             raise NotImplementedError(PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR)
         if self._computed["melting_temperature"][method]:
             return self._melting_temperature[method]
+
         if method == MeltingTemperature.BASIC:
             self._melting_temperature[MeltingTemperature.BASIC] = basic_melting_temperature_calc(self._sequence)
         elif method == MeltingTemperature.SALT_ADJUSTED:

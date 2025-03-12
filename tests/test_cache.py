@@ -66,3 +66,13 @@ def test_double_runs():
     assert len(double_runs_second) == len(double_runs_first)
     assert all(double_runs_first[pair] == double_runs_second[pair] for pair in double_runs_first)
     assert all(double_runs_second[pair] == double_runs_first[pair] for pair in double_runs_second)
+
+
+def test_e260():
+    oprimer = Primer("ATCGATCGATCGATCGATCG")
+    assert not oprimer.is_computed("E260")
+    e260_first = oprimer.E260
+    assert oprimer.is_computed("E260")
+
+    e260_second = oprimer.E260
+    assert round(e260_first, 1) == round(e260_second, 1)

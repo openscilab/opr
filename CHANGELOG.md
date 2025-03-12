@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `_computed` internal cache flag attribute
 - `is_computed` method
 - `to_rna` method
+- `E260` property
 ### Changed
 - Cache structure in `Primer` class
 - Error tests

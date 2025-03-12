@@ -119,6 +119,12 @@
 >>> primer1.melting_temperature(MeltingTemperature.SALT_ADJUSTED)
 64.64203250676053
 ```
+#### Extinction Coefficient at 260 nm (E260)
+```pycon
+>>> primer1.E260
+248.40000000000006
+```
+
 ### Operations
 
 #### Reverse
