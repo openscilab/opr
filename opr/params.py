@@ -15,13 +15,13 @@ C_WEIGHT = 289.18
 G_WEIGHT = 329.21
 ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT = 61.96
 
-BASE_EXTINCTION_COEFFICIENTS = { # L ⋅ mmol-1 ⋅ cm-1
+BASE_EXTINCTION_COEFFICIENTS = {  # L ⋅ mmol-1 ⋅ cm-1
     "A": 15.4,
     "C": 7.4,
     "G": 11.5,
     "T": 8.7
 }
-NN53_EXTINCTION_COEFFICIENTS = { # L ⋅ mmol-1 ⋅ cm-1
+NN53_EXTINCTION_COEFFICIENTS = {  # L ⋅ mmol-1 ⋅ cm-1
     "A": {
         "A": 27.4,
         "C": 21.2,

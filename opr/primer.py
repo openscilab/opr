@@ -15,6 +15,7 @@ from .params import PRIMER_ATTRIBUTE_NOT_COMPUTABLE_ERROR
 from .functions import molecular_weight_calc, basic_melting_temperature_calc, salt_adjusted_melting_temperature_calc, gc_clamp_calc
 from .functions import e260_ssnn_calc
 
+
 class MeltingTemperature(Enum):
     """Mode used to calculate the Melting Temperature of the Primer accordingly."""
 
@@ -293,7 +294,7 @@ class Primer:
             self._double_runs = counts
             self._computed["double_runs"] = True
         return self._double_runs
-    
+
     @property
     def E260(self):
         """
