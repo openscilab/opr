@@ -101,7 +101,9 @@ class Primer:
         :type other_primer: Primer
         :return: result as bool
         """
-        return self._sequence == other_primer._sequence
+        if isinstance(other_primer, Primer):
+            return self._sequence == other_primer._sequence
+        return False
 
     def __add__(self, other_primer):
         """
