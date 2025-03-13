@@ -81,6 +81,11 @@ def test_equality2():
     assert oprimer_1 != oprimer_2
 
 
+def test_equality3():
+    oprimer = Primer("ATCG")
+    assert oprimer != 2
+
+
 def test_str():
     oprimer_1 = Primer("ATCG")
     oprimer_2 = Primer("ATCGC")

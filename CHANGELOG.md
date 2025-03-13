@@ -12,9 +12,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `to_rna` method
 - `E260` property
 ### Changed
-- Cache structure in `Primer` class
-- Error tests
+- Cache structure in `Primer` class updated
+- Error tests updated
 - Cache Test system modified
+- `Primer` class `__eq__` method bug fixed
 ## [0.3] - 2025-02-06
 ### Added
 - `__iter__` overload

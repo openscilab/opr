@@ -4,6 +4,7 @@ import math
 from .params import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT, ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
 from .params import BASE_EXTINCTION_COEFFICIENTS, NN53_EXTINCTION_COEFFICIENTS
 
+
 def molecular_weight_calc(sequence):
     """
     Calculate molecular weight.
