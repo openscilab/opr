@@ -130,7 +130,6 @@ class Primer:
             return Primer(self._sequence * number)
         raise OPRBaseError(PRIMER_MULTIPLICATION_ERROR)
 
-
     def __contains__(self, sequence):
         """
         Check if the Primer contains the given sequence.

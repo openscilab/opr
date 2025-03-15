@@ -122,4 +122,3 @@ def test_contains3():
 def test_contains4():
     oprimer = Primer("TCGAT")
     assert 2 not in oprimer
-
