@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Error tests updated
 - Cache Test system modified
 - `Primer` class `__eq__` method bug fixed
+- `README.md` updated
 ## [0.3] - 2025-02-06
 ### Added
 - `__iter__` overload
