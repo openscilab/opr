@@ -62,9 +62,9 @@
 
 ### PyPI
 - Check [Python Packaging User Guide](https://packaging.python.org/installing/)
-- Run `pip install opr==0.3`
+- Run `pip install opr==0.4`
 ### Source code
-- Download [Version 0.3](https://github.com/openscilab/opr/archive/v0.3.zip) or [Latest Source](https://github.com/openscilab/opr/archive/dev.zip)
+- Download [Version 0.4](https://github.com/openscilab/opr/archive/v0.4.zip) or [Latest Source](https://github.com/openscilab/opr/archive/dev.zip)
 - Run `pip install .`
 
 ## Usage
