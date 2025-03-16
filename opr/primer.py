@@ -130,6 +130,20 @@ class Primer:
             return Primer(self._sequence * number)
         raise OPRBaseError(PRIMER_MULTIPLICATION_ERROR)
 
+    def __contains__(self, sequence):
+        """
+        Check if the Primer contains the given sequence.
+
+        :param sequence: sequence
+        :type sequence: str/Primer
+        :return: bool
+        """
+        if isinstance(sequence, str):
+            return sequence in self._sequence
+        elif isinstance(sequence, Primer):
+            return sequence._sequence in self._sequence
+        return False
+
     def __str__(self):
         """
         Primer object string representation method.

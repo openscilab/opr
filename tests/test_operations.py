@@ -99,3 +99,26 @@ def test_iter():
     for base in oprimer_1:
         sequence += base
     assert oprimer_1.sequence == sequence
+
+
+def test_contains1():
+    oprimer_1 = Primer("ATCG")
+    oprimer_2 = Primer("ATCGAT")
+    assert oprimer_1 in oprimer_2
+
+
+def test_contains2():
+    sequence = "ATCG"
+    oprimer = Primer("ATCGAT")
+    assert sequence in oprimer
+
+
+def test_contains3():
+    sequence = "ATCG"
+    oprimer = Primer("TCGAT")
+    assert sequence not in oprimer
+
+
+def test_contains4():
+    oprimer = Primer("TCGAT")
+    assert 2 not in oprimer
