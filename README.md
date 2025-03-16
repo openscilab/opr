@@ -49,6 +49,13 @@
             </td>
     </tr>
 </table>
+<table>
+    <tr> 
+        <td align="center">Code Quality</td>
+        <td align="center"><a href="https://app.codacy.com/gh/openscilab/opr/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade"><img src="https://app.codacy.com/project/badge/Grade/0a819f6eb6ae483695ad4934eff42df9"></a></td>
+        <td align="center"><a href="https://www.codefactor.io/repository/github/openscilab/opr"><img src="https://www.codefactor.io/repository/github/openscilab/opr/badge" alt="CodeFactor"></a></td>
+    </tr>
+</table>
 
 
 ## Installation
