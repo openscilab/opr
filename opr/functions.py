@@ -102,8 +102,8 @@ def protein_seq_calc(sequence_rna, frame):
     """
     Calculate the sequence of amino acids from a mRNA sequence.
 
-    :param sequence: mRNA sequence
-    :type sequence: str
+    :param sequence_rna: mRNA sequence
+    :type sequence_rna: str
     :param frame: frame of translation (1, 2, or 3)
     :type frame: int
     :return: protein sequence
