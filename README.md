@@ -154,6 +154,14 @@
 'CUGGAGGACGGAAGAGGAAGUAA'
 ```
 
+#### To Protein
+```pycon
+>>> oprimer_rna = oprimer.to_protein(frame=3)
+>>> oprimer_rna
+'GGRKRK*'
+```
+When the `frame=3` it starts from the third nucleus; the codons' list is then [`GGA`(G), `GGA`(G), `CGG`(R), `AAG`(K), `AGG`(R), `AAG`(K), `TAA`(STOP)]. Note that stop amino acid is marked as `*` in opr.
+
 ## Issues & bug reports
 
 Just fill an issue and describe it. We'll check it ASAP! or send an email to [opr@openscilab.com](mailto:opr@openscilab.com "opr@openscilab.com"). 
