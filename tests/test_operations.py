@@ -51,6 +51,30 @@ def test_to_rna_2():  # Reference: https://biomodel.uah.es/en/lab/cybertory/anal
     assert oprimer_rna == "AUCGAUCGAUCG"
 
 
+def test_to_protein():  # Reference: https://biomodel.uah.es/en/lab/cybertory/analysis/trans.htm
+    oprimer = Primer("ATCGATCG")
+    oprimer_protein = oprimer.to_protein()
+    assert oprimer_protein == "ID"
+
+
+def test_to_protein_2():  # Reference: https://en.vectorbuilder.com/tool/dna-translation.html
+    oprimer = Primer("ATCGATCG")
+    oprimer_protein = oprimer.to_protein(frame=2)
+    assert oprimer_protein == "SI"
+
+
+def test_to_protein_3():  # Reference: https://en.vectorbuilder.com/tool/dna-translation.html
+    oprimer = Primer("ATCGATCG")
+    oprimer_protein = oprimer.to_protein(frame=3)
+    assert oprimer_protein == "RS"
+
+
+def test_to_protein_4():  # Reference: https://en.vectorbuilder.com/tool/dna-translation.html
+    oprimer = Primer("ATCGATCGATCGTAA")
+    oprimer_protein = oprimer.to_protein()
+    assert oprimer_protein == "IDRS*"
+
+
 def test_length():
     oprimer = Primer("ATCGGCTAAATCGGCTAA")
     assert len(oprimer) == 18
