@@ -202,7 +202,7 @@ class Primer:
         """
         Convert DNA sequence to protein.
 
-        :param frame: reading frame
+        :param frame: reading frame (1, 2, or 3)
         :type frame: int
 
         :return: str
