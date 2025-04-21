@@ -100,7 +100,7 @@ def e260_ssnn_calc(sequence):
 
 def protein_seq_calc(sequence_rna, frame):
     """
-    Calculate the sequence of omino acids from a mRNA sequence.
+    Calculate the sequence of amino acids from a mRNA sequence.
 
     :param sequence: mRNA sequence
     :type sequence: str
