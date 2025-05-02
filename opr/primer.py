@@ -13,7 +13,7 @@ from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPLICATION_ERROR
 from .params import PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR
 from .params import PRIMER_ATTRIBUTE_NOT_COMPUTABLE_ERROR
 from .functions import molecular_weight_calc, basic_melting_temperature_calc, salt_adjusted_melting_temperature_calc, gc_clamp_calc
-from .functions import e260_ssnn_calc
+from .functions import e260_ssnn_calc, protein_seq_calc
 
 
 class MeltingTemperature(Enum):
@@ -197,6 +197,17 @@ class Primer:
         :return: str
         """
         return self._sequence.replace('T', 'U')
+
+    def to_protein(self, frame=1):
+        """
+        Convert DNA sequence to protein.
+
+        :param frame: reading frame (1, 2, or 3)
+        :type frame: int
+
+        :return: str
+        """
+        return protein_seq_calc(self.to_rna(), frame)
 
     @staticmethod
     def validate_primer(sequence):

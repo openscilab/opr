@@ -3,7 +3,7 @@
 import math
 from .params import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT, ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
 from .params import BASE_EXTINCTION_COEFFICIENTS, NN53_EXTINCTION_COEFFICIENTS
-
+from .params import CODONS_TO_AMINO_ACIDS
 
 def molecular_weight_calc(sequence):
     """
@@ -96,3 +96,22 @@ def e260_ssnn_calc(sequence):
     for base in sequence[1:-1]:
         e260 -= BASE_EXTINCTION_COEFFICIENTS[base]
     return e260
+
+
+def protein_seq_calc(sequence_rna, frame):
+    """
+    Calculate the sequence of amino acids from a mRNA sequence.
+
+    :param sequence_rna: mRNA sequence
+    :type sequence_rna: str
+    :param frame: frame of translation (1, 2, or 3)
+    :type frame: int
+    :return: protein sequence
+    """
+    frame = frame - 1
+    protein_seq = ""
+    for i in range(frame, len(sequence_rna), 3):
+        codon = sequence_rna[i:i + 3]
+        if len(codon) == 3:
+            protein_seq += CODONS_TO_AMINO_ACIDS[codon]
+    return protein_seq
