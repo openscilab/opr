@@ -54,7 +54,7 @@ CODONS_TO_AMINO_ACIDS = {
     "UCU": "S", "UCC": "S",
     "UCA": "S", "UCG": "S",
     "UAU": "Y", "UAC": "Y",
-    "UAA": "*", "UAG": "*", # Stop codons
+    "UAA": "*", "UAG": "*",  # Stop codons
     "UGU": "C", "UGC": "C",
     "UGA": "*", "UGG": "W",
 
