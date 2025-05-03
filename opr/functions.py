@@ -98,20 +98,20 @@ def e260_ssnn_calc(sequence):
     return e260
 
 
-def protein_seq_calc(sequence_rna, frame):
+def protein_seq_calc(rna_sequence, frame):
     """
     Calculate the sequence of amino acids from a mRNA sequence.
 
-    :param sequence_rna: mRNA sequence
-    :type sequence_rna: str
+    :param rna_sequence: mRNA sequence
+    :type rna_sequence: str
     :param frame: frame of translation (1, 2, or 3)
     :type frame: int
     :return: protein sequence
     """
     frame = frame - 1
     protein_seq = ""
-    for i in range(frame, len(sequence_rna), 3):
-        codon = sequence_rna[i:i + 3]
+    for i in range(frame, len(rna_sequence), 3):
+        codon = rna_sequence[i:i + 3]
         if len(codon) == 3:
             protein_seq += CODONS_TO_AMINO_ACIDS[codon]
     return protein_seq
