@@ -5,6 +5,7 @@ from .params import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT, ANHYDROUS_MOLECULAR_
 from .params import BASE_EXTINCTION_COEFFICIENTS, NN53_EXTINCTION_COEFFICIENTS
 from .params import CODONS_TO_AMINO_ACIDS
 
+
 def molecular_weight_calc(sequence):
     """
     Calculate molecular weight.
