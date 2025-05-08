@@ -68,6 +68,45 @@ def salt_adjusted_melting_temperature_calc(sequence, salt):
     return tm
 
 
+def nearest_neighbor_melting_temperature_calc(sequence, na_salt):
+    """
+    Calculate the Nearest Neighbor melting temperature (Tm) of a primer sequence.
+
+    :param sequence: Primer nucleotides sequence
+    :type sequence: str
+    :param na_salt: Sodium ion concentration in millimoles (unit mM)
+    :type na_salt: float
+    :return: Nearest Neighbor melting temperature as float (degrees Celsius)
+    """
+    # Convert salt from mM to M
+    na_conc = na_salt / 1000.0
+    # Ensure uppercase sequence
+    sequence = sequence.upper()
+    delta_h = 0.0
+    delta_s = 0.0
+
+    # Sum ΔH and ΔS from nearest neighbors
+    for i in range(len(sequence) - 1):
+        pair = sequence[i:i+2]
+        if pair in NN_PARAMS:
+            dh, ds = NN_PARAMS[pair]
+        else:
+            rev_comp_pair = ''.join(DNA_COMPLEMENT_MAP[base] for base in reversed(pair))
+            dh, ds = NN_PARAMS[rev_comp_pair]
+        delta_h += dh
+        delta_s += ds
+
+    # Constants for Nearest Neighbors formula
+    A = -0.0108         # kcal / (K·mol), helix initiation constant
+    R = 0.00199         # kcal / (K·mol), gas constant
+    C = 0.5e-6          # mol/L = 0.5 µM oligonucleotide concentration
+
+    # Compute melting temperature using the formula
+    denominator = A + delta_s + (R * math.log(C / 4))
+    tm = (delta_h / denominator) - 273.15 + (16.6 * math.log10(na_conc))
+    return tm
+
+
 def gc_clamp_calc(sequence):
     """
     Calculate GC clamp.
