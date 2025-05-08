@@ -29,12 +29,6 @@ def test_validate_primer_2():
 def test_melting_temperature_1():
     oprimer = Primer("ATCGATCGATCGATCGAT")
     with pytest.raises(NotImplementedError, match=r"This method for calculating melting temperature has not been implemented."):
-        oprimer.melting_temperature(method=MeltingTemperature.NEAREST_NEIGHBOR)
-
-
-def test_melting_temperature_2():
-    oprimer = Primer("ATCGATCGATCGATCGAT")
-    with pytest.raises(NotImplementedError, match=r"This method for calculating melting temperature has not been implemented."):
         oprimer.melting_temperature(method="Invalid Method")
 
 
