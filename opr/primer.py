@@ -369,7 +369,7 @@ class Primer:
         elif method == MeltingTemperature.SALT_ADJUSTED:
             self._melting_temperature[MeltingTemperature.SALT_ADJUSTED] = salt_adjusted_melting_temperature_calc(
                 self._sequence, self._salt_level)
-        else: 
+        else:
             # the method is MeltingTemperature.NEAREST_NEIGHBOR
             self._melting_temperature[MeltingTemperature.NEAREST_NEIGHBOR] = nearest_neighbor_melting_temperature_calc(
                 self._sequence, self._salt_level)
