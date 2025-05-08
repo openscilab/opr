@@ -131,7 +131,11 @@
 >>> primer1.E260
 248.40000000000006
 ```
-
+##### Nearest Neighbor
+```pycon
+>>> primer1.melting_temperature(MeltingTemperature.NEAREST_NEIGHBOR)
+66.42693710590595
+```
 ### Operations
 
 #### Reverse
