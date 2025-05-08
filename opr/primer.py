@@ -40,7 +40,7 @@ class Primer:
         :type sequence: str
         :param name: primer name
         :type name: str
-        :param salt: Sodium ion concentration in moles (unit mM)
+        :param salt: Sodium ion concentration in millimoles (unit mM)
         :type salt: float
         :return: an instance of the Primer class
         """
