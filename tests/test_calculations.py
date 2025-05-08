@@ -74,6 +74,12 @@ def test_melt_temp_6():  # Reference: http://biotools.nubic.northwestern.edu/Oli
     assert round(salt_adjusted_melt_temp, 0) == 26.0
 
 
+def test_melt_temp_7():  # Reference: https://www.sigmaaldrich.com/CA/en/technical-documents/protocol/genomics/pcr/oligos-melting-temp
+    oprimer = Primer("AAAAACCCCCGGGGGTTTTT", salt=50)
+    nearest_neighbor_melt_temp = oprimer.melting_temperature(method=MeltingTemperature.NEAREST_NEIGHBOR)
+    assert round(nearest_neighbor_melt_temp, 1) == 69.6
+
+
 def test_single_runs_1():  # Reference: https://www.oligoevaluator.com/OligoCalcServlet
     oprimer = Primer("ATCGATCG")
     runs = oprimer.single_runs
