@@ -99,3 +99,19 @@ PRIMER_MULTIPLICATION_ERROR = "The primer sequence can only be multiplied by an 
 PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR = "This method for calculating melting temperature has not been implemented."
 
 PRIMER_ATTRIBUTE_NOT_COMPUTABLE_ERROR = "This attribute either doesn't exist or cannot be computed/cached."
+
+# For DNA
+# Nearest-neighbor parameters (ΔH in kcal/mol, ΔS in kcal/K·mol)
+# ref: https://www.sigmaaldrich.com/CA/en/technical-documents/protocol/genomics/pcr/oligos-melting-temp
+NN_PARAMS = {
+    'AA': (-9.1, -0.0240),
+    'AT': (-8.6, -0.0239), 
+    'TA': (-6.0, -0.0169),
+    'CA': (-5.8, -0.0129), 
+    'GT': (-6.5, -0.0173),
+    'CT': (-7.8, -0.0208),
+    'GA': (-5.6, -0.0135),
+    'CG': (-11.9, -0.0278), 
+    'GC': (-11.1, -0.0267),
+    'GG': (-11.0, -0.0266), 
+}
