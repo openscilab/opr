@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- Nearest neighbor melting temperature calculation
 - `to_protein` method
 ### Changed
 - Test system modified

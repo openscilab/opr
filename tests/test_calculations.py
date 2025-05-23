@@ -74,6 +74,46 @@ def test_melt_temp_6():  # Reference: http://biotools.nubic.northwestern.edu/Oli
     assert round(salt_adjusted_melt_temp, 0) == 26.0
 
 
+def test_melt_temp_7():  
+    # References: 
+    # https://www.sigmaaldrich.com/CA/en/technical-documents/protocol/genomics/pcr/oligos-melting-temp
+    # https://www.sigmaaldrich.com/deepweb/assets/sigmaaldrich/marketing/global/documents/367/000/meltingtemp1.pdf
+    # https://www.oligoevaluator.com/OligoCalcServlet
+    oprimer = Primer("AAAAACCCCCGGGGGTTTTT", salt=50)
+    nearest_neighbor_melt_temp = oprimer.melting_temperature(method=MeltingTemperature.NEAREST_NEIGHBOR)
+    assert round(nearest_neighbor_melt_temp, 1) == 69.6
+
+
+def test_melt_temp_8():  
+    # References: 
+    # https://www.sigmaaldrich.com/CA/en/technical-documents/protocol/genomics/pcr/oligos-melting-temp
+    # https://www.sigmaaldrich.com/deepweb/assets/sigmaaldrich/marketing/global/documents/367/000/meltingtemp1.pdf
+    # https://www.oligoevaluator.com/OligoCalcServlet
+    oprimer = Primer("ACGTACGTACGTACGTACGT", salt=50)
+    nearest_neighbor_melt_temp = oprimer.melting_temperature(method=MeltingTemperature.NEAREST_NEIGHBOR)
+    assert round(nearest_neighbor_melt_temp, 1) == 57.1
+
+
+def test_melt_temp_9():  
+    # References: 
+    # https://www.sigmaaldrich.com/CA/en/technical-documents/protocol/genomics/pcr/oligos-melting-temp
+    # https://www.sigmaaldrich.com/deepweb/assets/sigmaaldrich/marketing/global/documents/367/000/meltingtemp1.pdf
+    # https://www.oligoevaluator.com/OligoCalcServlet
+    oprimer = Primer("GATCGATCGATCGATCGATC", salt=50)
+    nearest_neighbor_melt_temp = oprimer.melting_temperature(method=MeltingTemperature.NEAREST_NEIGHBOR)
+    assert round(nearest_neighbor_melt_temp, 1) == 64.5
+
+
+def test_melt_temp_10():
+    # References: 
+    # https://www.sigmaaldrich.com/CA/en/technical-documents/protocol/genomics/pcr/oligos-melting-temp
+    # https://www.sigmaaldrich.com/deepweb/assets/sigmaaldrich/marketing/global/documents/367/000/meltingtemp1.pdf
+    # https://www.oligoevaluator.com/OligoCalcServlet
+    oprimer = Primer("ATATATATATCGCGCGCGCG", salt=50)
+    nearest_neighbor_melt_temp = oprimer.melting_temperature(method=MeltingTemperature.NEAREST_NEIGHBOR)
+    assert round(nearest_neighbor_melt_temp, 1) == 66.3
+
+
 def test_single_runs_1():  # Reference: https://www.oligoevaluator.com/OligoCalcServlet
     oprimer = Primer("ATCGATCG")
     runs = oprimer.single_runs

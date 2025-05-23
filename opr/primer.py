@@ -13,6 +13,7 @@ from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPLICATION_ERROR
 from .params import PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR
 from .params import PRIMER_ATTRIBUTE_NOT_COMPUTABLE_ERROR
 from .functions import molecular_weight_calc, basic_melting_temperature_calc, salt_adjusted_melting_temperature_calc, gc_clamp_calc
+from .functions import nearest_neighbor_melting_temperature_calc
 from .functions import e260_ssnn_calc, protein_seq_calc
 
 
@@ -40,7 +41,7 @@ class Primer:
         :type sequence: str
         :param name: primer name
         :type name: str
-        :param salt: Sodium ion concentration in moles (unit mM)
+        :param salt: Sodium ion concentration in millimoles (unit mM)
         :type salt: float
         :return: an instance of the Primer class
         """
@@ -369,6 +370,8 @@ class Primer:
             self._melting_temperature[MeltingTemperature.SALT_ADJUSTED] = salt_adjusted_melting_temperature_calc(
                 self._sequence, self._salt_level)
         else:
-            raise NotImplementedError(PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR)
+            # the method is MeltingTemperature.NEAREST_NEIGHBOR
+            self._melting_temperature[MeltingTemperature.NEAREST_NEIGHBOR] = nearest_neighbor_melting_temperature_calc(
+                self._sequence, self._salt_level)
         self._computed["melting_temperature"][method] = True
         return self._melting_temperature[method]
