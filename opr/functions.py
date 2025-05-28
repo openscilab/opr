@@ -68,20 +68,14 @@ def salt_adjusted_melting_temperature_calc(sequence, salt):
     return tm
 
 
-def nearest_neighbor_melting_temperature_calc(sequence, na_salt):
+def calculate_thermodynamics_constants(sequence):
     """
-    Calculate the Nearest Neighbor melting temperature (Tm) of a primer sequence.
+    Calculate ΔH and ΔS for a primer sequence.
 
     :param sequence: Primer nucleotides sequence
     :type sequence: str
-    :param na_salt: Sodium ion concentration in millimoles (unit mM)
-    :type na_salt: float
-    :return: Nearest Neighbor melting temperature as float (degrees Celsius)
+    :return: (ΔH, ΔS) in kcal/mol and kcal/mol·K
     """
-    # Convert salt from mM to M
-    na_conc = na_salt / 1000.0
-    # Ensure uppercase sequence
-    sequence = sequence.upper()
     delta_h = 0.0
     delta_s = 0.0
 
@@ -95,6 +89,26 @@ def nearest_neighbor_melting_temperature_calc(sequence, na_salt):
             dh, ds = NN_PARAMS[rev_comp_pair]
         delta_h += dh
         delta_s += ds
+    return (delta_h, delta_s)
+
+
+def nearest_neighbor_melting_temperature_calc(sequence, na_salt, thermodynamic_constants):
+    """
+    Calculate the Nearest neighbor melting temperature (Tm) of a primer sequence.
+
+    :param sequence: Primer nucleotides sequence
+    :type sequence: str
+    :param na_salt: Sodium ion concentration in millimoles (unit mM)
+    :type na_salt: float
+    :param thermodynamic_constants: (ΔH, ΔS)
+    :type thermodynamic_constants: tuple (float, float)
+    :return: Nearest neighbor melting temperature as float (degrees Celsius)
+    """
+    # Convert salt from mM to M
+    na_conc = na_salt / 1000.0
+    # Ensure uppercase sequence
+    sequence = sequence.upper()
+    delta_h , delta_s = thermodynamic_constants
 
     # Constants for Nearest Neighbors formula
     A = -0.0108         # kcal / (K·mol), helix initiation constant
