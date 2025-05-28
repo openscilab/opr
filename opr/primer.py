@@ -60,6 +60,7 @@ class Primer:
             MeltingTemperature.NEAREST_NEIGHBOR: None,
         }
         self._delta_s = None
+        self._delta_h = None
 
         # Track computed attributes
         self._computed = {
@@ -75,6 +76,7 @@ class Primer:
                 MeltingTemperature.NEAREST_NEIGHBOR: False,
             },
             "delta_s": False,
+            "delta_h": False,
         }
 
     def is_computed(self, attr):
@@ -347,6 +349,19 @@ class Primer:
             self._computed["delta_s"] = True
             self._computed["delta_h"] = True
         return self._delta_s
+
+    @property
+    def delta_h(self):
+        """
+        Calculate ΔH based on Neareset neighbor method.
+
+        :return: ΔH (enthalpy change, kcal/mol)
+        """
+        if not self._computed["delta_h"]:
+            self._delta_h , self._delta_s = calculate_thermodynamics_constants(self._sequence)
+            self._computed["delta_s"] = True
+            self._computed["delta_h"] = True
+        return self._delta_h
 
     def repeats(self, sequence, consecutive=False):
         """
