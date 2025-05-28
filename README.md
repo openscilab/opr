@@ -131,6 +131,17 @@
 >>> primer1.melting_temperature(MeltingTemperature.NEAREST_NEIGHBOR)
 66.42693710590595
 ```
+#### Thermodynamic Constants
+##### Enthalpy change (ΔH), kcal/mol
+```pycon
+>>> round(primer1.delta_h,2)
+-175.0
+```
+##### Entropy change (ΔS), kcal/mol·K
+```pycon
+>>> round(primer1.delta_s,2)
+-0.44
+```
 #### Extinction Coefficient at 260 nm (E260)
 ```pycon
 >>> primer1.E260
