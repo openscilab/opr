@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- `delta_h` property 
+- `delta_s` property
+- Thermodynamic Constants (ΔH, ΔS) calculation (Nearest neighbor)
 - Nearest neighbor melting temperature calculation
 - `to_protein` method
 ### Changed
