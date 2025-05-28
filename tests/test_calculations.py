@@ -114,6 +114,42 @@ def test_melt_temp_10():
     assert round(nearest_neighbor_melt_temp, 1) == 66.3
 
 
+def test_thermodynamic_constants_1():  
+    # References: 
+    # https://www.sigmaaldrich.com/CA/en/technical-documents/protocol/genomics/pcr/oligos-melting-temp
+    # https://www.sigmaaldrich.com/deepweb/assets/sigmaaldrich/marketing/global/documents/367/000/meltingtemp1.pdf
+    # https://www.oligoevaluator.com/OligoCalcServlet
+    oprimer = Primer("AAAAACCCCCGGGGGTTTTT", salt=50)
+    assert round(oprimer.delta_h, 1) == -185.7 and round(oprimer.delta_s, 3) == -0.467
+
+
+def test_thermodynamic_constants_2():  
+    # References: 
+    # https://www.sigmaaldrich.com/CA/en/technical-documents/protocol/genomics/pcr/oligos-melting-temp
+    # https://www.sigmaaldrich.com/deepweb/assets/sigmaaldrich/marketing/global/documents/367/000/meltingtemp1.pdf
+    # https://www.oligoevaluator.com/OligoCalcServlet
+    oprimer = Primer("ACGTACGTACGTACGTACGT", salt=50)
+    assert round(oprimer.delta_h, 1) == -148.5 and round(oprimer.delta_s, 3) == -0.38
+
+
+def test_thermodynamic_constants_3():  
+    # References: 
+    # https://www.sigmaaldrich.com/CA/en/technical-documents/protocol/genomics/pcr/oligos-melting-temp
+    # https://www.sigmaaldrich.com/deepweb/assets/sigmaaldrich/marketing/global/documents/367/000/meltingtemp1.pdf
+    # https://www.oligoevaluator.com/OligoCalcServlet
+    oprimer = Primer("GATCGATCGATCGATCGATC", salt=50)
+    assert round(oprimer.delta_h, 1) == -146.6 and round(oprimer.delta_s, 3) == -0.366
+
+
+def test_thermodynamic_constants_4():  
+    # References: 
+    # https://www.sigmaaldrich.com/CA/en/technical-documents/protocol/genomics/pcr/oligos-melting-temp
+    # https://www.sigmaaldrich.com/deepweb/assets/sigmaaldrich/marketing/global/documents/367/000/meltingtemp1.pdf
+    # https://www.oligoevaluator.com/OligoCalcServlet
+    oprimer = Primer("ATATATATATCGCGCGCGCG", salt=50)
+    assert round(oprimer.delta_h, 1) == -176.5 and round(oprimer.delta_s, 3) == -0.446
+
+
 def test_single_runs_1():  # Reference: https://www.oligoevaluator.com/OligoCalcServlet
     oprimer = Primer("ATCGATCG")
     runs = oprimer.single_runs
