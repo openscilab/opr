@@ -402,6 +402,9 @@ class Primer:
         else:
             # the method is MeltingTemperature.NEAREST_NEIGHBOR
             self._melting_temperature[MeltingTemperature.NEAREST_NEIGHBOR] = nearest_neighbor_melting_temperature_calc(
-                self._sequence, self._salt_level)
+                self._sequence,
+                self._salt_level,
+                (self.delta_h, self.delta_s)
+                )
         self._computed["melting_temperature"][method] = True
         return self._melting_temperature[method]
