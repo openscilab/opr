@@ -13,7 +13,7 @@ from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPLICATION_ERROR
 from .params import PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR
 from .params import PRIMER_ATTRIBUTE_NOT_COMPUTABLE_ERROR
 from .functions import molecular_weight_calc, basic_melting_temperature_calc, salt_adjusted_melting_temperature_calc, gc_clamp_calc
-from .functions import nearest_neighbor_melting_temperature_calc
+from .functions import nearest_neighbor_melting_temperature_calc, calculate_thermodynamics_constants
 from .functions import e260_ssnn_calc, protein_seq_calc
 
 
@@ -59,6 +59,7 @@ class Primer:
             MeltingTemperature.SALT_ADJUSTED: None,
             MeltingTemperature.NEAREST_NEIGHBOR: None,
         }
+        self._delta_s = None
 
         # Track computed attributes
         self._computed = {
@@ -73,6 +74,7 @@ class Primer:
                 MeltingTemperature.SALT_ADJUSTED: False,
                 MeltingTemperature.NEAREST_NEIGHBOR: False,
             },
+            "delta_s": False,
         }
 
     def is_computed(self, attr):
@@ -332,6 +334,19 @@ class Primer:
             self._E260 = e260_ssnn_calc(self._sequence)
             self._computed["E260"] = True
         return self._E260
+
+    @property
+    def delta_s(self):
+        """
+        Calculate ΔS based on Neareset neighbor method.
+
+        :return: ΔS (entropy change, kcal/mol·K)
+        """
+        if not self._computed["delta_s"]:
+            self._delta_h , self._delta_s = calculate_thermodynamics_constants(self._sequence)
+            self._computed["delta_s"] = True
+            self._computed["delta_h"] = True
+        return self._delta_s
 
     def repeats(self, sequence, consecutive=False):
         """
