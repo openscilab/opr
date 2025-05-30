@@ -211,7 +211,7 @@ class Primer:
         :return: str
         """
         if frame not in [1, 2, 3]:
-            raise ValueError(FRAME_ERROR)
+            raise OPRBaseError(FRAME_ERROR)
         return protein_seq_calc(self.to_rna(), frame, one_letter)
 
     @staticmethod
