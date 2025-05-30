@@ -54,13 +54,17 @@ def test_to_rna_2():  # Reference: https://biomodel.uah.es/en/lab/cybertory/anal
 def test_to_protein_1(): # https://en.vectorbuilder.com/tool/dna-translation.html
     oprimer = Primer("ATCGATCG")
     assert oprimer.to_protein() == "ID" and oprimer.to_protein(frame=2) == "SI" and oprimer.to_protein(frame=3) == "RS"
-    assert oprimer.to_protein(one_letter=False) == "lle-Asp" and oprimer.to_protein(frame=2, one_letter=False) == "Ser-lle" and oprimer.to_protein(frame=3, one_letter=False) == "Arg-Ser"
+    assert oprimer.to_protein(one_letter=False) == "lle-Asp" and \
+        oprimer.to_protein(frame=2, one_letter=False) == "Ser-lle" and \
+        oprimer.to_protein(frame=3, one_letter=False) == "Arg-Ser"
 
 
 def test_to_protein_2():  # Reference: https://en.vectorbuilder.com/tool/dna-translation.html
     oprimer = Primer("ATCGATCGATCGTAA")
     assert oprimer.to_protein() == "IDRS*" and oprimer.to_protein(frame=2) == "SIDR" and oprimer.to_protein(frame=3) == "RSIV"
-    assert oprimer.to_protein(one_letter=False) == "lle-Asp-Arg-Ser-Stop" and oprimer.to_protein(frame=2, one_letter=False) == "Ser-lle-Asp-Arg" and oprimer.to_protein(frame=3, one_letter=False) == "Arg-Ser-lle-Val"
+    assert oprimer.to_protein(one_letter=False) == "lle-Asp-Arg-Ser-Stop" and \
+        oprimer.to_protein(frame=2, one_letter=False) == "Ser-lle-Asp-Arg" and \
+        oprimer.to_protein(frame=3, one_letter=False) == "Arg-Ser-lle-Val"
 
 
 def test_length():
