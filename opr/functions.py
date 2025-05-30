@@ -89,7 +89,7 @@ def calculate_thermodynamics_constants(sequence):
             dh, ds = NN_PARAMS[rev_comp_pair]
         delta_h += dh
         delta_s += ds
-    return (delta_h, delta_s)
+    return delta_h, delta_s
 
 
 def nearest_neighbor_melting_temperature_calc(sequence, na_salt, thermodynamic_constants):
