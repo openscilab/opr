@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Nearest neighbor melting temperature calculation
 - `to_protein` method
+- `protein_seq_calc` function
 ### Changed
 - Test system modified
 - `Python 3.6` support dropped
