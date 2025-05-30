@@ -132,15 +132,15 @@
 66.42693710590595
 ```
 #### Thermodynamic Constants
-##### Enthalpy change (ΔH), kcal/mol
+##### Enthalpy change (ΔH)
 ```pycon
->>> round(primer1.delta_h,2)
--175.0
+>>> primer1.delta_h
+-174.99999999999997
 ```
-##### Entropy change (ΔS), kcal/mol·K
+##### Entropy change (ΔS)
 ```pycon
->>> round(primer1.delta_s,2)
--0.44
+>>> primer1.delta_s
+-0.44210000000000005
 ```
 #### Extinction Coefficient at 260 nm (E260)
 ```pycon
