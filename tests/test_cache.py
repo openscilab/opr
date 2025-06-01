@@ -76,3 +76,16 @@ def test_e260():
 
     e260_second = oprimer.E260
     assert round(e260_first, 1) == round(e260_second, 1)
+
+
+def test_thermodynamic_constants():
+    oprimer = Primer("AAAAACCCCCGGGGGTTTTT")
+    assert not (oprimer.is_computed("delta_s") and oprimer.is_computed("delta_h"))
+    delta_s = oprimer.delta_s
+    delta_h = oprimer.delta_h
+    assert oprimer.is_computed("delta_s") and oprimer.is_computed("delta_h")
+
+    delta_s_second = oprimer.delta_s
+    assert round(delta_s, 1) == round(delta_s_second, 1)
+    delta_h_second = oprimer.delta_h
+    assert round(delta_h, 1) == round(delta_h_second, 1)
