@@ -51,10 +51,7 @@ def test_to_rna_2():  # Reference: https://biomodel.uah.es/en/lab/cybertory/anal
     assert oprimer_rna == "AUCGAUCGAUCG"
 
 
-def test_to_protein_1(): 
-    # References:
-    # https://biomodel.uah.es/en/lab/cybertory/analysis/trans.htm
-    # https://en.vectorbuilder.com/tool/dna-translation.html
+def test_to_protein_1():  # Reference: https://en.vectorbuilder.com/tool/dna-translation.html
     oprimer = Primer("ATCGATCG")
 
     # One-letter code translations
@@ -68,10 +65,7 @@ def test_to_protein_1():
     assert oprimer.to_protein(frame=3, multi_letter=True) == "Arg-Ser"
 
 
-def test_to_protein_2():  
-    # References:
-    # https://biomodel.uah.es/en/lab/cybertory/analysis/trans.htm
-    # https://en.vectorbuilder.com/tool/dna-translation.html
+def test_to_protein_2():  # Reference: https://en.vectorbuilder.com/tool/dna-translation.html
     oprimer = Primer("ATCGATCGATCGTAA")
 
     # One-letter code translations
