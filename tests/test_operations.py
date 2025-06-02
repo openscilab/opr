@@ -52,7 +52,7 @@ def test_to_rna_2():  # Reference: https://biomodel.uah.es/en/lab/cybertory/anal
 
 
 def test_to_protein_1(): 
-    # Reference:
+    # References:
     # https://biomodel.uah.es/en/lab/cybertory/analysis/trans.htm
     # https://en.vectorbuilder.com/tool/dna-translation.html
     oprimer = Primer("ATCGATCG")
@@ -69,7 +69,7 @@ def test_to_protein_1():
 
 
 def test_to_protein_2():  
-    # Reference:
+    # References:
     # https://biomodel.uah.es/en/lab/cybertory/analysis/trans.htm
     # https://en.vectorbuilder.com/tool/dna-translation.html
     oprimer = Primer("ATCGATCGATCGTAA")

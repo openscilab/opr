@@ -206,7 +206,7 @@ class Primer:
 
         :param frame: reading frame (1, 2, or 3)
         :type frame: int
-        :param multi_letter: whether to return amino acids in 1-letter codes (False) or 3-letter codes (True).
+        :param multi_letter: whether to return amino acids in 1-letter codes (False) or 3-letter codes (True)
         :type multi_letter: bool
         :return: str
         """

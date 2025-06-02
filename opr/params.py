@@ -48,7 +48,7 @@ NN53_EXTINCTION_COEFFICIENTS = {  # L ⋅ mmol-1 ⋅ cm-1
     }
 }
 
-CODONS_TO_AMINO_ACIDS_AA1 = {
+CODONS_TO_AMINO_ACIDS_SHORT = {
     "UUU": "F", "UUC": "F",
     "UUA": "L", "UUG": "L",
     "UCU": "S", "UCC": "S",
@@ -88,7 +88,7 @@ CODONS_TO_AMINO_ACIDS_AA1 = {
     "X": "INVALID",
 }
 
-CODONS_TO_AMINO_ACIDS_AA3 = {
+CODONS_TO_AMINO_ACIDS_LONG = {
     "UUU": "Phe", "UUC": "Phe",
     "UUA": "Leu", "UUG": "Leu",
     "UCU": "Ser", "UCC": "Ser",
@@ -128,7 +128,7 @@ CODONS_TO_AMINO_ACIDS_AA3 = {
     "X": "INVALID",
 }
 
-FRAME_ERROR = "`frame` must be 1, 2, or 3"
+FRAME_ERROR = "Parameter `frame` must be 1, 2, or 3."
 DEFAULT_PRIMER_NAME = "unknown"
 
 PRIMER_SEQUENCE_TYPE_ERROR = "Primer sequence should be a string variable."
