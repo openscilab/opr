@@ -200,19 +200,19 @@ class Primer:
         """
         return self._sequence.replace('T', 'U')
 
-    def to_protein(self, frame=1, one_letter=True):
+    def to_protein(self, frame=1, multi_letter=False):
         """
         Convert DNA sequence to protein.
 
         :param frame: reading frame (1, 2, or 3)
         :type frame: int
-        :param one_letter: Whether to return amino acids in 1-letter codes (True) or 3-letter codes (False).
-        :type one_letter: bool
+        :param multi_letter: whether to return amino acids in 1-letter codes (False) or 3-letter codes (True).
+        :type multi_letter: bool
         :return: str
         """
         if frame not in [1, 2, 3]:
             raise OPRBaseError(FRAME_ERROR)
-        return protein_seq_calc(self.to_rna(), frame, one_letter)
+        return protein_seq_calc(self.to_rna(), frame, multi_letter)
 
     @staticmethod
     def validate_primer(sequence):
