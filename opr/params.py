@@ -54,7 +54,7 @@ CODONS_TO_AMINO_ACIDS_AA1 = {
     "UCU": "S", "UCC": "S",
     "UCA": "S", "UCG": "S",
     "UAU": "Y", "UAC": "Y",
-    "UAA": "*", "UAG": "*",  # Stop codons
+    "UAA": "*", "UAG": "*",
     "UGU": "C", "UGC": "C",
     "UGA": "*", "UGG": "W",
 
@@ -67,8 +67,8 @@ CODONS_TO_AMINO_ACIDS_AA1 = {
     "CGU": "R", "CGC": "R",
     "CGA": "R", "CGG": "R",
 
-    "AUU": "I", "AUC": "I", "AUA": "I",
-    "AUG": "M",  # Start codon
+    "AUU": "I", "AUC": "I",
+    "AUA": "I", "AUG": "M",
     "ACU": "T", "ACC": "T",
     "ACA": "T", "ACG": "T",
     "AAU": "N", "AAC": "N",
@@ -83,21 +83,52 @@ CODONS_TO_AMINO_ACIDS_AA1 = {
     "GAU": "D", "GAC": "D",
     "GAA": "E", "GAG": "E",
     "GGU": "G", "GGC": "G",
-    "GGA": "G", "GGG": "G"
+    "GGA": "G", "GGG": "G",
+
+    "X": "INVALID",
 }
 
+CODONS_TO_AMINO_ACIDS_AA3 = {
+    "UUU": "Phe", "UUC": "Phe",
+    "UUA": "Leu", "UUG": "Leu",
+    "UCU": "Ser", "UCC": "Ser",
+    "UCA": "Ser", "UCG": "Ser",
+    "UAU": "Tyr", "UAC": "Tyr",
+    "UAA": "Stop","UAG": "Stop",
+    "UGU": "Cys", "UGC": "Cys",
+    "UGA": "Stop","UGG": "Trp",
 
-# 1-letter to 3-letter amino acid mapping
-AA1_TO_AA3 = {
-    'A': 'Ala', 'R': 'Arg', 'N': 'Asn', 'D': 'Asp',
-    'C': 'Cys', 'E': 'Glu', 'Q': 'Gln', 'G': 'Gly',
-    'H': 'His', 'I': 'lle', 'L': 'Leu', 'K': 'Lys',
-    'M': 'Met', 'F': 'Phe', 'P': 'Pro', 'S': 'Ser',
-    'T': 'Thr', 'W': 'Trp', 'Y': 'Tyr', 'V': 'Val',
-    '*': 'Stop', 'X': 'INVALID'
+    "CUU": "Leu", "CUC": "Leu",
+    "CUA": "Leu", "CUG": "Leu",
+    "CCU": "Pro", "CCC": "Pro",
+    "CCA": "Pro", "CCG": "Pro",
+    "CAU": "His", "CAC": "His",
+    "CAA": "Gln", "CAG": "Gln",
+    "CGU": "Arg", "CGC": "Arg",
+    "CGA": "Arg", "CGG": "Arg",
+
+    "AUU": "lle", "AUC": "lle", 
+    "AUA": "lle", "AUG": "Met",
+    "ACU": "Thr", "ACC": "Thr",
+    "ACA": "Thr", "ACG": "Thr",
+    "AAU": "Asn", "AAC": "Asn",
+    "AAA": "Lys", "AAG": "Lys",
+    "AGU": "Ser", "AGC": "Ser",
+    "AGA": "Arg", "AGG": "Arg",
+
+    "GUU": "Val", "GUC": "Val",
+    "GUA": "Val", "GUG": "Val",
+    "GCU": "Ala", "GCC": "Ala",
+    "GCA": "Ala", "GCG": "Ala",
+    "GAU": "Asp", "GAC": "Asp",
+    "GAA": "Glu", "GAG": "Glu",
+    "GGU": "Gly", "GGC": "Gly",
+    "GGA": "Gly", "GGG": "Gly",
+
+    "X": "INVALID",
 }
 
-FRAME_ERROR = "Frame must be 1, 2, or 3"
+FRAME_ERROR = "`frame` must be 1, 2, or 3"
 DEFAULT_PRIMER_NAME = "unknown"
 
 PRIMER_SEQUENCE_TYPE_ERROR = "Primer sequence should be a string variable."
