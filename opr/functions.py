@@ -4,7 +4,7 @@ import math
 from .params import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT, ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
 from .params import BASE_EXTINCTION_COEFFICIENTS, NN53_EXTINCTION_COEFFICIENTS
 from .params import NN_PARAMS, DNA_COMPLEMENT_MAP
-from .params import CODONS_TO_AMINO_ACIDS_AA1, AA1_TO_AA3
+from .params import CODONS_TO_AMINO_ACIDS_AA1, CODONS_TO_AMINO_ACIDS_AA3
 
 def molecular_weight_calc(sequence):
     """
@@ -137,7 +137,7 @@ def e260_ssnn_calc(sequence):
         e260 -= BASE_EXTINCTION_COEFFICIENTS[base]
     return e260
 
-def protein_seq_calc(rna_sequence, frame=1, one_letter=True):
+def protein_seq_calc(rna_sequence, frame=1, multi_letter=False):
     """
     Calculate the sequence of amino acids from a mRNA sequence.
 
@@ -145,14 +145,14 @@ def protein_seq_calc(rna_sequence, frame=1, one_letter=True):
     :type rna_sequence: str
     :param frame: frame of translation (1, 2, or 3)
     :type frame: int
-    :param one_letter: Whether to return amino acids in 1-letter codes (True) or 3-letter codes (False).
-    :type one_letter: bool
+    :param multi_letter: whether to return amino acids in 1-letter codes (False) or 3-letter codes (True).
+    :type multi_letter: bool
     :return: protein sequence
     """
     start = frame - 1
     protein = []
     for i in range(start, len(rna_sequence) - 2, 3):
         codon = rna_sequence[i:i+3]
-        aa1 = CODONS_TO_AMINO_ACIDS_AA1.get(codon, 'X')
-        protein.append(AA1_TO_AA3[aa1] if not one_letter else aa1)
-    return ''.join(protein) if one_letter else '-'.join(protein)
+        amino_acid = CODONS_TO_AMINO_ACIDS_AA3.get(codon, 'X') if multi_letter else CODONS_TO_AMINO_ACIDS_AA1.get(codon, 'X')
+        protein.append(amino_acid)
+    return '-'.join(protein) if multi_letter else ''.join(protein)
