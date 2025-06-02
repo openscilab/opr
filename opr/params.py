@@ -48,13 +48,13 @@ NN53_EXTINCTION_COEFFICIENTS = {  # L ⋅ mmol-1 ⋅ cm-1
     }
 }
 
-CODONS_TO_AMINO_ACIDS = {
+CODONS_TO_AMINO_ACIDS_SHORT = {
     "UUU": "F", "UUC": "F",
     "UUA": "L", "UUG": "L",
     "UCU": "S", "UCC": "S",
     "UCA": "S", "UCG": "S",
     "UAU": "Y", "UAC": "Y",
-    "UAA": "*", "UAG": "*",  # Stop codons
+    "UAA": "*", "UAG": "*",
     "UGU": "C", "UGC": "C",
     "UGA": "*", "UGG": "W",
 
@@ -67,8 +67,8 @@ CODONS_TO_AMINO_ACIDS = {
     "CGU": "R", "CGC": "R",
     "CGA": "R", "CGG": "R",
 
-    "AUU": "I", "AUC": "I", "AUA": "I",
-    "AUG": "M",  # Start codon
+    "AUU": "I", "AUC": "I",
+    "AUA": "I", "AUG": "M",
     "ACU": "T", "ACC": "T",
     "ACA": "T", "ACG": "T",
     "AAU": "N", "AAC": "N",
@@ -83,9 +83,52 @@ CODONS_TO_AMINO_ACIDS = {
     "GAU": "D", "GAC": "D",
     "GAA": "E", "GAG": "E",
     "GGU": "G", "GGC": "G",
-    "GGA": "G", "GGG": "G"
+    "GGA": "G", "GGG": "G",
+
+    "X": "INVALID",
 }
 
+CODONS_TO_AMINO_ACIDS_LONG = {
+    "UUU": "Phe", "UUC": "Phe",
+    "UUA": "Leu", "UUG": "Leu",
+    "UCU": "Ser", "UCC": "Ser",
+    "UCA": "Ser", "UCG": "Ser",
+    "UAU": "Tyr", "UAC": "Tyr",
+    "UAA": "Stop","UAG": "Stop",
+    "UGU": "Cys", "UGC": "Cys",
+    "UGA": "Stop","UGG": "Trp",
+
+    "CUU": "Leu", "CUC": "Leu",
+    "CUA": "Leu", "CUG": "Leu",
+    "CCU": "Pro", "CCC": "Pro",
+    "CCA": "Pro", "CCG": "Pro",
+    "CAU": "His", "CAC": "His",
+    "CAA": "Gln", "CAG": "Gln",
+    "CGU": "Arg", "CGC": "Arg",
+    "CGA": "Arg", "CGG": "Arg",
+
+    "AUU": "lle", "AUC": "lle", 
+    "AUA": "lle", "AUG": "Met",
+    "ACU": "Thr", "ACC": "Thr",
+    "ACA": "Thr", "ACG": "Thr",
+    "AAU": "Asn", "AAC": "Asn",
+    "AAA": "Lys", "AAG": "Lys",
+    "AGU": "Ser", "AGC": "Ser",
+    "AGA": "Arg", "AGG": "Arg",
+
+    "GUU": "Val", "GUC": "Val",
+    "GUA": "Val", "GUG": "Val",
+    "GCU": "Ala", "GCC": "Ala",
+    "GCA": "Ala", "GCG": "Ala",
+    "GAU": "Asp", "GAC": "Asp",
+    "GAA": "Glu", "GAG": "Glu",
+    "GGU": "Gly", "GGC": "Gly",
+    "GGA": "Gly", "GGG": "Gly",
+
+    "X": "INVALID",
+}
+
+FRAME_ERROR = "Parameter `frame` must be 1, 2, or 3."
 DEFAULT_PRIMER_NAME = "unknown"
 
 PRIMER_SEQUENCE_TYPE_ERROR = "Primer sequence should be a string variable."

@@ -51,29 +51,32 @@ def test_to_rna_2():  # Reference: https://biomodel.uah.es/en/lab/cybertory/anal
     assert oprimer_rna == "AUCGAUCGAUCG"
 
 
-def test_to_protein():  # Reference: https://biomodel.uah.es/en/lab/cybertory/analysis/trans.htm
+def test_to_protein_1():  # Reference: https://en.vectorbuilder.com/tool/dna-translation.html
     oprimer = Primer("ATCGATCG")
-    oprimer_protein = oprimer.to_protein()
-    assert oprimer_protein == "ID"
+
+    # One-letter code translations
+    assert oprimer.to_protein() == "ID"
+    assert oprimer.to_protein(frame=2) == "SI"
+    assert oprimer.to_protein(frame=3) == "RS"
+
+    # Three-letter code translations
+    assert oprimer.to_protein(multi_letter=True) == "lle-Asp"
+    assert oprimer.to_protein(frame=2, multi_letter=True) == "Ser-lle"
+    assert oprimer.to_protein(frame=3, multi_letter=True) == "Arg-Ser"
 
 
 def test_to_protein_2():  # Reference: https://en.vectorbuilder.com/tool/dna-translation.html
-    oprimer = Primer("ATCGATCG")
-    oprimer_protein = oprimer.to_protein(frame=2)
-    assert oprimer_protein == "SI"
-
-
-def test_to_protein_3():  # Reference: https://en.vectorbuilder.com/tool/dna-translation.html
-    oprimer = Primer("ATCGATCG")
-    oprimer_protein = oprimer.to_protein(frame=3)
-    assert oprimer_protein == "RS"
-
-
-def test_to_protein_4():  # Reference: https://en.vectorbuilder.com/tool/dna-translation.html
     oprimer = Primer("ATCGATCGATCGTAA")
-    oprimer_protein = oprimer.to_protein()
-    assert oprimer_protein == "IDRS*"
 
+    # One-letter code translations
+    assert oprimer.to_protein() == "IDRS*"
+    assert oprimer.to_protein(frame=2) == "SIDR"
+    assert oprimer.to_protein(frame=3) == "RSIV"
+
+    # Three-letter code translations
+    assert oprimer.to_protein(multi_letter=True) == "lle-Asp-Arg-Ser-Stop"
+    assert oprimer.to_protein(frame=2, multi_letter=True) == "Ser-lle-Asp-Arg"
+    assert oprimer.to_protein(frame=3, multi_letter=True) == "Arg-Ser-lle-Val"
 
 def test_length():
     oprimer = Primer("ATCGGCTAAATCGGCTAA")

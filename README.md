@@ -174,6 +174,9 @@
 >>> oprimer_protein = oprimer.to_protein(frame=3)
 >>> oprimer_protein
 'GGRKRK*'
+>>> oprimer_protein_aa3 = oprimer.to_protein(frame=3, multi_letter=True)
+>>> oprimer_protein_aa3
+'Gly-Gly-Arg-Lys-Arg-Lys-Stop'
 ```
 
 ℹ️ When the `frame=3` it starts from the third nucleotide. The list of codons is then [`GGA`(G), `GGA`(G), `CGG`(R), `AAG`(K), `AGG`(R), `AAG`(K), `TAA`(STOP)]

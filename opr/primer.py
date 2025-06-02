@@ -12,6 +12,7 @@ from .params import DNA_COMPLEMENT_MAP
 from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPLICATION_ERROR
 from .params import PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR
 from .params import PRIMER_ATTRIBUTE_NOT_COMPUTABLE_ERROR
+from .params import FRAME_ERROR
 from .functions import molecular_weight_calc, basic_melting_temperature_calc, salt_adjusted_melting_temperature_calc, gc_clamp_calc
 from .functions import nearest_neighbor_melting_temperature_calc, calculate_thermodynamics_constants
 from .functions import e260_ssnn_calc, protein_seq_calc
@@ -203,16 +204,19 @@ class Primer:
         """
         return self._sequence.replace('T', 'U')
 
-    def to_protein(self, frame=1):
+    def to_protein(self, frame=1, multi_letter=False):
         """
         Convert DNA sequence to protein.
 
         :param frame: reading frame (1, 2, or 3)
         :type frame: int
-
+        :param multi_letter: whether to return amino acids in 1-letter codes (False) or 3-letter codes (True)
+        :type multi_letter: bool
         :return: str
         """
-        return protein_seq_calc(self.to_rna(), frame)
+        if frame not in [1, 2, 3]:
+            raise OPRBaseError(FRAME_ERROR)
+        return protein_seq_calc(self.to_rna(), frame, multi_letter)
 
     @staticmethod
     def validate_primer(sequence):
