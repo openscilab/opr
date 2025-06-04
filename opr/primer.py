@@ -219,7 +219,7 @@ class Primer:
         if frame not in [1, 2, 3]:
             raise OPRBaseError(FRAME_ERROR)
 
-        key = f"AA3" if multi_letter else "AA1"
+        key = "AA3" if multi_letter else "AA1"
         if frame in self._protein_seq[key]:
             return self._protein_seq[key][frame]
 
