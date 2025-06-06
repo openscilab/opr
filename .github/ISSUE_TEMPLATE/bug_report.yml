@@ -84,6 +84,7 @@ body:
       label: OPR version
       description: Which version of OPR are you using?
       options:
+        - OPR 0.5
         - OPR 0.4
         - OPR 0.3
         - OPR 0.2
