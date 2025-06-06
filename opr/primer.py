@@ -214,7 +214,7 @@ class Primer:
         :type frame: int
         :param multi_letter: whether to return amino acids in 1-letter codes (False) or 3-letter codes (True)
         :type multi_letter: bool
-        :return: protein sequence
+        :return: protein sequence as str
         """
         if frame not in [1, 2, 3]:
             raise OPRBaseError(FRAME_ERROR)
