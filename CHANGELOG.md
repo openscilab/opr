@@ -68,7 +68,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `complement` method
 - `reverse` method
 
-[Unreleased]: https://github.com/openscilab/opr/compare/v0.4...dev
+[Unreleased]: https://github.com/openscilab/opr/compare/v0.5...dev
+[0.5]: https://github.com/openscilab/opr/compare/v0.4...v0.5
 [0.4]: https://github.com/openscilab/opr/compare/v0.3...v0.4
 [0.3]: https://github.com/openscilab/opr/compare/v0.2...v0.3
 [0.2]: https://github.com/openscilab/opr/compare/v0.1...v0.2
