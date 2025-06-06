@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """OPR parameters and constants."""
-OPR_VERSION = "0.4"
+OPR_VERSION = "0.5"
 VALID_BASES = set('ATCG')
 DNA_COMPLEMENT_MAP = {"A": "T", "C": "G", "G": "C", "T": "A"}
 
