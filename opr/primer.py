@@ -13,9 +13,10 @@ from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPLICATION_ERROR
 from .params import PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR
 from .params import PRIMER_ATTRIBUTE_NOT_COMPUTABLE_ERROR
 from .params import FRAME_ERROR
+from .params import CODONS_TO_AMINO_ACIDS_LONG, CODONS_TO_AMINO_ACIDS_SHORT
 from .functions import molecular_weight_calc, basic_melting_temperature_calc, salt_adjusted_melting_temperature_calc, gc_clamp_calc
 from .functions import nearest_neighbor_melting_temperature_calc, calculate_thermodynamics_constants
-from .functions import e260_ssnn_calc, protein_seq_calc
+from .functions import e260_ssnn_calc
 
 
 class MeltingTemperature(Enum):
@@ -62,6 +63,7 @@ class Primer:
         }
         self._delta_s = None
         self._delta_h = None
+        self._protein_seq = {"AA1": {}, "AA3": {}}
 
         # Track computed attributes
         self._computed = {
@@ -212,11 +214,29 @@ class Primer:
         :type frame: int
         :param multi_letter: whether to return amino acids in 1-letter codes (False) or 3-letter codes (True)
         :type multi_letter: bool
-        :return: str
+        :return: protein sequence as str
         """
         if frame not in [1, 2, 3]:
             raise OPRBaseError(FRAME_ERROR)
-        return protein_seq_calc(self.to_rna(), frame, multi_letter)
+
+        key = "AA3" if multi_letter else "AA1"
+        if frame in self._protein_seq[key]:
+            return self._protein_seq[key][frame]
+
+        rna_sequence = self.to_rna()
+        start = frame - 1
+        protein_aa1 = []
+        protein_aa3 = []
+        for i in range(start, len(rna_sequence) - 2, 3):
+            codon = rna_sequence[i:i+3]
+            protein_aa1.append(CODONS_TO_AMINO_ACIDS_SHORT[codon])
+            protein_aa3.append(CODONS_TO_AMINO_ACIDS_LONG[codon])
+
+        self._protein_seq["AA1"][frame] = ''.join(protein_aa1)
+        self._protein_seq["AA3"][frame] = '-'.join(protein_aa3)
+
+        result = self._protein_seq["AA3"][frame] if multi_letter else self._protein_seq["AA1"][frame]
+        return result
 
     @staticmethod
     def validate_primer(sequence):

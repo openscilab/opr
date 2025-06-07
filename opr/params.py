@@ -84,8 +84,6 @@ CODONS_TO_AMINO_ACIDS_SHORT = {
     "GAA": "E", "GAG": "E",
     "GGU": "G", "GGC": "G",
     "GGA": "G", "GGG": "G",
-
-    "X": "INVALID",
 }
 
 CODONS_TO_AMINO_ACIDS_LONG = {
@@ -124,8 +122,6 @@ CODONS_TO_AMINO_ACIDS_LONG = {
     "GAA": "Glu", "GAG": "Glu",
     "GGU": "Gly", "GGC": "Gly",
     "GGA": "Gly", "GGG": "Gly",
-
-    "X": "INVALID",
 }
 
 FRAME_ERROR = "Parameter `frame` must be 1, 2, or 3."
