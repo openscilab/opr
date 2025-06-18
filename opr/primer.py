@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """OPR primer."""
+from __future__ import annotations
 from typing import Union, Generator, Optional
 from typing import Dict
 import re
@@ -94,7 +95,7 @@ class Primer:
         """Return the length of the Primer sequence."""
         return len(self._sequence)
 
-    def __eq__(self, other_primer: "Primer") -> bool:
+    def __eq__(self, other_primer: Primer) -> bool:
         """
         Check primers equality. Return true if the sequences are equal.
 
@@ -104,7 +105,7 @@ class Primer:
             return self._sequence == other_primer._sequence
         return False
 
-    def __add__(self, other_primer: "Primer") -> "Primer":
+    def __add__(self, other_primer: Primer) -> Primer:
         """
         Concatenate the sequences of the current Primer with another one and return a new Primer.
 
@@ -114,7 +115,7 @@ class Primer:
             return Primer(self._sequence + other_primer._sequence)
         raise OPRBaseError(PRIMER_ADDITION_ERROR)
 
-    def __mul__(self, number: int) -> "Primer":
+    def __mul__(self, number: int) -> Primer:
         """
         Multiply the Primer sequence `number` times and return a new Primer.
 
@@ -124,7 +125,7 @@ class Primer:
             return Primer(self._sequence * number)
         raise OPRBaseError(PRIMER_MULTIPLICATION_ERROR)
 
-    def __contains__(self, sequence: Union[str, "Primer"]) -> bool:
+    def __contains__(self, sequence: Union[str, Primer]) -> bool:
         """
         Check if the Primer contains the given sequence.
 
@@ -144,7 +145,7 @@ class Primer:
         """Iterate through the primer sequence."""
         yield from self.sequence
 
-    def reverse(self, inplace: bool = False) -> Optional["Primer"]:
+    def reverse(self, inplace: bool = False) -> Optional[Primer]:
         """
         Reverse the sequence.
 
@@ -156,7 +157,7 @@ class Primer:
         else:
             return Primer(sequence=new_sequence)
 
-    def complement(self, inplace: bool = False) -> Optional["Primer"]:
+    def complement(self, inplace: bool = False) -> Optional[Primer]:
         """
         Complement sequence.
 
