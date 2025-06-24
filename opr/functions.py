@@ -66,7 +66,6 @@ def calculate_thermodynamics_constants(sequence: str) -> Tuple[float, float]:
     Calculate ΔH (in kcal/mol) and ΔS (in kcal/mol·K) for a primer sequence and return it.
 
     :param sequence: Primer nucleotides sequence
-    :type sequence: str
     """
     delta_h = 0.0
     delta_s = 0.0
