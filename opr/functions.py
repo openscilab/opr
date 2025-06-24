@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
 """OPR functions."""
+from typing import Tuple
 import math
 from .params import A_WEIGHT, T_WEIGHT, C_WEIGHT, G_WEIGHT, ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
 from .params import BASE_EXTINCTION_COEFFICIENTS, NN53_EXTINCTION_COEFFICIENTS
 from .params import NN_PARAMS, DNA_COMPLEMENT_MAP
 
-def molecular_weight_calc(sequence):
+def molecular_weight_calc(sequence: str) -> float:
     """
-    Calculate molecular weight.
+    Calculate molecular weight and return it.
 
     :param sequence: primer nucleotides sequence
-    :type sequence: str
-    :return: molecular weight as float
     """
     a_count = sequence.count('A')
     t_count = sequence.count('T')
@@ -21,13 +20,11 @@ def molecular_weight_calc(sequence):
         (g_count * G_WEIGHT) - ANHYDROUS_MOLECULAR_WEIGHT_CONSTANT
 
 
-def basic_melting_temperature_calc(sequence):
+def basic_melting_temperature_calc(sequence: str) -> float:
     """
-    Calculate basic melting temperature.
+    Calculate basic melting temperature and return it.
 
     :param sequence: primer nucleotides sequence
-    :type sequence: str
-    :return: melting temperature as float
     """
     a_count = sequence.count('A')
     t_count = sequence.count('T')
@@ -40,15 +37,12 @@ def basic_melting_temperature_calc(sequence):
     return melting_temperature
 
 
-def salt_adjusted_melting_temperature_calc(sequence, salt):
+def salt_adjusted_melting_temperature_calc(sequence: str, salt: float) -> float:
     """
-    Calculate the salt-adjusted melting temperature (Tm) of a primer sequence.
+    Calculate the salt-adjusted melting temperature (Tm) of a primer sequence and return it.
 
     :param sequence: Primer nucleotides sequence
-    :type sequence: str
     :param salt: Sodium ion concentration in moles (unit mM)
-    :type salt: float
-    :return: Salt-adjusted melting temperature as float
     """
     a_count = sequence.count('A')
     t_count = sequence.count('T')
@@ -67,13 +61,11 @@ def salt_adjusted_melting_temperature_calc(sequence, salt):
     return tm
 
 
-def calculate_thermodynamics_constants(sequence):
+def calculate_thermodynamics_constants(sequence: str) -> Tuple[float, float]:
     """
-    Calculate ΔH and ΔS for a primer sequence.
+    Calculate ΔH (in kcal/mol) and ΔS (in kcal/mol·K) for a primer sequence and return it.
 
     :param sequence: Primer nucleotides sequence
-    :type sequence: str
-    :return: (ΔH, ΔS) in kcal/mol and kcal/mol·K
     """
     delta_h = 0.0
     delta_s = 0.0
@@ -91,17 +83,13 @@ def calculate_thermodynamics_constants(sequence):
     return delta_h, delta_s
 
 
-def nearest_neighbor_melting_temperature_calc(sequence, na_salt, thermodynamic_constants):
+def nearest_neighbor_melting_temperature_calc(sequence: str, na_salt: float, thermodynamic_constants: Tuple[float, float]) -> float:
     """
-    Calculate the Nearest neighbor melting temperature (Tm) of a primer sequence.
+    Calculate the Nearest neighbor melting temperature (Tm) of a primer sequence and return it.
 
     :param sequence: Primer nucleotides sequence
-    :type sequence: str
     :param na_salt: Sodium ion concentration in millimoles (unit mM)
-    :type na_salt: float
     :param thermodynamic_constants: (ΔH, ΔS)
-    :type thermodynamic_constants: tuple (float, float)
-    :return: Nearest neighbor melting temperature as float (degrees Celsius)
     """
     # Convert salt from mM to M
     na_conc = na_salt / 1000.0
@@ -120,28 +108,24 @@ def nearest_neighbor_melting_temperature_calc(sequence, na_salt, thermodynamic_c
     return tm
 
 
-def gc_clamp_calc(sequence):
+def gc_clamp_calc(sequence: str) -> int:
     """
-    Calculate GC clamp.
+    Calculate GC clamp, number of guanine (G) or cytosine (C) bases in the last 5 bases of the primer, and return it.
 
     :param sequence: primer sequence
-    :type sequence: str
-    :return: number of guanine (G) or cytosine (C) bases in the last 5 bases of the primer
     """
     if len(sequence) < 5:
         return 0
     return sequence[-5:].count('G') + sequence[-5:].count('C')
 
 
-def e260_ssnn_calc(sequence):
+def e260_ssnn_calc(sequence: str) -> float:
     """
-    Calculate the extinction coefficient for a primer.
+    Calculate the extinction coefficient for a primer and return it.
 
     It uses nearest-neighbor model for single strand DNA (ss-nn) based on https://www.sigmaaldrich.com/US/en/technical-documents/technical-article/genomics/pcr/quantitation-of-oligos.
 
     :param sequence: primer sequence
-    :type sequence: str
-    :return: extinction coefficient as float
     """
     e260 = 0
     for i in range(len(sequence) - 1):
