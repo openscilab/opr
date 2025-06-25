@@ -4,7 +4,7 @@ import os
 import sys
 import codecs
 Failed = 0
-OPR_VERSION = "0.4"
+OPR_VERSION = "0.5"
 
 
 SETUP_ITEMS = [

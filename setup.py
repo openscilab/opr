@@ -31,14 +31,14 @@ setup(
     name='opr',
     packages=[
         'opr', ],
-    version='0.4',
+    version='0.5',
     description='OPR: Optimized Primer',
     long_description=read_description(),
     long_description_content_type='text/markdown',
     author='OPR Development Team',
     author_email='opr@openscilab.com',
     url='https://github.com/openscilab/opr',
-    download_url='https://github.com/openscilab/opr/tarball/v0.4',
+    download_url='https://github.com/openscilab/opr/tarball/v0.5',
     keywords="primer biology bioinformatics genome dna pcr",
     project_urls={
             'Source': 'https://github.com/openscilab/opr',

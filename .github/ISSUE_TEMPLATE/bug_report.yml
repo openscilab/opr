@@ -75,7 +75,6 @@ body:
         - Python 3.9
         - Python 3.8
         - Python 3.7
-        - Python 3.6
       default: 1
     validations:
       required: true
@@ -85,6 +84,7 @@ body:
       label: OPR version
       description: Which version of OPR are you using?
       options:
+        - OPR 0.5
         - OPR 0.4
         - OPR 0.3
         - OPR 0.2
