@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 """OPR primer."""
+from __future__ import annotations
+from typing import Union, Generator, Optional
+from typing import Dict
 import re
 import itertools
 from enum import Enum
@@ -13,9 +16,10 @@ from .params import PRIMER_ADDITION_ERROR, PRIMER_MULTIPLICATION_ERROR
 from .params import PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR
 from .params import PRIMER_ATTRIBUTE_NOT_COMPUTABLE_ERROR
 from .params import FRAME_ERROR
+from .params import CODONS_TO_AMINO_ACIDS_LONG, CODONS_TO_AMINO_ACIDS_SHORT
 from .functions import molecular_weight_calc, basic_melting_temperature_calc, salt_adjusted_melting_temperature_calc, gc_clamp_calc
 from .functions import nearest_neighbor_melting_temperature_calc, calculate_thermodynamics_constants
-from .functions import e260_ssnn_calc, protein_seq_calc
+from .functions import e260_ssnn_calc
 
 
 class MeltingTemperature(Enum):
@@ -34,17 +38,13 @@ class Primer:
     >>> oprimer.molecular_weight
     """
 
-    def __init__(self, sequence, name=DEFAULT_PRIMER_NAME, salt=50):
+    def __init__(self, sequence: str, name: str = DEFAULT_PRIMER_NAME, salt: float = 50) -> None:
         """
         Initialize the Primer instance.
 
         :param sequence: primer nucleotides sequence
-        :type sequence: str
         :param name: primer name
-        :type name: str
         :param salt: Sodium ion concentration in millimoles (unit mM)
-        :type salt: float
-        :return: an instance of the Primer class
         """
         self._sequence = Primer.validate_primer(sequence)
         self._name = name
@@ -62,6 +62,7 @@ class Primer:
         }
         self._delta_s = None
         self._delta_h = None
+        self._protein_seq = {"AA1": {}, "AA3": {}}
 
         # Track computed attributes
         self._computed = {
@@ -80,69 +81,55 @@ class Primer:
             "delta_h": False,
         }
 
-    def is_computed(self, attr):
+    def is_computed(self, attr: str) -> bool:
         """
-        Check whether the given attribute has been computed.
+        Check whether the given attribute has been computed. Return true if it has been previously computed.
 
         :param attr: The attribute to check.
-        :type attr: str
-        :return: True if the attribute is previously computed, False otherwise.
         """
         if attr not in self._computed:
             raise OPRBaseError(PRIMER_ATTRIBUTE_NOT_COMPUTABLE_ERROR)
         return self._computed.get(attr, False)
 
     def __len__(self):
-        """
-        Return the length of the Primer sequence.
-
-        :return: length of the Primer sequence
-        """
+        """Return the length of the Primer sequence."""
         return len(self._sequence)
 
-    def __eq__(self, other_primer):
+    def __eq__(self, other_primer: Primer) -> bool:
         """
-        Check primers equality.
+        Check primers equality. Return true if the sequences are equal.
 
         :param other_primer: another Primer
-        :type other_primer: Primer
-        :return: result as bool
         """
         if isinstance(other_primer, Primer):
             return self._sequence == other_primer._sequence
         return False
 
-    def __add__(self, other_primer):
+    def __add__(self, other_primer: Primer) -> Primer:
         """
-        Concatenate the sequences of the current Primer with another one.
+        Concatenate the sequences of the current Primer with another one and return a new Primer.
 
         :param other_primer: another Primer to concat its sequence to the current Primer
-        :type other_primer: Primer
-        :return: new Primer with concatenated sequence
         """
         if isinstance(other_primer, Primer):
             return Primer(self._sequence + other_primer._sequence)
         raise OPRBaseError(PRIMER_ADDITION_ERROR)
 
-    def __mul__(self, number):
+    def __mul__(self, number: int) -> Primer:
         """
-        Multiply the Primer sequence `number` times.
+        Multiply the Primer sequence `number` times and return a new Primer.
 
         :param number: times to concat the Primer sequence to itself
-        :type number: int
-        :return: new Primer with multiplied sequence
         """
         if isinstance(number, int):
             return Primer(self._sequence * number)
         raise OPRBaseError(PRIMER_MULTIPLICATION_ERROR)
 
-    def __contains__(self, sequence):
+    def __contains__(self, sequence: Union[str, Primer]) -> bool:
         """
         Check if the Primer contains the given sequence.
 
         :param sequence: sequence
-        :type sequence: str/Primer
-        :return: bool
         """
         if isinstance(sequence, str):
             return sequence in self._sequence
@@ -150,29 +137,19 @@ class Primer:
             return sequence._sequence in self._sequence
         return False
 
-    def __str__(self):
-        """
-        Primer object string representation method.
-
-        :return: primer sequence as str
-        """
+    def __str__(self) -> str:
+        """Primer object string representation method. Returns the primer sequence."""
         return self._sequence
 
-    def __iter__(self):
-        """
-        Iterate through Primer.
-
-        :return: base as Generator[str]
-        """
+    def __iter__(self) -> Generator[str, None, None]:
+        """Iterate through the primer sequence."""
         yield from self.sequence
 
-    def reverse(self, inplace=False):
+    def reverse(self, inplace: bool = False) -> Optional[Primer]:
         """
-        Reverse sequence.
+        Reverse the sequence.
 
         :param inplace: inplace flag
-        :type inplace: bool
-        :return: new Primer object or None
         """
         new_sequence = self._sequence[::-1]
         if inplace:
@@ -180,13 +157,11 @@ class Primer:
         else:
             return Primer(sequence=new_sequence)
 
-    def complement(self, inplace=False):
+    def complement(self, inplace: bool = False) -> Optional[Primer]:
         """
         Complement sequence.
 
         :param inplace: inplace flag
-        :type inplace: bool
-        :return: new Primer object or None
         """
         new_sequence = ""
         for item in self._sequence:
@@ -196,36 +171,45 @@ class Primer:
         else:
             return Primer(sequence=new_sequence)
 
-    def to_rna(self):
-        """
-        Convert DNA sequence to RNA.
-
-        :return: str
-        """
+    def to_rna(self) -> str:
+        """Convert DNA sequence to RNA."""
         return self._sequence.replace('T', 'U')
 
-    def to_protein(self, frame=1, multi_letter=False):
+    def to_protein(self, frame: int = 1, multi_letter: bool = False) -> str:
         """
-        Convert DNA sequence to protein.
+        Convert DNA sequence to protein and return the protein sequence.
 
         :param frame: reading frame (1, 2, or 3)
-        :type frame: int
         :param multi_letter: whether to return amino acids in 1-letter codes (False) or 3-letter codes (True)
-        :type multi_letter: bool
-        :return: str
         """
         if frame not in [1, 2, 3]:
             raise OPRBaseError(FRAME_ERROR)
-        return protein_seq_calc(self.to_rna(), frame, multi_letter)
+
+        key = "AA3" if multi_letter else "AA1"
+        if frame in self._protein_seq[key]:
+            return self._protein_seq[key][frame]
+
+        rna_sequence = self.to_rna()
+        start = frame - 1
+        protein_aa1 = []
+        protein_aa3 = []
+        for i in range(start, len(rna_sequence) - 2, 3):
+            codon = rna_sequence[i:i+3]
+            protein_aa1.append(CODONS_TO_AMINO_ACIDS_SHORT[codon])
+            protein_aa3.append(CODONS_TO_AMINO_ACIDS_LONG[codon])
+
+        self._protein_seq["AA1"][frame] = ''.join(protein_aa1)
+        self._protein_seq["AA3"][frame] = '-'.join(protein_aa3)
+
+        result = self._protein_seq["AA3"][frame] if multi_letter else self._protein_seq["AA1"][frame]
+        return result
 
     @staticmethod
-    def validate_primer(sequence):
+    def validate_primer(sequence: str) -> str:
         """
-        Validate the given primer sequence.
+        Validate the given primer sequence and return it in uppercase.
 
         :param sequence: primer nucleotides sequence
-        :type sequence: any
-        :return: an uppercased primer sequence
         """
         if not isinstance(sequence, str):
             raise OPRBaseError(PRIMER_SEQUENCE_TYPE_ERROR)
@@ -239,42 +223,26 @@ class Primer:
         return sequence
 
     @property
-    def sequence(self):
-        """
-        Return the primer sequence.
-
-        :return: primer sequence
-        """
+    def sequence(self) -> str:
+        """Return the primer sequence."""
         return self._sequence
 
     @property
-    def name(self):
-        """
-        Return the primer name.
-
-        :return: primer name
-        """
+    def name(self) -> str:
+        """Return the primer name."""
         return self._name
 
     @property
-    def molecular_weight(self):
-        """
-        Calculate(if needed) the molecular weight.
-
-        :return: molecular weight
-        """
+    def molecular_weight(self) -> float:
+        """Calculate the molecular weight and return it."""
         if not self._computed["molecular_weight"]:
             self._molecular_weight = molecular_weight_calc(self._sequence)
             self._computed["molecular_weight"] = True
         return self._molecular_weight
 
     @property
-    def gc_content(self):
-        """
-        Calculate gc content.
-
-        :return: gc content
-        """
+    def gc_content(self) -> float:
+        """Calculate gc content and return it."""
         if not self._computed["gc_content"]:
             gc_count = self._sequence.count('G') + self._sequence.count('C')
             self._gc_content = gc_count / len(self._sequence)
@@ -284,25 +252,19 @@ class Primer:
         return self._gc_content
 
     @property
-    def gc_clamp(self):
-        """
-        Calculate GC clamp of the primer.
-
-        :return: GC clamp of the primer
-        """
+    def gc_clamp(self) -> int:
+        """Calculate GC clamp of the primer and return it."""
         if not self._computed["gc_clamp"]:
             self._gc_clamp = gc_clamp_calc(self._sequence)
             self._computed["gc_clamp"] = True
         return self._gc_clamp
 
     @property
-    def single_runs(self):
+    def single_runs(self) -> Dict[str, int]:
         """
-        Calculate Single Runs of the primer.
+        Calculate Single Runs of the primer and return them.
 
         Run length refers to how many times a single base is repeated consecutively in the primer.
-
-        :return: single runs of the primer
         """
         if not self._computed["single_runs"]:
             self._single_runs = {}
@@ -312,13 +274,11 @@ class Primer:
         return self._single_runs
 
     @property
-    def double_runs(self):
+    def double_runs(self) -> Dict[str, int]:
         """
-        Calculate Double Runs of the primer.
+        Calculate Double Run Counts (2-base pairs) of the primer and return them.
 
         It refers to how many times each 2-base pairs occurs consecutively in the primer.
-
-        :return: Dictionary of double runs (2-base pairs) and their counts in the primer
         """
         if not self._computed["double_runs"]:
             pairs = [''.join(pair) for pair in itertools.product(VALID_BASES, repeat=2) if pair[0] != pair[1]]
@@ -330,24 +290,16 @@ class Primer:
         return self._double_runs
 
     @property
-    def E260(self):
-        """
-        Calculate the extinction coefficient at 260 nm.
-
-        :return: extinction coefficient at 260 nm
-        """
+    def E260(self) -> float:
+        """Calculate the extinction coefficient at 260 nm and return it."""
         if not self._computed["E260"]:
             self._E260 = e260_ssnn_calc(self._sequence)
             self._computed["E260"] = True
         return self._E260
 
     @property
-    def delta_s(self):
-        """
-        Calculate ΔS based on Neareset neighbor method.
-
-        :return: ΔS (entropy change, kcal/mol·K)
-        """
+    def delta_s(self) -> float:
+        """Calculate entropy change, ΔS (in kcal/mol·K), and return it."""
         if not self._computed["delta_s"]:
             self._delta_h , self._delta_s = calculate_thermodynamics_constants(self._sequence)
             self._computed["delta_s"] = True
@@ -355,27 +307,20 @@ class Primer:
         return self._delta_s
 
     @property
-    def delta_h(self):
-        """
-        Calculate ΔH based on Neareset neighbor method.
-
-        :return: ΔH (enthalpy change, kcal/mol)
-        """
+    def delta_h(self) -> float:
+        """Calculate enthalpy change, ΔH (in kcal/mol), and return it."""
         if not self._computed["delta_h"]:
             self._delta_h , self._delta_s = calculate_thermodynamics_constants(self._sequence)
             self._computed["delta_s"] = True
             self._computed["delta_h"] = True
         return self._delta_h
 
-    def repeats(self, sequence, consecutive=False):
+    def repeats(self, sequence: str, consecutive: bool = False) -> int:
         """
-        Count occurrences of a subsequence in a given sequence.
+        Count occurrences of a subsequence in a given sequence and return it.
 
         :param sequence: The sequence to search within.
-        :type sequence: str
         :param consecutive: Whether to count only consecutive repeats.
-        :type consecutive: bool
-        :return: The count of occurrences.
         """
         if consecutive:
             pattern = f"(?:{re.escape(sequence)})+"
@@ -385,13 +330,11 @@ class Primer:
         else:
             return self.sequence.count(sequence)
 
-    def melting_temperature(self, method=MeltingTemperature.BASIC):
+    def melting_temperature(self, method: MeltingTemperature = MeltingTemperature.BASIC) -> float:
         """
-        Calculate(if needed) the melting temperature.
+        Calculate the approximated melting temperature and return it.
 
         :param method: requested calculation mode for melting temperature
-        :type method: MeltingTemperature
-        :return: approximated melting temperature
         """
         if method not in self._computed["melting_temperature"]:
             raise NotImplementedError(PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR)

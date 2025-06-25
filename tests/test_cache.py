@@ -89,3 +89,31 @@ def test_thermodynamic_constants():
     assert round(delta_s, 1) == round(delta_s_second, 1)
     delta_h_second = oprimer.delta_h
     assert round(delta_h, 1) == round(delta_h_second, 1)
+
+
+def test_to_protein():  # Reference: https://en.vectorbuilder.com/tool/dna-translation.html
+    oprimer = Primer("ATCGATCG")
+
+    # Frame 1
+    ## not cached
+    assert not oprimer._protein_seq["AA1"].get(1)
+    ## first call -> cache
+    assert oprimer.to_protein() == "ID"
+    ## check AA1 cache
+    assert oprimer._protein_seq["AA1"][1] == "ID"
+    ## check AA3 cache
+    assert oprimer._protein_seq["AA3"][1] == "lle-Asp"
+
+    # Frame 2
+    ## not cached
+    assert not oprimer._protein_seq["AA1"].get(2)
+    assert oprimer.to_protein(frame=2) == "SI"
+    assert oprimer._protein_seq["AA1"][2] == "SI"
+    assert oprimer._protein_seq["AA3"][2] == "Ser-lle"
+
+    # Frame 3
+    ## not cached
+    assert not oprimer._protein_seq["AA1"].get(3)
+    assert oprimer.to_protein(frame=3) == "RS"
+    assert oprimer._protein_seq["AA1"][3] == "RS"
+    assert oprimer._protein_seq["AA3"][3] == "Arg-Ser"

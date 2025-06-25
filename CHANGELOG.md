@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `to_protein` method
 - `protein_seq_calc` function
 ### Changed
+- Python typing features added to all modules
 - Test system modified
 - `Python 3.6` support dropped
 - `README.md` updated
