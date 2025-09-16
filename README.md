@@ -5,6 +5,7 @@
     <a href="https://codecov.io/gh/openscilab/opr"><img src="https://codecov.io/gh/openscilab/opr/branch/dev/graph/badge.svg" alt="Codecov"></a>
     <a href="https://badge.fury.io/py/opr"><img src="https://badge.fury.io/py/opr.svg" alt="PyPI version"></a>
     <a href="https://www.python.org/"><img src="https://img.shields.io/badge/built%20with-Python3-green.svg" alt="built with Python3"></a>
+    <a href="https://github.com/openscilab/opr"><img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/openscilab/opr"></a>
     <a href="https://discord.gg/8mBspwXqcA"><img src="https://img.shields.io/discord/1064533716615049236.svg" alt="Discord Channel"></a>
 </div>
 
@@ -216,4 +217,4 @@ Give a ⭐️ if this project helped you!
 ### Donate to our project
 If you do like our project and we hope that you do, can you please support us? Our project is not and is never going to be working for profit. We need the money just so we can continue doing what we do ;-) .			
 
-<a href="https://openscilab.com/#donation" target="_blank"><img src="https://github.com/openscilab/opr/raw/main/otherfiles/donation.png" height="90px" width="270px" alt="OPR Donation"></a>
+<a href="https://openscilab.com/#donation" target="_blank"><img src="https://github.com/openscilab/opr/raw/main/otherfiles/donation.png" width="270" alt="OPR Donation"></a>
