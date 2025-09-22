@@ -317,7 +317,7 @@ class Primer:
             self._computed["delta_s"] = True
             self._computed["delta_h"] = True
         return self._delta_h
-    
+
     @property
     def molecular_formula(self) -> str:
         """Calculate the molecular formula and return it."""
