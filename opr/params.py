@@ -154,3 +154,12 @@ NN_PARAMS = {
     'GC': (-11.1, -0.0267),
     'GG': (-11.0, -0.0266), 
 }
+
+
+MOLECULAR_FORMULA_FORMAT = "C{c_count}H{h_count}N{n_count}O{o_count}P{p_count}"
+MOLECULAR_FORMULA_BASES = {
+    "A": {"C": 10, "H": 13, "N": 5, "O": 3},
+    "T": {"C": 10, "H": 14, "N": 2, "O": 5},
+    "G": {"C": 10, "H": 13, "N": 5, "O": 4},
+    "C": {"C": 9,  "H": 13, "N": 3, "O": 4},
+}
