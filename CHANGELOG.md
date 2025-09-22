@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Changed
 - `README.md` updated
+- `molecular_formula` property 
 ## [0.5] - 2025-06-27
 ### Added
 - `delta_h` property 
