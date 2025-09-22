@@ -5,9 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- `molecular_formula` property
 ### Changed
 - `README.md` updated
-- `molecular_formula` property 
 ## [0.5] - 2025-06-27
 ### Added
 - `delta_h` property 
