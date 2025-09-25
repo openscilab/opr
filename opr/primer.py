@@ -17,7 +17,7 @@ from .params import PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR
 from .params import PRIMER_ATTRIBUTE_NOT_COMPUTABLE_ERROR
 from .params import FRAME_ERROR
 from .params import CODONS_TO_AMINO_ACIDS_LONG, CODONS_TO_AMINO_ACIDS_SHORT
-from .params import MOLECULAR_FORMULA_BASES, MOLECULAR_FORMULA_FORMAT
+from .params import MOLECULAR_FORMULA_BASES, MOLECULAR_FORMULA_FORMAT_ORDER
 from .functions import molecular_weight_calc, basic_melting_temperature_calc, salt_adjusted_melting_temperature_calc, gc_clamp_calc
 from .functions import nearest_neighbor_melting_temperature_calc, calculate_thermodynamics_constants
 from .functions import e260_ssnn_calc
@@ -329,13 +329,11 @@ class Primer:
             counts["P"] = len(self._sequence) - 1
             counts["O"] += 2 * (len(self._sequence) - 1)
             counts["H"] -= (len(self._sequence) - 1)
-            self._molecular_formula = MOLECULAR_FORMULA_FORMAT.format(
-                c_count=counts["C"],
-                h_count=counts["H"],
-                n_count=counts["N"],
-                o_count=counts["O"],
-                p_count=counts["P"]
-            )
+            result = []
+            for element in MOLECULAR_FORMULA_FORMAT_ORDER:
+                if counts[element] > 0:
+                    result.append(f"{element}{counts[element]}")
+            self._molecular_formula = ''.join(result)
             self._computed["molecular_formula"] = True
         return self._molecular_formula
 
