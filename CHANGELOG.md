@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `molecular_formula` property
 ### Changed
 - `README.md` updated
+- `Python 3.14` added to `test.yml`
 ## [0.5] - 2025-06-27
 ### Added
 - `delta_h` property 
