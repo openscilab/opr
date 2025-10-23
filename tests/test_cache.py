@@ -91,6 +91,16 @@ def test_thermodynamic_constants():
     assert round(delta_h, 1) == round(delta_h_second, 1)
 
 
+def test_molecular_formula():
+    oprimer = Primer("ATCGATCGATCGATCGATCG")
+    assert not oprimer.is_computed("molecular_formula")
+    formula_first = oprimer.molecular_formula
+    assert oprimer.is_computed("molecular_formula")
+
+    formula_second = oprimer.molecular_formula
+    assert formula_first == formula_second
+
+
 def test_to_protein():  # Reference: https://en.vectorbuilder.com/tool/dna-translation.html
     oprimer = Primer("ATCGATCG")
 

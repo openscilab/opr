@@ -17,6 +17,7 @@ from .params import PRIMER_MELTING_TEMPERATURE_NOT_IMPLEMENTED_ERROR
 from .params import PRIMER_ATTRIBUTE_NOT_COMPUTABLE_ERROR
 from .params import FRAME_ERROR
 from .params import CODONS_TO_AMINO_ACIDS_LONG, CODONS_TO_AMINO_ACIDS_SHORT
+from .params import MOLECULAR_FORMULA_BASES, MOLECULAR_FORMULA_FORMAT_ORDER
 from .functions import molecular_weight_calc, basic_melting_temperature_calc, salt_adjusted_melting_temperature_calc, gc_clamp_calc
 from .functions import nearest_neighbor_melting_temperature_calc, calculate_thermodynamics_constants
 from .functions import e260_ssnn_calc
@@ -62,6 +63,7 @@ class Primer:
         }
         self._delta_s = None
         self._delta_h = None
+        self._molecular_formula = None
         self._protein_seq = {"AA1": {}, "AA3": {}}
 
         # Track computed attributes
@@ -79,6 +81,7 @@ class Primer:
             },
             "delta_s": False,
             "delta_h": False,
+            "molecular_formula": False,
         }
 
     def is_computed(self, attr: str) -> bool:
@@ -314,6 +317,25 @@ class Primer:
             self._computed["delta_s"] = True
             self._computed["delta_h"] = True
         return self._delta_h
+
+    @property
+    def molecular_formula(self) -> str:
+        """Calculate the molecular formula and return it."""
+        if not self._computed["molecular_formula"]:
+            counts = {"C": 0, "H": 0, "N": 0, "O": 0, "P": 0}
+            for base in self._sequence:
+                for element, count in MOLECULAR_FORMULA_BASES[base].items():
+                    counts[element] += count
+            counts["P"] = len(self._sequence) - 1
+            counts["O"] += 2 * (len(self._sequence) - 1)
+            counts["H"] -= (len(self._sequence) - 1)
+            result = []
+            for element in MOLECULAR_FORMULA_FORMAT_ORDER:
+                if counts[element] > 0:
+                    result.append(f"{element}{counts[element]}")
+            self._molecular_formula = ''.join(result)
+            self._computed["molecular_formula"] = True
+        return self._molecular_formula
 
     def repeats(self, sequence: str, consecutive: bool = False) -> int:
         """
