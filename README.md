@@ -148,6 +148,11 @@
 >>> primer1.E260
 248.40000000000006
 ```
+#### Molecular Formula
+```pycon
+>>> primer1.molecular_formula
+'C228 H279 N105 O129 P22'
+```
 ### Operations
 
 #### Reverse

@@ -156,7 +156,7 @@ NN_PARAMS = {
 }
 
 
-MOLECULAR_FORMULA_FORMAT_ORDER = ["C", "H", "N", "O", "P"] # CxHyNzOwPv
+MOLECULAR_FORMULA_FORMAT_ORDER = ["C", "H", "N", "O", "P"] # Cx Hy Nz Ow Pv
 MOLECULAR_FORMULA_BASES = {
     "A": {"C": 10, "H": 13, "N": 5, "O": 3},
     "T": {"C": 10, "H": 14, "N": 2, "O": 5},

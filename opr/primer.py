@@ -333,7 +333,7 @@ class Primer:
             for element in MOLECULAR_FORMULA_FORMAT_ORDER:
                 if counts[element] > 0:
                     result.append(f"{element}{counts[element]}")
-            self._molecular_formula = ''.join(result)
+            self._molecular_formula = ' '.join(result)
             self._computed["molecular_formula"] = True
         return self._molecular_formula
 
