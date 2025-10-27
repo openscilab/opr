@@ -74,7 +74,7 @@ def test_melt_temp_6():  # Reference: http://biotools.nubic.northwestern.edu/Oli
     assert round(salt_adjusted_melt_temp, 0) == 26.0
 
 
-def test_melt_temp_7():  
+def test_melt_temp_7():
     # References: 
     # https://www.sigmaaldrich.com/CA/en/technical-documents/protocol/genomics/pcr/oligos-melting-temp
     # https://www.sigmaaldrich.com/deepweb/assets/sigmaaldrich/marketing/global/documents/367/000/meltingtemp1.pdf
@@ -84,7 +84,7 @@ def test_melt_temp_7():
     assert round(nearest_neighbor_melt_temp, 1) == 69.6
 
 
-def test_melt_temp_8():  
+def test_melt_temp_8():
     # References: 
     # https://www.sigmaaldrich.com/CA/en/technical-documents/protocol/genomics/pcr/oligos-melting-temp
     # https://www.sigmaaldrich.com/deepweb/assets/sigmaaldrich/marketing/global/documents/367/000/meltingtemp1.pdf
@@ -94,7 +94,7 @@ def test_melt_temp_8():
     assert round(nearest_neighbor_melt_temp, 1) == 57.1
 
 
-def test_melt_temp_9():  
+def test_melt_temp_9():
     # References: 
     # https://www.sigmaaldrich.com/CA/en/technical-documents/protocol/genomics/pcr/oligos-melting-temp
     # https://www.sigmaaldrich.com/deepweb/assets/sigmaaldrich/marketing/global/documents/367/000/meltingtemp1.pdf
