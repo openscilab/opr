@@ -1,5 +1,3 @@
-import itertools
-from opr.params import VALID_BASES
 from opr import Primer, MeltingTemperature
 
 TEST_CASE_NAME = "Cache tests"

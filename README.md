@@ -211,6 +211,8 @@ You can also join our discord server
 
 <blockquote>4- Panjkovich, Alejandro, and Francisco Melo. "Comparison of different melting temperature calculation methods for short DNA sequences." <i>Bioinformatics 21.6</i> (2005): 711-722.</blockquote>
 
+<blockquote>5- <a href="https://atdbio.com/tools/oligo-calculator">ATDBio - Oligo Calculator</a></blockquote>
+
 
 ## Show your support
 
